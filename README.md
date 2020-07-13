@@ -1,4 +1,6 @@
-### Hi there 👋
+### Greetings 👋
+
+I'm Yanick, a 22 year old full mobile developer from Montreal, Canada. I specialze in cross-platform development using React Native and Flutter, but that doesn't mean native development scares me 😉 
 
 <!--
 **emeraldsanto/emeraldsanto** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
