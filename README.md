@@ -4,7 +4,7 @@ I'm Yanick, a 22 year old mobile developer from Montreal, Canada. I specialize i
 
 ### What I'm currently doing
 
-I work for a digital media [company](https://www.narcitymedia.com) building many things ranging from a cross-platform mobile app to an in-house CMS. The tech stack I'm using daily consists of React Native, TypeScript, Preact, Node and MongoDB. On top of that I also do freelancing work for an awesome [startup](https://nightborn.be) based in Brussels, Belgium.
+I work for a development [agency](https://www.alithya.com) building many things ranging from a cross-platform mobile app to an in-house CMS. The tech stack I'm using daily consists of React Native, TypeScript, Preact, Node and MongoDB. On top of that I also do freelancing work for an awesome [startup](https://nightborn.be) based in Brussels, Belgium.
 
 ### Have a project for me?
 
