@@ -20,6 +20,7 @@
 	"baseUrl": "./src",
 	"paths": {
 		"@components/*": ["components/*"],
+		"@localization/*": ["localization/*"],
 		"@pages/*": ["pages/*"],
 		"@styles/*": ["styles/*"]
 	}
@@ -27,7 +28,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx", "next.config.js"
   ],
   "exclude": [
     "node_modules"
