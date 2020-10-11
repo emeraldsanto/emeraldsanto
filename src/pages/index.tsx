@@ -68,8 +68,8 @@ export default function Home() {
 				>
 					Powered by{" "}
 					<img
-						src="/vercel.svg"
 						alt="Vercel Logo"
+						src="/vercel.svg"
 						className={styles.logo}
 					/>
 				</a>
