@@ -1,0 +1,37 @@
+{
+	"name": "portfolio",
+	"version": "0.0.1",
+	"description": "A website showcasing my past and current work.",
+	"main": "pages/index.tsx",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/emeraldsanto/emeraldsanto.git"
+	},
+	"keywords": [
+		"next",
+		"nextjs",
+		"react",
+		"reactjs"
+	],
+	"author": "Yanick Bélanger",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/emeraldsanto/emeraldsanto/issues"
+	},
+	"homepage": "https://github.com/emeraldsanto/emeraldsanto#readme",
+	"dependencies": {
+		"next": "^9.5.5",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"devDependencies": {
+		"@types/node": "^14.11.8",
+		"@types/react": "^16.9.52",
+		"typescript": "^4.0.3"
+	}
+}
