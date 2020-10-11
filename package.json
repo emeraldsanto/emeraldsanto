@@ -2,7 +2,7 @@
 	"name": "portfolio",
 	"version": "0.0.1",
 	"description": "A website showcasing my past and current work.",
-	"main": "pages/index.tsx",
+	"main": "src/pages/index.tsx",
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
