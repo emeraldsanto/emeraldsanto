@@ -18,6 +18,10 @@ const PAGES = [
 		text: "About",
 		url: "/about",
 	},
+	{
+		text: "Work",
+		url: "/work",
+	},
 ];
 
 const SOCIALS = [
@@ -38,12 +42,18 @@ const SOCIALS = [
 export const SideBar: NextComponentType<SideBarProps> = (props) => {
 	return (
 		<aside className={styles.sidebar}>
+			<i18n.Link href="/">
+				<div className={styles.initial}>
+					<h3>Y</h3>
+				</div>
+			</i18n.Link>
+
 			<div className={styles.routes_container}>
-				{PAGES.map((p) => (
+				{/* {PAGES.map((p) => (
 					<i18n.Link href={p.url}>
-						<span className={styles.item}>{p.text}</span>
+						<p className={styles.route}>{p.text}</p>
 					</i18n.Link>
-				))}
+				))} */}
 			</div>
 
 			<div className={styles.icons_container}>
@@ -52,7 +62,7 @@ export const SideBar: NextComponentType<SideBarProps> = (props) => {
 						<FontAwesomeIcon
 							size="lg"
 							icon={s.icon}
-							className={styles.item}
+							className={styles.icon}
 						/>
 					</a>
 				))}
