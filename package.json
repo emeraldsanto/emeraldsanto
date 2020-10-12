@@ -26,9 +26,10 @@
 	"homepage": "https://github.com/emeraldsanto/emeraldsanto#readme",
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "1.2.32",
-		"@fortawesome/free-brands-svg-icons": "^5.15.1",
+		"@fortawesome/free-brands-svg-icons": "5.15.1",
 		"@fortawesome/free-solid-svg-icons": "5.15.1",
 		"@fortawesome/react-fontawesome": "0.1.11",
+		"framer-motion": "^2.9.1",
 		"next": "9.5.5",
 		"next-i18next": "6.0.3",
 		"react": "16.13.1",

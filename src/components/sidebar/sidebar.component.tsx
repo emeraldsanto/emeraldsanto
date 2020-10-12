@@ -58,7 +58,7 @@ export const SideBar: NextComponentType<SideBarProps> = (props) => {
 
 			<div className={styles.icons_container}>
 				{SOCIALS.map((s) => (
-					<a href={s.url}>
+					<a key={s.url} href={s.url}>
 						<FontAwesomeIcon
 							size="lg"
 							icon={s.icon}

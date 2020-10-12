@@ -3,6 +3,8 @@
 .page {
 	flex-grow: 1;
 	display: flex;
+	align-items: center;
 	flex-direction: column;
-	padding: 25px 25px 25px 90px;
+	justify-content: center;
+	padding: 30px 30px 30px 100px;
 }
