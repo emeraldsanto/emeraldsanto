@@ -1,0 +1,8 @@
+@import "../../styles/variables.scss";
+
+.page {
+	flex-grow: 1;
+	display: flex;
+	margin-left: 60px;
+	flex-direction: column;
+}

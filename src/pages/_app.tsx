@@ -1,7 +1,9 @@
+import { SideBar } from "@components/sidebar/sidebar.component";
 import "@styles/globals.scss";
 import { default as NextApp } from "next/app";
 import { AppContextType } from "next/dist/next-server/lib/utils";
 import { Router } from "next/router";
+import React from "react";
 
 class App extends NextApp {
 	// Odd but required, see: https://github.com/isaachinman/next-i18next#3-project-setup
@@ -11,7 +13,13 @@ class App extends NextApp {
 
 	render() {
 		const { Component, pageProps } = this.props;
-		return <Component {...pageProps} />;
+		return (
+			<div className="app">
+				<SideBar />
+
+				<Component {...pageProps} />
+			</div>
+		);
 	}
 }
 
