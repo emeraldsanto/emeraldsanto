@@ -1,4 +1,4 @@
-import "@styles/globals.css";
+import "@styles/globals.scss";
 import { default as NextApp } from "next/app";
 import { AppContextType } from "next/dist/next-server/lib/utils";
 import { Router } from "next/router";
