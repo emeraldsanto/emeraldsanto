@@ -1,4 +1,5 @@
 import { SideBar } from "@components/sidebar/sidebar.component";
+import i18n from "@localization/i18n";
 import "@styles/globals.scss";
 import { default as NextApp } from "next/app";
 import { AppContextType } from "next/dist/next-server/lib/utils";
@@ -23,4 +24,4 @@ class App extends NextApp {
 	}
 }
 
-export default App;
+export default i18n.appWithTranslation(App);

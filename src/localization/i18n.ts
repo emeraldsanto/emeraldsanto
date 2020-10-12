@@ -1,12 +1,12 @@
 import NextI18Next from "next-i18next";
+import config from "next/config";
 import path from "path";
 
-export const i18n = new NextI18Next({
+export default new NextI18Next({
+	defaultNS: "common",
 	defaultLanguage: "en",
 	otherLanguages: ["fr"],
-	localePath: path.resolve("../../public/static/locales"),
-	localeSubpaths: {
-		en: "en",
-		fr: "fr",
-	},
+	// The path is weird, not sure why but this works
+	localePath: path.resolve("./public/static/locales"),
+	localeSubpaths: config().publicRuntimeConfig.localeSubpaths,
 });
