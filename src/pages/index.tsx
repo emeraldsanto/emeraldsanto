@@ -1,3 +1,4 @@
+import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
 import i18n from "@localization/i18n";
 import styles from "@styles/home.module.scss";
@@ -32,7 +33,9 @@ const Home: NextPage = () => {
 								className={styles.button}
 								variants={SINGLE_BUTTON_VARIANTS}
 							>
-								<p>{t(p.text)}</p>
+								<Button type="button">
+									<p>{t(p.text)}</p>
+								</Button>
 							</motion.div>
 						</i18n.Link>
 					))}

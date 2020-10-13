@@ -1,0 +1,24 @@
+@import "../../styles/_variables.scss";
+
+.input {
+	height: 45px;
+	outline: none;
+	border-radius: 6px;
+	margin-bottom: 20px;
+	padding: 5px 10px 5px 10px;
+	color: $color_lighter_text;
+	border: 1px solid lightgray;
+}
+
+.textarea {
+	padding: 10px;
+	outline: none;
+	display: block;
+	resize: vertical;
+	min-height: 150px;
+	border-radius: 6px;
+	margin-bottom: 25px;
+	color: $color_lighter_text;
+	font: 400 13.333333px Arial;
+	border: 1px solid lightgray;
+}

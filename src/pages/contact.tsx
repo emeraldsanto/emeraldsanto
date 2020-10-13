@@ -1,3 +1,5 @@
+import { Button } from "@components/button/button.component";
+import { Input, TextArea } from "@components/input/input.component";
 import { Page } from "@components/page/page.component";
 import i18n from "@localization/i18n";
 import styles from "@styles/contact.module.scss";
@@ -31,23 +33,26 @@ const Contact: NextPage = () => {
 
 	return (
 		<Page>
-			<div style={{ maxWidth: 500 }}>
+			<div className={styles.form_container}>
 				<h1 className={styles.title}>{t("title")}</h1>
 
 				<p className={styles.description}>{t("description")}</p>
 
 				<form className={styles.form} onSubmit={onFormSubmit}>
 					<div className={styles.row}>
-						<input
+						<Input
 							required
+							name="name"
 							value={name}
 							placeholder={t("name")}
 							className={styles.input}
 							onChange={(e) => setName(e.target.value)}
 						/>
 
-						<input
+						<Input
 							required
+							type="email"
+							name="email"
 							value={email}
 							placeholder={t("email")}
 							className={styles.input}
@@ -55,8 +60,9 @@ const Contact: NextPage = () => {
 						/>
 					</div>
 
-					<input
+					<Input
 						required
+						name="subject"
 						value={subject}
 						className={styles.input}
 						style={{ width: "100%" }}
@@ -64,19 +70,19 @@ const Contact: NextPage = () => {
 						onChange={(e) => setSubject(e.target.value)}
 					/>
 
-					<textarea
+					<TextArea
 						required
+						name="message"
 						value={message}
-						style={{ width: "100%" }}
 						placeholder={t("message")}
 						className={styles.textarea}
 						onChange={(e) => setMessage(e.target.value)}
 					/>
 
 					<div className={styles.submit_container}>
-						<button type="submit" className={styles.submit}>
+						<Button type="submit">
 							<p>{t("send")}</p>
-						</button>
+						</Button>
 					</div>
 				</form>
 			</div>
