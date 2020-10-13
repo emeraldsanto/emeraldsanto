@@ -10,20 +10,14 @@ import Document, {
 	NextScript,
 } from "next/document";
 
-interface AugmentedDocumentProps extends DocumentProps {
-	language: string;
-}
-
-interface AugmentDocumentInitialProps extends DocumentInitialProps {
-	language: string;
-}
+type AugmentedDocumentProps<T> = T & { language: string };
 
 export default class LocalizedDocument extends Document<
-	AugmentedDocumentProps
+	AugmentedDocumentProps<DocumentProps>
 > {
 	static async getInitialProps(
 		ctx: DocumentContext
-	): Promise<AugmentDocumentInitialProps> {
+	): Promise<AugmentedDocumentProps<DocumentInitialProps>> {
 		const initialProps = await Document.getInitialProps(ctx);
 		const language = lngFromReq(ctx.req);
 
