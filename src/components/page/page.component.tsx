@@ -6,9 +6,9 @@ export const Page: FC<DetailedHTMLProps<
 	HTMLAttributes<HTMLDivElement>,
 	HTMLDivElement
 >> = (props) => {
-	const { className, children, ...rest } = props;
+	const { className = "", children, ...rest } = props;
 	return (
-		<main className={`${styles.page} ${className || ""}`} {...rest}>
+		<main className={`${styles.page} ${className}`} {...rest}>
 			<Head>
 				<title>Yanick Bélanger - Portfolio</title>
 				<link rel="icon" href="/favicon.ico" />
