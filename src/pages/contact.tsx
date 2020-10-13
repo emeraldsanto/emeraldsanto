@@ -1,5 +1,6 @@
 import { Button } from "@components/button/button.component";
 import { Input, TextArea } from "@components/input/input.component";
+import { Loading } from "@components/loading/loading.component";
 import { Page } from "@components/page/page.component";
 import i18n from "@localization/i18n";
 import styles from "@styles/contact.module.scss";
@@ -24,13 +25,13 @@ interface ContactState {
 }
 
 type ContactAction =
-	| { name: "reset" }
+	| { name: "error" }
+	| { name: "submit" }
+	| { name: "success" }
 	| { name: "name"; payload: ContactState["name"] }
 	| { name: "email"; payload: ContactState["email"] }
 	| { name: "subject"; payload: ContactState["subject"] }
-	| { name: "message"; payload: ContactState["message"] }
-	| { name: "submit" }
-	| { name: "success" };
+	| { name: "message"; payload: ContactState["message"] };
 
 const INITIAL_STATE: ContactState = {
 	name: "",
@@ -45,9 +46,13 @@ function contactReducer(
 	action: ContactAction
 ): ContactState {
 	switch (action.name) {
-		case "reset":
 		case "success":
 			return INITIAL_STATE;
+		case "error":
+			return {
+				...state,
+				status: "error",
+			};
 		case "submit":
 			return {
 				...state,
@@ -109,6 +114,7 @@ const Contact: NextPage = () => {
 				dispatch({ name: "success" });
 			} catch (error) {
 				console.log(error);
+				dispatch({ name: "error" });
 			}
 		},
 		[name, email, subject, message, dispatch]
@@ -230,8 +236,16 @@ const Contact: NextPage = () => {
 						variants={BUTTON_VARIANTS}
 						className={styles.submit_container}
 					>
-						<Button type="submit">
-							<p>{t("send")}</p>
+						<Button
+							type="submit"
+							className={styles.submit}
+							disabled={status === "loading"}
+						>
+							{status === "loading" ? (
+								<Loading />
+							) : (
+								<p>{t("send")}</p>
+							)}
 						</Button>
 					</motion.div>
 				</motion.form>

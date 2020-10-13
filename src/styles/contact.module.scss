@@ -36,6 +36,11 @@
 	justify-content: center;
 }
 
+.submit {
+	display: flex;
+	justify-content: center;
+}
+
 @media only screen and (max-width: 815px) {
 	.form_container {
 		width: initial;
