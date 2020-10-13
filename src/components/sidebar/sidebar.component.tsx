@@ -5,8 +5,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import i18n from "@localization/i18n";
-import { NextComponentType } from "next";
-import { SideBarProps } from "./sidebar.props";
+import { FC } from "react";
 import styles from "./sidebar.style.module.scss";
 
 const PAGES = [
@@ -39,7 +38,7 @@ const SOCIALS = [
 	},
 ];
 
-export const SideBar: NextComponentType<SideBarProps> = (props) => {
+export const SideBar: FC = () => {
 	return (
 		<aside className={styles.sidebar}>
 			<i18n.Link href="/">
@@ -48,17 +47,11 @@ export const SideBar: NextComponentType<SideBarProps> = (props) => {
 				</div>
 			</i18n.Link>
 
-			<div className={styles.routes_container}>
-				{/* {PAGES.map((p) => (
-					<i18n.Link href={p.url}>
-						<p className={styles.route}>{p.text}</p>
-					</i18n.Link>
-				))} */}
-			</div>
+			<div className={styles.routes_container}>{/* TODO: ? */}</div>
 
 			<div className={styles.icons_container}>
 				{SOCIALS.map((s) => (
-					<a key={s.url} href={s.url}>
+					<a key={s.url} href={s.url} target="_blank">
 						<FontAwesomeIcon
 							size="lg"
 							icon={s.icon}

@@ -1,0 +1,32 @@
+{
+	"title": "Mes projets 🔨",
+	"description": "Je suis généralement assez occupé car je dois gérer mon travail à temps plein, mes contrats de consultation ainsi que le developpement \"open-source\" et autres loisirs. Voici donc une liste non-exhaustive de mes expériences professionnelles depuis quelques années.",
+	"alithya": {
+		"name": "Alithya",
+		"title": "Développeur Mobile",
+		"period": "08/2020 - Maintenant",
+		"location": "Montréal, Canada",
+		"description": "Développement de quelques projets full-stack au sein de l'équipe mobile, tout en encadrant d'autres développeurs en pleine transition vers React Native. Mes enseignements étaients constitués des tests \"end-to-end\" avec Detox, les bases de TypeScript ainsi que le déploiement vers navigateurs avec React Native Web."
+	},
+	"nightborn": {
+		"name": "Nightborn",
+		"title": "Développeur Full-stack",
+		"period": "10/2019 - Maintenant",
+		"location": "Bruxelles, Belgique",
+		"description": "Développement de plusieurs projets full-stack incluant des systèmes de paiement, principalement pour des cliens dans les domaines médicaux et financiers."
+	},
+	"narcitymedia": {
+		"name": "Narcity Media",
+		"title": "Développeur Mobile",
+		"period": "05/2019 - 08/2020",
+		"location": "Montréal, Canada",
+		"description": "Dévéloppement, maintenance et déploiement de l'application Narcity à partir de zéro, en tant que seul développeur mobile de l'entreprise. Le tout dans un environnement Agile (SCRUM)."
+	},
+	"levelapp": {
+		"name": "Levelapp",
+		"title": "Développeur Mobile (Stagiaire)",
+		"period": "03/2019 - 05/2019",
+		"location": "Bruxelles, Belgique",
+		"description": "Réécriture d'une application existante en Xamarin vers React Native en tant que première expérience avec ce \"framework\" au sein de l'agence."
+	}
+}

@@ -5,5 +5,7 @@
 	"email": "Adresse courriel",
 	"subject": "Objet",
 	"message": "Votre message...",
-	"send": "Envoyer!"
+	"send": "Envoyer!",
+	"sendSuccess": "Ton courriel à bien été envoyé, à bientôt!",
+	"sendError": "Une erreur est survenue lors de l'envoi, réessaye plus tard!"
 }

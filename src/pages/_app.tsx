@@ -1,8 +1,10 @@
 import { SideBar } from "@components/sidebar/sidebar.component";
 import i18n from "@localization/i18n";
 import "@styles/globals.scss";
+import "@styles/toasts.scss";
 import { default as NextApp } from "next/app";
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 class App extends NextApp {
 	render() {
@@ -12,6 +14,8 @@ class App extends NextApp {
 				<SideBar />
 
 				<Component {...pageProps} />
+
+				<ToastContainer />
 			</div>
 		);
 	}

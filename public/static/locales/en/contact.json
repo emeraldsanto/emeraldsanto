@@ -5,5 +5,7 @@
 	"email": "Email address",
 	"subject": "Subject",
 	"message": "Your message...",
-	"send": "Send!"
+	"send": "Send!",
+	"sendSuccess": "Your email was successfully sent, talk to you soon!",
+	"sendError": "An error occured while sending your email, try again later!"
 }

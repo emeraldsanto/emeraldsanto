@@ -14,6 +14,7 @@ import {
 	useCallback,
 	useReducer,
 } from "react";
+import { toast } from "react-toastify";
 import env from "../../env.json";
 
 interface ContactState {
@@ -99,9 +100,9 @@ const Contact: NextPage = () => {
 			event.preventDefault();
 
 			try {
-				const result = await send(
-					"contact_service",
-					"contact_form",
+				await send(
+					env.email_js_service_id,
+					env.email_js_template_id,
 					{
 						name,
 						email,
@@ -112,12 +113,13 @@ const Contact: NextPage = () => {
 				);
 
 				dispatch({ name: "success" });
+				toast(t("sendSuccess"), { type: "success" });
 			} catch (error) {
-				console.log(error);
 				dispatch({ name: "error" });
+				toast(t("sendError"), { type: "error" });
 			}
 		},
-		[name, email, subject, message, dispatch]
+		[t, name, email, subject, message, dispatch]
 	);
 
 	return (

@@ -1,0 +1,27 @@
+@import "../../node_modules/react-toastify/dist/ReactToastify.min.css";
+@import "./_variables.scss";
+
+/**
+ * This customizes the react-toastify colors.
+ * See: https://github.com/fkhadra/react-toastify/issues/140#issuecomment-517921048
+ */
+.Toastify__toast--default {
+	background: #fff;
+	color: #aaa;
+}
+
+.Toastify__toast--info {
+	background: $color_light_blue;
+}
+
+.Toastify__toast--success {
+	background: #07bc0c;
+}
+
+.Toastify__toast--warning {
+	background: #f1c40f;
+}
+
+.Toastify__toast--error {
+	background: $color_accent;
+}

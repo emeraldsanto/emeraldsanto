@@ -1,0 +1,32 @@
+{
+	"title": "My work 🔨",
+	"description": "I'm generally quite busy between my day job, freelancing gigs, open-source contributions and other hobbies. Below is a non-exhaustive list of my professional experiences over the pas few years.",
+	"alithya": {
+		"name": "Alithya",
+		"title": "Mobile Developer",
+		"period": "08/2020 - Present",
+		"location": "Montreal, Canada",
+		"description": "Worked on full-stack contracts within the mobile team while mentoring and coaching other developers transitioning to React Native. My teachings included end-to-end testing with Detox, TypeScript fundamentals and targeting the browser with React Native Web."
+	},
+	"nightborn": {
+		"name": "Nightborn",
+		"title": "Full-stack Developer",
+		"period": "08/2020 - Present",
+		"location": "Brussels, Belgium",
+		"description": "Worked on many full-stack projects including payment systems, both web and mobile, for clients in the medical, real estate and financial sectors."
+	},
+	"narcitymedia": {
+		"name": "Narcity Media",
+		"title": "Mobile Developer",
+		"period": "05/2019 - 08/2020",
+		"location": "Montreal, Canada",
+		"description": "Developed, deployed and maintained the Narcity mobile application from scratch, as the only mobile developer in an Agile (SCRUM) environment. This includes both front-end (React Native, TypeScript) and back-end (NodeJS, MongoDB). Contributed heavily to the Narcity website as well as the the in-house CMS (Preact, MongoDB) as well as collaborated with and challenged the design team to create an engaging user experience."
+	},
+	"levelapp": {
+		"name": "Levelapp",
+		"title": "Mobile Developer (Intern)",
+		"period": "03/2019 - 05/2019",
+		"location": "Brussels, Belgium",
+		"description": "Rewrote an existing Xamarin application in React Native and TypeScript as a first experiment with this new framework within the agency, in an Agile (SCRUM) environment."
+	}
+}
