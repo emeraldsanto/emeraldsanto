@@ -10,7 +10,7 @@ export const Page: FC<DetailedHTMLProps<
 	return (
 		<main className={`${styles.page} ${className || ""}`} {...rest}>
 			<Head>
-				<title>Create Next App</title>
+				<title>Yanick Bélanger - Portfolio</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
