@@ -4,6 +4,48 @@ import styles from "@styles/home.module.scss";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
 
+const Home: NextPage = () => {
+	const { t } = i18n.useTranslation("home");
+
+	return (
+		<Page>
+			<div>
+				<motion.div
+					initial="hidden"
+					animate="visible"
+					variants={TEXT_VARIANTS}
+				>
+					<h1 className={styles.greeting}>{t("greeting")}</h1>
+
+					<h1 className={styles.presentation}>{t("presentation")}</h1>
+				</motion.div>
+
+				<motion.div
+					initial="hidden"
+					animate="visible"
+					className={styles.buttons}
+					variants={BUTTON_VARIANTS}
+				>
+					{PAGES.map((p) => (
+						<i18n.Link key={p.url} href={p.url}>
+							<motion.div
+								className={styles.button}
+								variants={SINGLE_BUTTON_VARIANTS}
+							>
+								<p>{t(p.text)}</p>
+							</motion.div>
+						</i18n.Link>
+					))}
+				</motion.div>
+			</div>
+		</Page>
+	);
+};
+
+Home.getInitialProps = () => ({ namespacesRequired: ["home"] });
+
+export default Home;
+
 const TEXT_VARIANTS: Variants = {
 	hidden: {
 		scale: 0.65,
@@ -52,45 +94,3 @@ const PAGES = [
 		url: "/contact",
 	},
 ];
-
-const Home: NextPage = (props) => {
-	const { t } = i18n.useTranslation("home");
-
-	return (
-		<Page>
-			<div>
-				<motion.div
-					initial="hidden"
-					animate="visible"
-					variants={TEXT_VARIANTS}
-				>
-					<h1 className={styles.greeting}>{t("greeting")}</h1>
-
-					<h1 className={styles.presentation}>{t("presentation")}</h1>
-				</motion.div>
-
-				<motion.div
-					initial="hidden"
-					animate="visible"
-					className={styles.buttons}
-					variants={BUTTON_VARIANTS}
-				>
-					{PAGES.map((p) => (
-						<i18n.Link key={p.url} href={p.url}>
-							<motion.div
-								className={styles.button}
-								variants={SINGLE_BUTTON_VARIANTS}
-							>
-								<p>{t(p.text)}</p>
-							</motion.div>
-						</i18n.Link>
-					))}
-				</motion.div>
-			</div>
-		</Page>
-	);
-};
-
-Home.getInitialProps = () => ({ namespacesRequired: ["home"] });
-
-export default Home;

@@ -1,0 +1,61 @@
+@import "../styles/_variables.scss";
+
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.side {
+	display: flex;
+	max-width: 500px;
+	flex-direction: column;
+
+	&:first-child {
+		margin-right: 100px;
+	}
+}
+
+.title {
+	margin-bottom: 50px;
+}
+
+.description {
+	line-height: 22px;
+	text-align: justify;
+}
+
+.portrait {
+	width: 350px;
+	height: 350px;
+	border-radius: 50%;
+	background-size: cover;
+	background-position: center center;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	background-image: url("/static/assets/portrait-min.jpg");
+}
+
+@media only screen and (max-width: 1000px) {
+	.container {
+		flex-direction: column-reverse;
+	}
+
+	.side {
+		&:first-child {
+			margin-right: 0;
+			margin-top: 25px;
+		}
+	}
+
+	.title {
+		margin-bottom: 25px;
+	}
+}
+
+@media only screen and (max-width: 625px) {
+	.portrait {
+		width: 150px;
+		height: 150px;
+	}
+}
