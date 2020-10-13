@@ -3,9 +3,11 @@ import { Input, TextArea } from "@components/input/input.component";
 import { Page } from "@components/page/page.component";
 import i18n from "@localization/i18n";
 import styles from "@styles/contact.module.scss";
+import { send } from "emailjs-com";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
 import { FormEvent, Fragment, useCallback, useState } from "react";
+import env from "../../env.json";
 
 const Contact: NextPage = () => {
 	const [name, setName] = useState("");
@@ -24,18 +26,24 @@ const Contact: NextPage = () => {
 	})();
 
 	const onFormSubmit = useCallback(
-		(event: FormEvent) => {
+		async (event: FormEvent) => {
 			event.preventDefault();
 
-			fetch("https://hooks.zapier.com/hooks/catch/8712179/ogg7il2", {
-				method: "POST",
-				body: JSON.stringify({
-					name,
-					email,
-					subject,
-					message,
-				}),
-			});
+			try {
+				const result = await send(
+					"contact_service",
+					"contact_form",
+					{
+						name,
+						email,
+						subject,
+						message,
+					},
+					env.email_js_user_id
+				);
+			} catch (error) {
+				console.log(error);
+			}
 		},
 		[name, email, subject, message]
 	);
