@@ -3,20 +3,20 @@ import i18n from "@localization/i18n";
 import "@styles/globals.scss";
 import "@styles/toasts.scss";
 import { default as NextApp } from "next/app";
-import React from "react";
+import React, { Fragment } from "react";
 import { ToastContainer } from "react-toastify";
 
 class App extends NextApp {
 	render() {
 		const { Component, pageProps } = this.props;
 		return (
-			<div className="app">
+			<Fragment>
 				<SideBar />
 
 				<Component {...pageProps} />
 
 				<ToastContainer />
-			</div>
+			</Fragment>
 		);
 	}
 }
