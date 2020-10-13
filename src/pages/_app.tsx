@@ -13,7 +13,9 @@ class App extends NextApp {
 			<Fragment>
 				<SideBar />
 
-				<Component {...pageProps} />
+				<main className="root_component">
+					<Component {...pageProps} />
+				</main>
 
 				<ToastContainer />
 			</Fragment>

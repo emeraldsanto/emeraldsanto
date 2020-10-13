@@ -1,16 +1,12 @@
 @import "../../styles/variables.scss";
 
 .page {
-	flex: 1;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: center;
-	padding: 30px 100px 30px 100px;
+	margin: auto;
+	padding: 20px 100px 20px 100px;
 }
 
 @media only screen and (max-width: 625px) {
 	.page {
-		padding: 30px;
+		padding: 20px;
 	}
 }

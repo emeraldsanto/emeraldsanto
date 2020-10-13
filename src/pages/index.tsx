@@ -1,11 +1,11 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
 import i18n from "@localization/i18n";
-import styles from "@styles/home.module.scss";
+import styles from "@styles/index.module.scss";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
 
-const Home: NextPage = () => {
+const Index: NextPage = () => {
 	const { t } = i18n.useTranslation("home");
 
 	return (
@@ -46,9 +46,9 @@ const Home: NextPage = () => {
 	);
 };
 
-Home.getInitialProps = () => ({ namespacesRequired: ["home"] });
+Index.getInitialProps = () => ({ namespacesRequired: ["home"] });
 
-export default Home;
+export default Index;
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {
