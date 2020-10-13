@@ -10,39 +10,21 @@ const About: NextPage = () => {
 		<Page>
 			<div className={styles.container}>
 				<div className={styles.side}>
-					<h1 className={styles.title}>À propos de moi 🤔</h1>
+					<h1 className={styles.title}>{t("title")}</h1>
 
-					<p className={styles.description}>
-						I'm Yanick Bélanger, a mobile developer and freelancer
-						based in Montreal, Canada. I specialize in
-						cross-platform development using technologies such as
-						React Native, Flutter, Kotlin, Swift and TypeScript.
-					</p>
+					<p className={styles.description}>{t("firstParagraph")}</p>
 
 					<br />
 
-					<p className={styles.description}>
-						With that in mind, I also have a full-stack background
-						from working on the web as well as on the back-end,
-						primarily using C#, T-SQL, Node.JS, MongoDB and of
-						course React.
-					</p>
+					<p className={styles.description}>{t("secondParagraph")}</p>
 
 					<br />
 
-					<p className={styles.description}>
-						This is all very helpful when I find myself working
-						alone on a project, which unfortunately happens more
-						often than not.
-					</p>
+					<p className={styles.description}>{t("thirdParagraph")}</p>
 
 					<br />
 
-					<p className={styles.description}>
-						In my free time I enjoy photography, mountain biking,
-						contributing to open-source software as well as watching
-						macabre TV shows with my significant other.
-					</p>
+					<p className={styles.description}>{t("fourthParagraph")}</p>
 				</div>
 
 				<div className={styles.side}>
