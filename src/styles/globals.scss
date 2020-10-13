@@ -27,6 +27,14 @@ p {
 	color: $color_black;
 }
 
+p {
+	color: $color_lighter_text;
+}
+
+h1 {
+	font-size: 3em;
+}
+
 a {
 	color: inherit;
 	text-decoration: none;
