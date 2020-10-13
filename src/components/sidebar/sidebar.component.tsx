@@ -51,7 +51,7 @@ export const SideBar: FC = () => {
 
 			<div className={styles.icons_container}>
 				{SOCIALS.map((s) => (
-					<a key={s.url} href={s.url} target="_blank">
+					<a key={s.url} href={s.url} target="_blank" rel="noopener">
 						<FontAwesomeIcon
 							size="lg"
 							icon={s.icon}
