@@ -36,27 +36,31 @@ const Work: NextPage = () => {
 				</motion.p>
 
 				{EXPERIENCES.map((e, i) => (
-					<Fragment>
+					<Fragment key={e.name}>
 						<motion.div
 							className={styles.experience}
 							variants={SINGLE_TEXT_VARIANT}
 						>
 							<div>
-								<h4>{e.name}</h4>{" "}
+								<h4>
+									<a href={e.url} target="_blank">
+										{t(e.name)}
+									</a>
+								</h4>{" "}
 								<span className={styles.location}>
-									{e.period}
+									{t(e.period)}
 								</span>
 							</div>
 
 							<p className={styles.work_title}>
-								{e.title}{" "}
+								{t(e.title)}{" "}
 								<span className={styles.location}>
-									{e.location}
+									{t(e.location)}
 								</span>
 							</p>
 
 							<p className={styles.work_description}>
-								{e.description}
+								{t(e.description)}
 							</p>
 							<hr />
 							<div className={styles.tech_container}>
@@ -107,30 +111,30 @@ const SINGLE_TEXT_VARIANT: Variants = {
 
 const EXPERIENCES = [
 	{
-		name: "Alithya",
-		title: "Mobile Developer",
-		period: "08/2020 - Present",
-		location: "Montréal, Canada",
-		description:
-			"Worked on full-stack contracts within the mobile team while mentoring and coaching other developers transitioning to React Native. My teachings included end-to-end testing with Detox, TypeScript fundamentals, targeting the browser with React Native Web, etc.",
+		name: "alithya.name",
+		title: "alithya.title",
+		period: "alithya.period",
+		location: "alithya.location",
+		url: "https://www.alithya.com",
+		description: "alithya.description",
 		technologies: ["React Native", "TypeScript", "Node.JS"],
 	},
 	{
-		name: "Nightborn",
-		title: "Mobile Developer",
-		period: "10/2019 - Present",
-		location: "Brussels, Belgium",
-		description:
-			"Worked on many full-stack projects including payment systems, both web and mobile, for clients in the medical, real estate and financial sectors. All projects were built using React/React Native, TypeScript and .NET Core (C#).",
+		name: "nightborn.name",
+		title: "nightborn.title",
+		period: "nightborn.period",
+		location: "nightborn.location",
+		url: "https://www.nightborn.be",
+		description: "nightborn.description",
 		technologies: ["React Native", "React.JS", "TypeScript", "C#", "T-SQL"],
 	},
 	{
-		name: "Narcity Media",
-		title: "Mobile Developer",
-		period: "05/2019 - 08/2020",
-		location: "Montréal, Canada",
-		description:
-			"Developed, deployed and maintained the Narcity mobile application from scratch, as the only mobile developer in an Agile (SCRUM) environment. This includes both front-end (React Native, TypeScript) and back-end (NodeJS, MongoDB). Contributed heavily to the Narcity website as well as the the in-house CMS (Preact, MongoDB) as well as collaborated with and challenged the design team to create an engaging user experience.",
+		name: "narcitymedia.name",
+		title: "narcitymedia.title",
+		period: "narcitymedia.period",
+		location: "narcitymedia.location",
+		url: "https://www.narcitymedia.com",
+		description: "narcitymedia.description",
 		technologies: [
 			"React Native",
 			"React.JS",
@@ -140,12 +144,12 @@ const EXPERIENCES = [
 		],
 	},
 	{
-		name: "Levelapp",
-		period: "03/2019 - 05/2019",
-		location: "Brussels, Belgium",
-		title: "Mobile Developer (Intern)",
-		description:
-			"Rewrote an existing Xamarin application in React Native and TypeScript as a first experiment with this new framework within the agency, in an Agile (SCRUM) environment.",
+		name: "levelapp.name",
+		title: "levelapp.title",
+		period: "levelapp.period",
+		location: "levelapp.location",
+		url: "https://www.levelapp.be",
+		description: "levelapp.description",
 		technologies: ["React Native", "TypeScript"],
 	},
 ];
