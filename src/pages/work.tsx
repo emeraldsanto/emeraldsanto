@@ -39,7 +39,11 @@ const Work: NextPage = () => {
 						>
 							<div>
 								<h4>
-									<a href={e.url} target="_blank">
+									<a
+										href={e.url}
+										target="_blank"
+										rel="noopener"
+									>
 										{t(e.name)}
 									</a>
 								</h4>{" "}

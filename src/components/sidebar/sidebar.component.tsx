@@ -25,14 +25,17 @@ const PAGES = [
 
 const SOCIALS = [
 	{
+		name: "GitHub",
 		icon: faGithubSquare,
 		url: "https://www.github.com/emeraldsanto",
 	},
 	{
+		name: "LinkedIn",
 		icon: faLinkedin,
 		url: "https://www.linkedin.com/in/yanick-belanger-dev",
 	},
 	{
+		name: "Twitter",
 		icon: faTwitterSquare,
 		url: "https://www.twitter.com/yanthedev",
 	},
@@ -51,7 +54,13 @@ export const SideBar: FC = () => {
 
 			<div className={styles.icons_container}>
 				{SOCIALS.map((s) => (
-					<a key={s.url} href={s.url} target="_blank">
+					<a
+						key={s.url}
+						href={s.url}
+						target="_blank"
+						rel="noopener"
+						aria-label={s.name}
+					>
 						<FontAwesomeIcon
 							size="lg"
 							icon={s.icon}
