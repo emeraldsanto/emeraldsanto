@@ -35,10 +35,6 @@
 	justify-content: center;
 }
 
-.submit {
-	
-}
-
 @media only screen and (max-width: 815px) {
 	.form_container {
 		width: initial;
@@ -50,10 +46,6 @@
 
 	.form {
 		width: 100%;
-	}
-
-	.row {
-		flex-direction: column;
 	}
 
 	.input {

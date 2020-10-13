@@ -3,8 +3,9 @@ import { Input, TextArea } from "@components/input/input.component";
 import { Page } from "@components/page/page.component";
 import i18n from "@localization/i18n";
 import styles from "@styles/contact.module.scss";
+import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
-import { FormEvent, useCallback, useState } from "react";
+import { FormEvent, Fragment, useCallback, useState } from "react";
 
 const Contact: NextPage = () => {
 	const [name, setName] = useState("");
@@ -13,6 +14,14 @@ const Contact: NextPage = () => {
 	const [message, setMessage] = useState("");
 
 	const { t } = i18n.useTranslation("contact");
+
+	const isSmallFormFactor = (() => {
+		if (typeof window === "undefined") {
+			return false;
+		}
+
+		return document.body.clientWidth <= 815;
+	})();
 
 	const onFormSubmit = useCallback(
 		(event: FormEvent) => {
@@ -34,57 +43,124 @@ const Contact: NextPage = () => {
 	return (
 		<Page>
 			<div className={styles.form_container}>
-				<h1 className={styles.title}>{t("title")}</h1>
+				<motion.div
+					initial="hidden"
+					animate="visible"
+					variants={FADE_VARIANTS}
+				>
+					<motion.h1
+						className={styles.title}
+						variants={CHILD_VARIANTS}
+					>
+						{t("title")}
+					</motion.h1>
 
-				<p className={styles.description}>{t("description")}</p>
+					<motion.p
+						className={styles.description}
+						variants={CHILD_VARIANTS}
+					>
+						{t("description")}
+					</motion.p>
+				</motion.div>
 
-				<form className={styles.form} onSubmit={onFormSubmit}>
-					<div className={styles.row}>
+				<motion.form
+					initial="hidden"
+					animate="visible"
+					className={styles.form}
+					onSubmit={onFormSubmit}
+					variants={DELAY_FADE_VARIANTS}
+				>
+					{isSmallFormFactor ? (
+						<Fragment>
+							<motion.div
+								className={styles.row}
+								variants={CHILD_VARIANTS}
+							>
+								<Input
+									required
+									name="name"
+									value={name}
+									placeholder={t("name")}
+									className={styles.input}
+									onChange={(e) => setName(e.target.value)}
+								/>
+							</motion.div>
+
+							<motion.div
+								className={styles.row}
+								variants={CHILD_VARIANTS}
+							>
+								<Input
+									required
+									type="email"
+									name="email"
+									value={email}
+									placeholder={t("email")}
+									className={styles.input}
+									onChange={(e) => setEmail(e.target.value)}
+								/>
+							</motion.div>
+						</Fragment>
+					) : (
+						<motion.div
+							className={styles.row}
+							variants={CHILD_VARIANTS}
+						>
+							<Input
+								required
+								name="name"
+								value={name}
+								placeholder={t("name")}
+								className={styles.input}
+								onChange={(e) => setName(e.target.value)}
+							/>
+
+							<Input
+								required
+								type="email"
+								name="email"
+								value={email}
+								placeholder={t("email")}
+								className={styles.input}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+						</motion.div>
+					)}
+
+					<motion.div variants={CHILD_VARIANTS}>
 						<Input
 							required
-							name="name"
-							value={name}
-							placeholder={t("name")}
+							name="subject"
+							value={subject}
 							className={styles.input}
-							onChange={(e) => setName(e.target.value)}
+							style={{ width: "100%" }}
+							placeholder={t("subject")}
+							onChange={(e) => setSubject(e.target.value)}
 						/>
+					</motion.div>
 
-						<Input
+					<motion.div variants={CHILD_VARIANTS}>
+						<TextArea
 							required
-							type="email"
-							name="email"
-							value={email}
-							placeholder={t("email")}
-							className={styles.input}
-							onChange={(e) => setEmail(e.target.value)}
+							name="message"
+							value={message}
+							placeholder={t("message")}
+							className={styles.textarea}
+							onChange={(e) => setMessage(e.target.value)}
 						/>
-					</div>
+					</motion.div>
 
-					<Input
-						required
-						name="subject"
-						value={subject}
-						className={styles.input}
-						style={{ width: "100%" }}
-						placeholder={t("subject")}
-						onChange={(e) => setSubject(e.target.value)}
-					/>
-
-					<TextArea
-						required
-						name="message"
-						value={message}
-						placeholder={t("message")}
-						className={styles.textarea}
-						onChange={(e) => setMessage(e.target.value)}
-					/>
-
-					<div className={styles.submit_container}>
+					<motion.div
+						initial="hidden"
+						animate="visible"
+						variants={BUTTON_VARIANTS}
+						className={styles.submit_container}
+					>
 						<Button type="submit">
 							<p>{t("send")}</p>
 						</Button>
-					</div>
-				</form>
+					</motion.div>
+				</motion.form>
 			</div>
 		</Page>
 	);
@@ -93,3 +169,50 @@ const Contact: NextPage = () => {
 Contact.getInitialProps = () => ({ namespacesRequired: ["contact"] });
 
 export default Contact;
+
+const FADE_VARIANTS: Variants = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.2,
+		},
+	},
+};
+
+const DELAY_FADE_VARIANTS: Variants = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			delayChildren: 0.4,
+			staggerChildren: 0.2,
+		},
+	},
+};
+
+const CHILD_VARIANTS: Variants = {
+	hidden: {
+		opacity: 0,
+		translateX: -50,
+	},
+	visible: {
+		opacity: 1,
+		translateX: 0,
+	},
+};
+
+const BUTTON_VARIANTS: Variants = {
+	hidden: {
+		opacity: 0,
+		scale: 0.65,
+	},
+	visible: {
+		scale: 1,
+		opacity: 1,
+	},
+};
