@@ -43,3 +43,9 @@ a {
 * {
 	box-sizing: border-box;
 }
+
+@media only screen and (max-width: 625px) {
+	.app {
+		flex-direction: column;
+	}
+}
