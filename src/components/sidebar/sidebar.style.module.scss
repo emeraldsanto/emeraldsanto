@@ -9,7 +9,6 @@
 	flex-direction: column;
 	padding: 20px 0 20px 0;
 	justify-content: space-between;
-	// background-color: $color_light_blue;
 
 	.initial {
 		width: 30px;
@@ -54,6 +53,24 @@
 	
 			&:hover {
 				color: $color_accent;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 625px) {
+	.sidebar {
+		width: 100%;
+		height: 70px;
+		flex-direction: row;
+		padding: 0 20px 0 20px;
+
+		.icons_container {
+			flex-direction: row;
+
+			.icon {
+				margin-top: 0;
+				margin-left: 15px;
 			}
 		}
 	}

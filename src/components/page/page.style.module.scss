@@ -8,3 +8,9 @@
 	justify-content: center;
 	padding: 30px 30px 30px 100px;
 }
+
+@media only screen and (max-width: 625px) {
+	.page {
+		padding: 100px 30px 30px 30px;
+	}
+}
