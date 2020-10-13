@@ -34,12 +34,7 @@ const Contact: NextPage = () => {
 			<div style={{ maxWidth: 500 }}>
 				<h1 className={styles.title}>{t("title")}</h1>
 
-				<p className={styles.description}>
-					T'as envie de me parler de ta nouvelle idée d'application
-					mobile révolutionaire? T'es à la bonne place, n'oublie pas
-					d'inclure le plus de détails possible pour m'aider à bien
-					comprendre ta vision.
-				</p>
+				<p className={styles.description}>{t("description")}</p>
 
 				<form className={styles.form} onSubmit={onFormSubmit}>
 					<div className={styles.row}>

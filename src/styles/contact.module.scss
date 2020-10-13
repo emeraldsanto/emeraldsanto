@@ -36,14 +36,10 @@
 	resize: vertical;
 	min-height: 150px;
 	border-radius: 6px;
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 	color: $color_lighter_text;
 	font: 400 13.333333px Arial;
 	border: 1px solid lightgray;
-
-	&:focus {
-		border-color: $color_dark_blue;
-	}
 }
 
 .submit_container {
