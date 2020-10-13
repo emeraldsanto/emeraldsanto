@@ -28,17 +28,16 @@ const Home: NextPage = () => {
 					variants={BUTTON_VARIANTS}
 				>
 					{PAGES.map((p) => (
-						<div className={styles.button_wrapper}>
-							<i18n.Link key={p.url} href={p.url}>
-								<motion.div variants={SINGLE_BUTTON_VARIANTS}>
-									<Button
-										type="button"
-										className={styles.button}
-									>
-										<p>{t(p.text)}</p>
-									</Button>
-								</motion.div>
-							</i18n.Link>
+						<div key={p.url} className={styles.button_wrapper}>
+							<motion.div variants={SINGLE_BUTTON_VARIANTS}>
+								<Button
+									type="button"
+									className={styles.button}
+									onClick={() => i18n.Router.push(p.url)}
+								>
+									<p>{t(p.text)}</p>
+								</Button>
+							</motion.div>
 						</div>
 					))}
 				</motion.div>
