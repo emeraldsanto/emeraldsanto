@@ -6,14 +6,66 @@ import styles from "@styles/contact.module.scss";
 import { send } from "emailjs-com";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
-import { FormEvent, Fragment, useCallback, useState } from "react";
+import {
+	ChangeEvent,
+	FormEvent,
+	Fragment,
+	useCallback,
+	useReducer,
+} from "react";
 import env from "../../env.json";
 
+interface ContactState {
+	name: string;
+	email: string;
+	subject: string;
+	message: string;
+	status: "idle" | "loading" | "error";
+}
+
+type ContactAction =
+	| { name: "reset" }
+	| { name: "name"; payload: ContactState["name"] }
+	| { name: "email"; payload: ContactState["email"] }
+	| { name: "subject"; payload: ContactState["subject"] }
+	| { name: "message"; payload: ContactState["message"] }
+	| { name: "submit" }
+	| { name: "success" };
+
+const INITIAL_STATE: ContactState = {
+	name: "",
+	email: "",
+	subject: "",
+	message: "",
+	status: "idle",
+};
+
+function contactReducer(
+	state: ContactState,
+	action: ContactAction
+): ContactState {
+	switch (action.name) {
+		case "reset":
+		case "success":
+			return INITIAL_STATE;
+		case "submit":
+			return {
+				...state,
+				status: "loading",
+			};
+		default:
+			return {
+				...state,
+				[action.name]: [action.payload],
+			};
+	}
+}
+
 const Contact: NextPage = () => {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [subject, setSubject] = useState("");
-	const [message, setMessage] = useState("");
+	const [{ name, email, subject, message, status }, dispatch] = useReducer(
+		contactReducer,
+		INITIAL_STATE
+	);
 
 	const { t } = i18n.useTranslation("contact");
 
@@ -22,11 +74,23 @@ const Contact: NextPage = () => {
 			return false;
 		}
 
+		// Media query equivalent in CSS
 		return document.body.clientWidth <= 815;
 	})();
 
+	const onInputChange = useCallback(
+		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+			dispatch({
+				name: event.target.name as any,
+				payload: event.target.value,
+			});
+		},
+		[dispatch]
+	);
+
 	const onFormSubmit = useCallback(
 		async (event: FormEvent) => {
+			dispatch({ name: "submit" });
 			event.preventDefault();
 
 			try {
@@ -41,11 +105,13 @@ const Contact: NextPage = () => {
 					},
 					env.email_js_user_id
 				);
+
+				dispatch({ name: "success" });
 			} catch (error) {
 				console.log(error);
 			}
 		},
-		[name, email, subject, message]
+		[name, email, subject, message, dispatch]
 	);
 
 	return (
@@ -90,7 +156,7 @@ const Contact: NextPage = () => {
 									value={name}
 									placeholder={t("name")}
 									className={styles.input}
-									onChange={(e) => setName(e.target.value)}
+									onChange={onInputChange}
 								/>
 							</motion.div>
 
@@ -105,7 +171,7 @@ const Contact: NextPage = () => {
 									value={email}
 									placeholder={t("email")}
 									className={styles.input}
-									onChange={(e) => setEmail(e.target.value)}
+									onChange={onInputChange}
 								/>
 							</motion.div>
 						</Fragment>
@@ -120,7 +186,7 @@ const Contact: NextPage = () => {
 								value={name}
 								placeholder={t("name")}
 								className={styles.input}
-								onChange={(e) => setName(e.target.value)}
+								onChange={onInputChange}
 							/>
 
 							<Input
@@ -130,7 +196,7 @@ const Contact: NextPage = () => {
 								value={email}
 								placeholder={t("email")}
 								className={styles.input}
-								onChange={(e) => setEmail(e.target.value)}
+								onChange={onInputChange}
 							/>
 						</motion.div>
 					)}
@@ -140,10 +206,10 @@ const Contact: NextPage = () => {
 							required
 							name="subject"
 							value={subject}
+							onChange={onInputChange}
 							className={styles.input}
 							style={{ width: "100%" }}
 							placeholder={t("subject")}
-							onChange={(e) => setSubject(e.target.value)}
 						/>
 					</motion.div>
 
@@ -152,9 +218,9 @@ const Contact: NextPage = () => {
 							required
 							name="message"
 							value={message}
+							onChange={onInputChange}
 							placeholder={t("message")}
 							className={styles.textarea}
-							onChange={(e) => setMessage(e.target.value)}
 						/>
 					</motion.div>
 
