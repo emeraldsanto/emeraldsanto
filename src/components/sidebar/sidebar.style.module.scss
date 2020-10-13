@@ -9,7 +9,7 @@
 	flex-direction: column;
 	padding: 20px 0 20px 0;
 	justify-content: space-between;
-	background-color: $color_light_blue;
+	// background-color: $color_light_blue;
 
 	.initial {
 		width: 30px;
@@ -19,19 +19,19 @@
 		border-radius: 50%;
 		align-items: center;
 		justify-content: center;
-		border: 1px solid $color_white;
+		border: 1px solid $color_black;
 		transition: all 0.2s;
 
 		&:hover {
-			border-color: $color_dark_blue;
+			border-color: $color_accent;
 			
 			h3 {
-				color: $color_dark_blue;
+				color: $color_accent;
 			}
 		}
 
 		h3 {
-			color: $color_white;
+			color: $color_black;
 		}
 	}
 
@@ -41,19 +41,6 @@
 		align-items: center;
 		flex-direction: column;
 		justify-content: center;
-
-		.route {
-			cursor: pointer;
-			transition: color 0.2s;
-
-			&:not(:first-child) {
-				margin-top: 15px;
-			}
-
-			&:hover {
-				color: $color_dark_blue
-			}
-		}
 	}
 
 	.icons_container {
@@ -62,13 +49,12 @@
 
 		.icon {
 			margin-top: 15px;
-			color: $color_white;
+			color: $color_black;
 			transition: color 0.2s;
 	
 			&:hover {
-				color: $color_dark_blue;
+				color: $color_accent;
 			}
 		}
 	}
-
 }
