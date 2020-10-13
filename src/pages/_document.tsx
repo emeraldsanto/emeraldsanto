@@ -1,3 +1,5 @@
+// @ts-ignore https://github.com/isaachinman/next-i18next/issues/20#issuecomment-467026458
+import { lngFromReq } from "next-i18next/dist/commonjs/utils";
 import Document, {
 	DocumentContext,
 	DocumentInitialProps,
@@ -23,7 +25,7 @@ export default class LocalizedDocument extends Document<
 		ctx: DocumentContext
 	): Promise<AugmentDocumentInitialProps> {
 		const initialProps = await Document.getInitialProps(ctx);
-		const language: string = (ctx.req as any)?.language || "en";
+		const language = lngFromReq(ctx.req);
 
 		return { ...initialProps, language };
 	}
