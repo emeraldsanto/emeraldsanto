@@ -40,15 +40,15 @@ const SINGLE_BUTTON_VARIANTS: Variants = {
 
 const PAGES = [
 	{
-		text: "À propos de moi",
+		text: "aboutMe",
 		url: "/about",
 	},
 	{
-		text: "Mes projets",
+		text: "myWork",
 		url: "/work",
 	},
 	{
-		text: "Me contacter",
+		text: "contactMe",
 		url: "/contact",
 	},
 ];
@@ -76,7 +76,7 @@ const Home: NextPage = (props) => {
 					variants={BUTTON_VARIANTS}
 				>
 					{PAGES.map((p) => (
-						<i18n.Link href={p.url}>
+						<i18n.Link key={p.url} href={p.url}>
 							<motion.div
 								className={styles.button}
 								variants={SINGLE_BUTTON_VARIANTS}

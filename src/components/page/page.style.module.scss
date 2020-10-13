@@ -3,10 +3,10 @@
 .page {
 	flex-grow: 1;
 	display: flex;
+	padding: 30px 100px 30px 100px;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-	padding: 30px 30px 30px 100px;
 }
 
 @media only screen and (max-width: 625px) {
