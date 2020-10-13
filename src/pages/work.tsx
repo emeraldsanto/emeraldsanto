@@ -21,18 +21,14 @@ const Work: NextPage = () => {
 					className={styles.title}
 					variants={SINGLE_TEXT_VARIANT}
 				>
-					Mes projets 🔨
+					{t("title")}
 				</motion.h1>
 
 				<motion.p
 					className={styles.description}
 					variants={SINGLE_TEXT_VARIANT}
 				>
-					Je suis généralement assez occupé car je dois gérer mon
-					travail à temps plein, mes contrats de consultation ainsi
-					que le developpement "open-source" et autres loisirs. Voici
-					donc une liste non-exhaustive de mes expériences
-					professionnelles depuis quelques années.
+					{t("description")}
 				</motion.p>
 
 				{EXPERIENCES.map((e, i) => (
