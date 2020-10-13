@@ -27,7 +27,18 @@ export default class LocalizedDocument extends Document<
 	render() {
 		return (
 			<Html lang={this.props.language}>
-				<Head />
+				<Head>
+					<meta
+						name="description"
+						content="Yanick Bélanger - Portfolio"
+					/>
+
+					<meta
+						property="og:image"
+						content="/static/assets/portrait-min.jpg"
+					/>
+				</Head>
+
 				<body>
 					<Main />
 					<NextScript />
