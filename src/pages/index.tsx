@@ -76,14 +76,14 @@ const Home: NextPage = (props) => {
 					variants={BUTTON_VARIANTS}
 				>
 					{PAGES.map((p) => (
-						<motion.div
-							className={styles.button}
-							variants={SINGLE_BUTTON_VARIANTS}
-						>
-							<i18n.Link href={p.url}>
+						<i18n.Link href={p.url}>
+							<motion.div
+								className={styles.button}
+								variants={SINGLE_BUTTON_VARIANTS}
+							>
 								<p>{t(p.text)}</p>
-							</i18n.Link>
-						</motion.div>
+							</motion.div>
+						</i18n.Link>
 					))}
 				</motion.div>
 			</div>
