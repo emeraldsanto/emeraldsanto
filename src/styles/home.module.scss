@@ -1,0 +1,61 @@
+@import "../styles/variables.scss";
+
+.portrait {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	margin-right: 50px;
+	background-size: cover;
+	background-position: center center;
+	background-image: url("/static/assets/portrait-min.jpg");
+}
+
+.greeting {
+	font-size: 3em;
+}
+
+.presentation {
+	font-size: 4em;
+}
+
+.buttons {
+	display: flex;
+	margin-top: 35px;
+	justify-content: space-between;
+
+	.button {
+		cursor: pointer;
+		flex-basis: 30%;
+		min-width: 120px;
+		border-radius: 6px;
+		padding: 15px 10px;
+		transition: all 0.2s ease 0s;
+		background-color: $color_accent;
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+		&:not(:first-child) {
+			margin-left: 15px;
+		}
+
+		&:hover {
+			background-color: $color_dark_blue;
+			box-shadow: 0px 15px 20px rgba(54, 38, 167, 0.4);
+		}
+
+		p {
+			text-align: center;
+			color: $color_white;
+		}
+	}
+}
+
+@media only screen and (max-width: 625px) {
+	.buttons {
+		flex-direction: column;
+
+		.button:not(:first-child) {
+			margin-left: 0;
+			margin-top: 15px;
+		}
+	}
+}
