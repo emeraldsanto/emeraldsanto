@@ -23,39 +23,27 @@
 	margin-top: 35px;
 	justify-content: space-between;
 
-	.button {
-		cursor: pointer;
-		flex-basis: 30%;
-		min-width: 120px;
-		border-radius: 6px;
-		padding: 15px 10px;
-		transition: all 0.2s ease 0s;
-		background-color: $color_accent;
-		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-
+	.button_wrapper {
 		&:not(:first-child) {
 			margin-left: 15px;
-		}
-
-		&:hover {
-			background-color: $color_dark_blue;
-			box-shadow: 0px 15px 20px rgba(54, 38, 167, 0.4);
-		}
-
-		p {
-			text-align: center;
-			color: $color_white;
 		}
 	}
 }
 
 @media only screen and (max-width: 625px) {
 	.buttons {
+		margin-top: 20px;
 		flex-direction: column;
 
-		.button:not(:first-child) {
-			margin-left: 0;
-			margin-top: 15px;
+		.button_wrapper {
+			&:not(:first-child) {
+				margin-left: 0;
+				margin-top: 15px;
+			}
+		}
+
+		.button {
+			width: 100%;
 		}
 	}
 }

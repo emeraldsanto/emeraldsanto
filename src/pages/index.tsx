@@ -1,3 +1,4 @@
+import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
 import i18n from "@localization/i18n";
 import styles from "@styles/home.module.scss";
@@ -27,14 +28,17 @@ const Home: NextPage = () => {
 					variants={BUTTON_VARIANTS}
 				>
 					{PAGES.map((p) => (
-						<i18n.Link key={p.url} href={p.url}>
-							<motion.div
-								className={styles.button}
-								variants={SINGLE_BUTTON_VARIANTS}
-							>
-								<p>{t(p.text)}</p>
+						<div key={p.url} className={styles.button_wrapper}>
+							<motion.div variants={SINGLE_BUTTON_VARIANTS}>
+								<Button
+									type="button"
+									className={styles.button}
+									onClick={() => i18n.Router.push(p.url)}
+								>
+									<p>{t(p.text)}</p>
+								</Button>
 							</motion.div>
-						</i18n.Link>
+						</div>
 					))}
 				</motion.div>
 			</div>

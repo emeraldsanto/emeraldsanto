@@ -1,0 +1,16 @@
+@import "../../styles/variables.scss";
+
+.loading_container {
+	display: flex;
+}
+
+.loading_circle {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background-color: $color_white;
+
+	&:not(:first-child) {
+		margin-left: 2px;
+	}
+}
