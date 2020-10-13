@@ -28,16 +28,18 @@ const Home: NextPage = () => {
 					variants={BUTTON_VARIANTS}
 				>
 					{PAGES.map((p) => (
-						<i18n.Link key={p.url} href={p.url}>
-							<motion.div
-								className={styles.button}
-								variants={SINGLE_BUTTON_VARIANTS}
-							>
-								<Button type="button">
-									<p>{t(p.text)}</p>
-								</Button>
-							</motion.div>
-						</i18n.Link>
+						<div className={styles.button_wrapper}>
+							<i18n.Link key={p.url} href={p.url}>
+								<motion.div variants={SINGLE_BUTTON_VARIANTS}>
+									<Button
+										type="button"
+										className={styles.button}
+									>
+										<p>{t(p.text)}</p>
+									</Button>
+								</motion.div>
+							</i18n.Link>
+						</div>
 					))}
 				</motion.div>
 			</div>
