@@ -37,6 +37,16 @@ export default class LocalizedDocument extends Document<
 						property="og:image"
 						content="/static/assets/portrait-min.jpg"
 					/>
+
+					<link
+						rel="stylesheet"
+						href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&display=swap"
+					></link>
+
+					<link
+						rel="stylesheet"
+						href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap"
+					></link>
 				</Head>
 
 				<body>

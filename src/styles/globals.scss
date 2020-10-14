@@ -20,15 +20,14 @@ h2,
 h3,
 h4,
 h5,
-h6,
-p {
-	margin: 0;
-	padding: 0;
+h6 {
 	color: $color_black;
+	font-family: "Roboto Slab", serif;
 }
 
-p {
+p, span {
 	color: $color_lighter_text;
+	font-family: "Poppins", sans-serif;
 }
 
 h1 {
@@ -46,6 +45,8 @@ a {
 }
 
 * {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 }
 
