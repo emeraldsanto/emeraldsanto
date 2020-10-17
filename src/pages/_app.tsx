@@ -2,25 +2,43 @@ import { SideBar } from "@components/sidebar/sidebar.component";
 import i18n from "@localization/i18n";
 import "@styles/globals.scss";
 import "@styles/toasts.scss";
-import { default as NextApp } from "next/app";
-import React, { Fragment } from "react";
+import { Analytics } from "lib/Analytics";
+import BaseApp, { AppContext, AppProps } from "next/app";
+import { useRouter } from "next/router";
+import React, { FC, Fragment, useCallback, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
-class App extends NextApp {
-	render() {
-		const { Component, pageProps } = this.props;
-		return (
-			<Fragment>
-				<SideBar />
+const App: FC<AppProps> = (props) => {
+	const { Component, pageProps } = props;
 
-				<main className="root_component">
-					<Component {...pageProps} />
-				</main>
+	const router = useRouter();
 
-				<ToastContainer />
-			</Fragment>
-		);
-	}
-}
+	const onRouteChange = useCallback(
+		(url: string) => Analytics.logPageView(url),
+		[]
+	);
+
+	useEffect(() => {
+		router.events.on("routeChangeComplete", onRouteChange);
+		return () => router.events.off("routeChangeComplete", onRouteChange);
+	}, [router.events]);
+
+	return (
+		<Fragment>
+			<SideBar />
+
+			<main className="root_component">
+				<Component {...pageProps} />
+			</main>
+
+			<ToastContainer />
+		</Fragment>
+	);
+};
+
+// @ts-ignore
+App.getInitialProps = async (appContext: AppContext) => ({
+	...(await BaseApp.getInitialProps(appContext)),
+});
 
 export default i18n.appWithTranslation(App);
