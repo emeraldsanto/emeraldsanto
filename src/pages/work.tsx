@@ -65,7 +65,9 @@ const Work: NextPage = () => {
 							<hr />
 							<div className={styles.tech_container}>
 								{e.technologies.map((t) => (
-									<span className={styles.tech}>{t}</span>
+									<span key={t} className={styles.tech}>
+										{t}
+									</span>
 								))}
 							</div>
 						</motion.div>
