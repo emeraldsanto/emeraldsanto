@@ -123,7 +123,7 @@ const Contact: NextPage = () => {
 	);
 
 	return (
-		<Page>
+		<Page title={t("title")}>
 			<div className={styles.form_container}>
 				<motion.div
 					initial="hidden"
@@ -134,7 +134,7 @@ const Contact: NextPage = () => {
 						className={styles.title}
 						variants={CHILD_VARIANTS}
 					>
-						{t("title")}
+						{t("title")} 📬
 					</motion.h1>
 
 					<motion.p
