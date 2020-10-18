@@ -8,7 +8,7 @@ const About: NextPage = () => {
 	const { t } = i18n.useTranslation("about");
 
 	return (
-		<Page>
+		<Page title={t("title")}>
 			<div className={styles.container}>
 				<motion.div
 					initial="hidden"
@@ -20,7 +20,7 @@ const About: NextPage = () => {
 						className={styles.title}
 						variants={SINGLE_TEXT_VARIANT}
 					>
-						{t("title")}
+						{t("title")} 🤔
 					</motion.h1>
 
 					<motion.p
