@@ -4,7 +4,7 @@ I'm Yanick, a 22 year old mobile developer from Montreal, Canada. I specialize i
 
 ### What I'm currently doing
 
-I work for a development [agency](https://www.alithya.com) building cross-platform mobile applications. The tech stack I'm using daily consists of React Native, TypeScript and NodeJS. On top of that I also do freelancing work for an awesome [startup](https://nightborn.be) based in Brussels, Belgium.
+I work for a fintech [startup](https://www.moka.ai) building full-stack cross-platform mobile applications. The tech stack I'm using daily consists of React Native, TypeScript and NodeJS. On top of that I also do freelancing work for an awesome [startup](https://nightborn.be) based in Brussels, Belgium.
 
 ### Have a project for me?
 
