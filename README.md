@@ -13,7 +13,7 @@ If you or your company is looking for an experienced React Native developer, or 
 ### Where to find me?
 
 - [LinkedIn](https://www.linkedin.com/in/yanick-bélanger)
-- [Twitter](https://www.twitter/com/yanthedev)
+- [Twitter](https://www.twitter.com/yanthedev)
 - [Email](mailto:yanick.belanger@yahoo.com)
 
 <!--

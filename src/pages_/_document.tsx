@@ -1,33 +1,16 @@
 import { Analytics } from "lib/Analytics";
-// @ts-ignore https://github.com/isaachinman/next-i18next/issues/20#issuecomment-467026458
-import { lngFromReq } from "next-i18next/dist/commonjs/utils";
 import Document, {
-	DocumentContext,
-	DocumentInitialProps,
 	DocumentProps,
 	Head,
 	Html,
 	Main,
-	NextScript,
+	NextScript
 } from "next/document";
 
-type AugmentedDocumentProps<T> = T & { language: string };
-
-export default class LocalizedDocument extends Document<
-	AugmentedDocumentProps<DocumentProps>
-> {
-	static async getInitialProps(
-		ctx: DocumentContext
-	): Promise<AugmentedDocumentProps<DocumentInitialProps>> {
-		const initialProps = await Document.getInitialProps(ctx);
-		const language = lngFromReq(ctx.req);
-
-		return { ...initialProps, language };
-	}
-
+export default class LocalizedDocument extends Document<DocumentProps> {
 	render() {
 		return (
-			<Html lang={this.props.language}>
+			<Html>
 				<Head>
 					<meta
 						name="description"

@@ -1,0 +1,14 @@
+{
+	"locales": ["en", "fr"],
+	"defaultLocale": "en",
+	"currentPagesDir": "src/pages_",
+	"finalPagesDir": "src/pages",
+	"localesPath": "public/static/locales",
+	"pages": {
+	  "*": ["404"],
+	  "/": ["home"],
+	  "/about": ["about"],
+	  "/work": ["work"],
+	  "/contact": ["contact"]
+	}
+  }

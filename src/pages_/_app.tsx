@@ -1,9 +1,8 @@
 import { SideBar } from "@components/sidebar/sidebar.component";
-import i18n from "@localization/i18n";
 import "@styles/globals.scss";
 import "@styles/toasts.scss";
 import { Analytics } from "lib/Analytics";
-import BaseApp, { AppContext, AppProps } from "next/app";
+import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import React, { FC, Fragment, useCallback, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
@@ -36,9 +35,4 @@ const App: FC<AppProps> = (props) => {
 	);
 };
 
-// @ts-ignore
-App.getInitialProps = async (appContext: AppContext) => ({
-	...(await BaseApp.getInitialProps(appContext)),
-});
-
-export default i18n.appWithTranslation(App);
+export default App;
