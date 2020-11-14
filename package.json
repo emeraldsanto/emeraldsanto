@@ -4,8 +4,8 @@
 	"description": "A website showcasing my past and current work.",
 	"main": "src/pages/index.tsx",
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
+		"dev": "next-translate && next dev",
+		"build": "next-translate && next build",
 		"start": "next start"
 	},
 	"repository": {
@@ -31,7 +31,7 @@
 		"emailjs-com": "2.6.3",
 		"framer-motion": "2.9.4",
 		"next": "10.0.1",
-		"next-i18next": "6.0.3",
+		"next-translate": "^0.19.5",
 		"react": "17.0.1",
 		"react-dom": "17.0.1",
 		"react-toastify": "6.1.0",

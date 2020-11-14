@@ -1,14 +1,14 @@
 import { Page } from "@components/page/page.component";
-import i18n from "@localization/i18n";
 import styles from "@styles/about.module.scss";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
+import useTranslation from "next-translate/useTranslation";
 
 const About: NextPage = () => {
-	const { t } = i18n.useTranslation("about");
+	const { t } = useTranslation();
 
 	return (
-		<Page title={t("title")}>
+		<Page title={t("about:title")}>
 			<div className={styles.container}>
 				<motion.div
 					initial="hidden"
@@ -20,14 +20,14 @@ const About: NextPage = () => {
 						className={styles.title}
 						variants={SINGLE_TEXT_VARIANT}
 					>
-						{t("title")} 🤔
+						{t("about:title")} 🤔
 					</motion.h1>
 
 					<motion.p
 						className={styles.description}
 						variants={SINGLE_TEXT_VARIANT}
 					>
-						{t("firstParagraph")}
+						{t("about:firstParagraph")}
 					</motion.p>
 
 					<br />
@@ -36,7 +36,7 @@ const About: NextPage = () => {
 						className={styles.description}
 						variants={SINGLE_TEXT_VARIANT}
 					>
-						{t("secondParagraph")}
+						{t("about:secondParagraph")}
 					</motion.p>
 
 					<br />
@@ -45,7 +45,7 @@ const About: NextPage = () => {
 						className={styles.description}
 						variants={SINGLE_TEXT_VARIANT}
 					>
-						{t("thirdParagraph")}
+						{t("about:thirdParagraph")}
 					</motion.p>
 
 					<br />
@@ -54,7 +54,7 @@ const About: NextPage = () => {
 						className={styles.description}
 						variants={SINGLE_TEXT_VARIANT}
 					>
-						{t("fourthParagraph")}
+						{t("about:fourthParagraph")}
 					</motion.p>
 				</motion.div>
 
@@ -70,10 +70,6 @@ const About: NextPage = () => {
 		</Page>
 	);
 };
-
-About.getInitialProps = () => ({
-	namespacesRequired: ["about"],
-});
 
 export default About;
 

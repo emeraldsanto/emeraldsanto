@@ -1,10 +1,10 @@
 import {
 	faGithubSquare,
 	faLinkedin,
-	faTwitterSquare,
+	faTwitterSquare
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import i18n from "@localization/i18n";
+import Link from "next/link";
 import { FC } from "react";
 import styles from "./sidebar.style.module.scss";
 
@@ -44,11 +44,11 @@ const SOCIALS = [
 export const SideBar: FC = () => {
 	return (
 		<aside className={styles.sidebar}>
-			<i18n.Link href="/">
+			<Link href="/">
 				<div className={styles.initial}>
 					<h3>Y</h3>
 				</div>
-			</i18n.Link>
+			</Link>
 
 			<div className={styles.routes_container}>{/* TODO: ? */}</div>
 

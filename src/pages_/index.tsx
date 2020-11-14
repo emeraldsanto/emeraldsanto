@@ -1,12 +1,13 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
-import i18n from "@localization/i18n";
 import styles from "@styles/index.module.scss";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
+import useTranslation from "next-translate/useTranslation";
+import Link from "next/link";
 
 const Index: NextPage = () => {
-	const { t } = i18n.useTranslation("home");
+	const { t } = useTranslation();
 
 	return (
 		<Page>
@@ -16,9 +17,9 @@ const Index: NextPage = () => {
 					animate="visible"
 					variants={TEXT_VARIANTS}
 				>
-					<h1 className={styles.greeting}>{t("greeting")}</h1>
+					<h1 className={styles.greeting}>{t("home:greeting")}</h1>
 
-					<h1 className={styles.presentation}>{t("presentation")}</h1>
+					<h1 className={styles.presentation}>{t("home:presentation")}</h1>
 				</motion.div>
 
 				<motion.div
@@ -30,13 +31,14 @@ const Index: NextPage = () => {
 					{PAGES.map((p) => (
 						<div key={p.url} className={styles.button_wrapper}>
 							<motion.div variants={SINGLE_BUTTON_VARIANTS}>
-								<Button
-									type="button"
-									className={styles.button}
-									onClick={() => i18n.Router.push(p.url)}
-								>
-									<p>{t(p.text)}</p>
-								</Button>
+								<Link href={p.url}>
+									<Button
+										type="button"
+										className={styles.button}
+									>
+										<p>{t(p.text)}</p>
+									</Button>
+								</Link>
 							</motion.div>
 						</div>
 					))}
@@ -45,8 +47,6 @@ const Index: NextPage = () => {
 		</Page>
 	);
 };
-
-Index.getInitialProps = () => ({ namespacesRequired: ["home"] });
 
 export default Index;
 
@@ -86,15 +86,15 @@ const SINGLE_BUTTON_VARIANTS: Variants = {
 
 const PAGES = [
 	{
-		text: "aboutMe",
+		text: "home:aboutMe",
 		url: "/about",
 	},
 	{
-		text: "myWork",
+		text: "home:myWork",
 		url: "/work",
 	},
 	{
-		text: "contactMe",
+		text: "home:contactMe",
 		url: "/contact",
 	},
 ];

@@ -1,16 +1,16 @@
 import { Page } from "@components/page/page.component";
 import { PeriodLink } from "@components/period-link/period-link.component";
-import i18n from "@localization/i18n";
 import styles from "@styles/work.module.scss";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
+import useTranslation from "next-translate/useTranslation";
 import { Fragment } from "react";
 
 const Work: NextPage = () => {
-	const { t } = i18n.useTranslation("work");
+	const { t } = useTranslation();
 
 	return (
-		<Page title={t("title")}>
+		<Page title={t("work:title")}>
 			<motion.div
 				initial="hidden"
 				animate="visible"
@@ -21,14 +21,14 @@ const Work: NextPage = () => {
 					className={styles.title}
 					variants={SINGLE_TEXT_VARIANT}
 				>
-					{t("title")} 🔨
+					{t("work:title")} 🔨
 				</motion.h1>
 
 				<motion.p
 					className={styles.description}
 					variants={SINGLE_TEXT_VARIANT}
 				>
-					{t("description")}
+					{t("work:description")}
 				</motion.p>
 
 				{EXPERIENCES.map((e, i) => (
@@ -84,8 +84,6 @@ const Work: NextPage = () => {
 	);
 };
 
-Work.getInitialProps = () => ({ namespacesRequired: ["work"] });
-
 export default Work;
 
 const TEXT_VARIANTS: Variants = {
@@ -113,54 +111,45 @@ const SINGLE_TEXT_VARIANT: Variants = {
 
 const EXPERIENCES = [
 	{
-		name: "moka.name",
-		title: "moka.title",
-		period: "moka.period",
-		location: "moka.location",
+		name: "moka",
 		url: "https://www.moka.ai",
-		description: "moka.description",
-		technologies: ["Node.JS", "MongoDB", "PostgreSQL", "React Native"],
+		technologies: ["Node.JS", "MongoDB", "PostgreSQL", "React Native"]
 	},
 	{
-		name: "alithya.name",
-		title: "alithya.title",
-		period: "alithya.period",
-		location: "alithya.location",
-		url: "https://www.alithya.com",
-		description: "alithya.description",
-		technologies: ["React Native", "TypeScript", "Node.JS"],
-	},
-	{
-		name: "nightborn.name",
-		title: "nightborn.title",
-		period: "nightborn.period",
-		location: "nightborn.location",
+		name: "nightborn",
 		url: "https://www.nightborn.be",
-		description: "nightborn.description",
-		technologies: ["React Native", "React.JS", "TypeScript", "C#", "T-SQL"],
+		technologies: ["React Native", "React.JS", "TypeScript", "C#", "T-SQL"]
 	},
 	{
-		name: "narcitymedia.name",
-		title: "narcitymedia.title",
-		period: "narcitymedia.period",
-		location: "narcitymedia.location",
+		name: "alithya",
+		url: "https://www.alithya.com",
+		technologies: ["React Native", "TypeScript", "Node.JS"]
+	},
+	{
+		name: "narcitymedia",
 		url: "https://www.narcitymedia.com",
-		description: "narcitymedia.description",
 		technologies: [
 			"React Native",
 			"React.JS",
 			"TypeScript",
 			"Node.JS",
 			"MongoDB",
-		],
+		]
 	},
 	{
-		name: "levelapp.name",
-		title: "levelapp.title",
-		period: "levelapp.period",
-		location: "levelapp.location",
+		name: "levelapp",
 		url: "https://www.levelapp.be",
-		description: "levelapp.description",
-		technologies: ["React Native", "TypeScript"],
+		technologies: ["React Native", "TypeScript"]
 	},
-];
+].map(e => ({
+	...e,
+	name: makei18nKey(e.name, "name"),
+	title: makei18nKey(e.name, "title"),
+	period: makei18nKey(e.name, "period"),
+	location: makei18nKey(e.name, "location"),
+	description: makei18nKey(e.name, "description")
+}));
+
+function makei18nKey(experienceName: string, suffix: string) {
+	return `work:${experienceName}.${suffix}`;
+}

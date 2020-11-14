@@ -2,17 +2,17 @@ import { Button } from "@components/button/button.component";
 import { Input, TextArea } from "@components/input/input.component";
 import { Loading } from "@components/loading/loading.component";
 import { Page } from "@components/page/page.component";
-import i18n from "@localization/i18n";
 import styles from "@styles/contact.module.scss";
 import { send } from "emailjs-com";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
+import useTranslation from "next-translate/useTranslation";
 import {
 	ChangeEvent,
 	FormEvent,
 	Fragment,
 	useCallback,
-	useReducer,
+	useReducer
 } from "react";
 import { toast } from "react-toastify";
 import env from "../../env.json";
@@ -73,7 +73,7 @@ const Contact: NextPage = () => {
 		INITIAL_STATE
 	);
 
-	const { t } = i18n.useTranslation("contact");
+	const { t } = useTranslation();
 
 	const isSmallFormFactor = (() => {
 		if (typeof window === "undefined") {
@@ -113,17 +113,17 @@ const Contact: NextPage = () => {
 				);
 
 				dispatch({ name: "success" });
-				toast(t("sendSuccess"), { type: "success" });
+				toast(t("contact:sendSuccess"), { type: "success" });
 			} catch (error) {
 				dispatch({ name: "error" });
-				toast(t("sendError"), { type: "error" });
+				toast(t("contact:sendError"), { type: "error" });
 			}
 		},
 		[t, name, email, subject, message, dispatch]
 	);
 
 	return (
-		<Page title={t("title")}>
+		<Page title={t("contact:title")}>
 			<div className={styles.form_container}>
 				<motion.div
 					initial="hidden"
@@ -134,14 +134,14 @@ const Contact: NextPage = () => {
 						className={styles.title}
 						variants={CHILD_VARIANTS}
 					>
-						{t("title")} 📬
+						{t("contact:title")} 📬
 					</motion.h1>
 
 					<motion.p
 						className={styles.description}
 						variants={CHILD_VARIANTS}
 					>
-						{t("description")}
+						{t("contact:description")}
 					</motion.p>
 				</motion.div>
 
@@ -162,9 +162,9 @@ const Contact: NextPage = () => {
 									required
 									name="name"
 									value={name}
-									placeholder={t("name")}
 									className={styles.input}
 									onChange={onInputChange}
+									placeholder={t("contact:name")}
 								/>
 							</motion.div>
 
@@ -177,9 +177,9 @@ const Contact: NextPage = () => {
 									type="email"
 									name="email"
 									value={email}
-									placeholder={t("email")}
 									className={styles.input}
 									onChange={onInputChange}
+									placeholder={t("contact:email")}
 								/>
 							</motion.div>
 						</Fragment>
@@ -192,9 +192,9 @@ const Contact: NextPage = () => {
 								required
 								name="name"
 								value={name}
-								placeholder={t("name")}
 								className={styles.input}
 								onChange={onInputChange}
+								placeholder={t("contact:name")}
 							/>
 
 							<Input
@@ -202,9 +202,9 @@ const Contact: NextPage = () => {
 								type="email"
 								name="email"
 								value={email}
-								placeholder={t("email")}
 								className={styles.input}
 								onChange={onInputChange}
+								placeholder={t("contact:email")}
 							/>
 						</motion.div>
 					)}
@@ -217,7 +217,7 @@ const Contact: NextPage = () => {
 							onChange={onInputChange}
 							className={styles.input}
 							style={{ width: "100%" }}
-							placeholder={t("subject")}
+							placeholder={t("contact:subject")}
 						/>
 					</motion.div>
 
@@ -227,8 +227,8 @@ const Contact: NextPage = () => {
 							name="message"
 							value={message}
 							onChange={onInputChange}
-							placeholder={t("message")}
 							className={styles.textarea}
+							placeholder={t("contact:message")}
 						/>
 					</motion.div>
 
@@ -246,7 +246,7 @@ const Contact: NextPage = () => {
 							{status === "loading" ? (
 								<Loading />
 							) : (
-								<p>{t("send")}</p>
+								<p>{t("contact:send")}</p>
 							)}
 						</Button>
 					</motion.div>
@@ -255,8 +255,6 @@ const Contact: NextPage = () => {
 		</Page>
 	);
 };
-
-Contact.getInitialProps = () => ({ namespacesRequired: ["contact"] });
 
 export default Contact;
 
