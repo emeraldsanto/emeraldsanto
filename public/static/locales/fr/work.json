@@ -1,6 +1,13 @@
 {
 	"title": "Mes projets",
 	"description": "Je suis généralement assez occupé car je dois gérer mon travail à temps plein, mes contrats de consultation ainsi que le developpement \"open-source\" et autres loisirs. Voici donc une liste non-exhaustive de mes expériences professionnelles depuis quelques années.",
+	"moka": {
+		"name": "Moka Financial Technologies",
+		"title": "Développeur Full Stack",
+		"period": "11/2020 - Maintenant",
+		"location": "Montréal, Canada",
+		"description": "Développement de fonctionnalités en rapport avec la vérification d'identité utilisateur de l'application mobile Moka en collaboration avec les équipes front et back end."
+	},
 	"alithya": {
 		"name": "Alithya",
 		"title": "Développeur Mobile",
@@ -10,7 +17,7 @@
 	},
 	"nightborn": {
 		"name": "Nightborn",
-		"title": "Développeur Full-stack",
+		"title": "Développeur Full Stack",
 		"period": "10/2019 - Maintenant",
 		"location": "Bruxelles, Belgique",
 		"description": "Développement de plusieurs projets full-stack incluant des systèmes de paiement, principalement pour des cliens dans les domaines médicaux et financiers."

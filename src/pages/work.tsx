@@ -113,6 +113,15 @@ const SINGLE_TEXT_VARIANT: Variants = {
 
 const EXPERIENCES = [
 	{
+		name: "moka.name",
+		title: "moka.title",
+		period: "moka.period",
+		location: "moka.location",
+		url: "https://www.moka.ai",
+		description: "moka.description",
+		technologies: ["Node.JS", "MongoDB", "PostgreSQL", "React Native"],
+	},
+	{
 		name: "alithya.name",
 		title: "alithya.title",
 		period: "alithya.period",
