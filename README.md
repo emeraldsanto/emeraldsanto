@@ -12,9 +12,12 @@ If you or your company is looking for an experienced React Native developer, or 
 
 ### Where to find me?
 
+- [Personal website](https://yanickbelanger.dev)
 - [LinkedIn](https://www.linkedin.com/in/yanick-bélanger)
 - [Twitter](https://www.twitter.com/yanthedev)
 - [Email](mailto:yanick.belanger@yahoo.com)
+
+[![emeraldsanto's github stats](https://github-readme-stats.vercel.app/api?username=emeraldsanto)](https://github.com/anuraghazra/github-readme-stats)
 
 <!--
 **emeraldsanto/emeraldsanto** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
