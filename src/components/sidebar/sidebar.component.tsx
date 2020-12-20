@@ -1,3 +1,4 @@
+import { LanguageSwitcher } from '@components/language-switcher/language-switcher.component';
 import {
 	faGithubSquare,
 	faLinkedin,
@@ -7,21 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { FC } from "react";
 import styles from "./sidebar.style.module.scss";
-
-const PAGES = [
-	{
-		text: "Home",
-		url: "/",
-	},
-	{
-		text: "About",
-		url: "/about",
-	},
-	{
-		text: "Work",
-		url: "/work",
-	},
-];
 
 const SOCIALS = [
 	{
@@ -49,6 +35,8 @@ export const SideBar: FC = () => {
 					<h3>Y</h3>
 				</div>
 			</Link>
+
+			<LanguageSwitcher className={styles.switcher} />
 
 			<div className={styles.routes_container}>{/* TODO: ? */}</div>
 

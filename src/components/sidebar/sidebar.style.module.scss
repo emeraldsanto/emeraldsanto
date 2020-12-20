@@ -34,6 +34,10 @@
 		}
 	}
 
+	.switcher {
+		margin: 10px 0;
+	}
+
 	.routes_container {
 		flex: 1;
 		display: flex;
@@ -65,6 +69,10 @@
 		padding: 20px;
 		position: static;
 		flex-direction: row;
+
+		.switcher {
+			margin: 0 10px;
+		}
 
 		.icons_container {
 			flex-direction: row;
