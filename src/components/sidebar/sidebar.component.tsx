@@ -1,3 +1,4 @@
+import { LanguageSwitcher } from '@components/language-switcher/language-switcher.component';
 import {
 	faGithubSquare,
 	faLinkedin,
@@ -34,6 +35,8 @@ export const SideBar: FC = () => {
 					<h3>Y</h3>
 				</div>
 			</Link>
+
+			<LanguageSwitcher className={styles.switcher} />
 
 			<div className={styles.routes_container}>{/* TODO: ? */}</div>
 
