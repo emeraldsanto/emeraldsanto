@@ -8,21 +8,6 @@ import Link from "next/link";
 import { FC } from "react";
 import styles from "./sidebar.style.module.scss";
 
-const PAGES = [
-	{
-		text: "Home",
-		url: "/",
-	},
-	{
-		text: "About",
-		url: "/about",
-	},
-	{
-		text: "Work",
-		url: "/work",
-	},
-];
-
 const SOCIALS = [
 	{
 		name: "GitHub",

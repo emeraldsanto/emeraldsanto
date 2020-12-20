@@ -2,6 +2,7 @@ import { Page } from "@components/page/page.component";
 import styles from "@styles/about.module.scss";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
+import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
 
 const About: NextPage = () => {
@@ -64,7 +65,14 @@ const About: NextPage = () => {
 						animate="visible"
 						className={styles.portrait}
 						variants={PORTRAIT_VARIANTS}
-					/>
+					>
+						<Image
+							width={350}
+							height={350}
+							objectFit="cover"
+							src="/static/assets/portrait-min.jpg"
+						/>
+					</motion.div>
 				</div>
 			</div>
 		</Page>
