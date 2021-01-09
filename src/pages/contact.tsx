@@ -12,10 +12,12 @@ import {
 	FormEvent,
 	Fragment,
 	useCallback,
+	useMemo,
 	useReducer
 } from "react";
 import { toast } from "react-toastify";
 import environment from "@lib/environment";
+import { useWindowDimensions } from '@hooks/useWindowDimensions';
 
 interface ContactState {
 	name: string;
@@ -74,20 +76,17 @@ const Contact: NextPage = () => {
 	);
 
 	const { t } = useTranslation();
+	const [width] = useWindowDimensions();
 
-	const isSmallFormFactor = (() => {
-		if (typeof window === "undefined") {
-			return false;
-		}
-
-		// Media query equivalent in CSS
-		return document.body.clientWidth <= 815;
-	})();
+	const isSmallFormFactor = useMemo(
+		() => width < 815,
+		[width]
+	);
 
 	const onInputChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			dispatch({
-				name: event.target.name as any,
+				name: event.target.name as ContactAction['name'],
 				payload: event.target.value,
 			});
 		},
@@ -96,8 +95,8 @@ const Contact: NextPage = () => {
 
 	const onFormSubmit = useCallback(
 		async (event: FormEvent) => {
-			dispatch({ name: "submit" });
 			event.preventDefault();
+			dispatch({ name: "submit" });
 
 			try {
 				await send(
