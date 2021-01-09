@@ -27,10 +27,8 @@
 	margin-top: 35px;
 	justify-content: space-between;
 
-	.button_wrapper {
-		&:not(:first-child) {
-			margin-left: 15px;
-		}
+	.button_wrapper:not(:first-child) {
+		margin-left: 15px;
 	}
 }
 
