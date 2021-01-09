@@ -1,25 +1,20 @@
 import { SideBar } from "@components/sidebar/sidebar.component";
 import "@styles/globals.scss";
 import "@styles/toasts.scss";
-import { Analytics } from "lib/Analytics";
+import { logPageView } from "@lib/analytics";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import React, { FC, Fragment, useCallback, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
-const App: FC<AppProps> = (props) => {
+export default function App(props: AppProps) {
 	const { Component, pageProps } = props;
 
 	const router = useRouter();
 
-	const onRouteChange = useCallback(
-		(url: string) => Analytics.logPageView(url),
-		[]
-	);
-
 	useEffect(() => {
-		router.events.on("routeChangeComplete", onRouteChange);
-		return () => router.events.off("routeChangeComplete", onRouteChange);
+		router.events.on("routeChangeComplete", logPageView);
+		return () => router.events.off("routeChangeComplete", logPageView);
 	}, [router.events]);
 
 	return (
@@ -34,5 +29,3 @@ const App: FC<AppProps> = (props) => {
 		</Fragment>
 	);
 };
-
-export default App;

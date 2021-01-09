@@ -1,4 +1,4 @@
-import { Analytics } from "lib/Analytics";
+import environment from '@lib/environment';
 import Document, {
 	DocumentProps,
 	Head,
@@ -35,14 +35,14 @@ export default class LocalizedDocument extends Document<DocumentProps> {
 					{/* Global site tag (gtag.js) - Google Analytics */}
 					<script
 						async
-						src="https://www.googletagmanager.com/gtag/js?id=${Analytics.TRACKING_ID}"
+						src="https://www.googletagmanager.com/gtag/js?id=${environment.services.ga.trackingId}"
 					></script>
 					<script
 						dangerouslySetInnerHTML={{
 							__html: `
 								window.dataLayer = window.dataLayer || []; function
 								gtag(){window.dataLayer.push(arguments)}
-								gtag('js', new Date()); gtag('config', "${Analytics.TRACKING_ID}");
+								gtag('js', new Date()); gtag('config', "${environment.services.ga.trackingId}");
 							`,
 						}}
 					></script>

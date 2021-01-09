@@ -15,7 +15,7 @@ import {
 	useReducer
 } from "react";
 import { toast } from "react-toastify";
-import env from "../../env.json";
+import environment from "@lib/environment";
 
 interface ContactState {
 	name: string;
@@ -101,16 +101,16 @@ const Contact: NextPage = () => {
 
 			try {
 				await send(
-					env.email_js_service_id,
-					env.email_js_template_id,
-					{
-						name,
-						email,
-						subject,
-						message,
-					},
-					env.email_js_user_id
-				);
+          environment.services.emailjs.serviceId,
+          environment.services.emailjs.templateId,
+          {
+            name,
+            email,
+            subject,
+            message,
+          },
+          environment.services.emailjs.userId
+        );
 
 				dispatch({ name: "success" });
 				toast(t("contact:sendSuccess"), { type: "success" });
