@@ -14,7 +14,7 @@ export default class LocalizedDocument extends Document<DocumentProps> {
 				<Head>
 					<meta
 						name="description"
-						content="Yanick Bélanger - Portfolio"
+						content="Website showcasing the work and experience of Yanick Bélanger"
 					/>
 
 					<meta

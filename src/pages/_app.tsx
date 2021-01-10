@@ -6,6 +6,8 @@ import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
+import { ThemeProvider } from 'contexts/theme/theme-provider';
+import { themes } from '@lib/design';
 
 export default function App(props: AppProps) {
 	const { Component, pageProps } = props;
@@ -18,7 +20,10 @@ export default function App(props: AppProps) {
 	}, [router.events]);
 
 	return (
-		<Fragment>
+		<ThemeProvider
+			themes={[themes.light, themes.dark]}
+			defaults={{ light: themes.light, dark: themes.dark }}
+		>
 			<SideBar />
 
 			<main className="root_component">
@@ -26,6 +31,6 @@ export default function App(props: AppProps) {
 			</main>
 
 			<ToastContainer />
-		</Fragment>
+		</ThemeProvider>
 	);
 };
