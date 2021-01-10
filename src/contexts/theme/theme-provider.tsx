@@ -30,11 +30,13 @@ export function ThemeProvider(props: PropsWithChildren<ThemeProviderProps>) {
 	});
 
 	const onThemePreferenceChange = useCallback(
-		(_: MediaQueryList, event: MediaQueryListEvent) => {
-			if (event.matches && !theme.dark) {
+		() => {
+			const prefersDark = window.matchMedia(DARK_MEDIA_QUERY).matches;
+
+			if (prefersDark && !theme.dark) {
 				setTheme(getDefaultTheme(defaults, true));
-			} else if (!event.matches && theme.dark) {
-				setTheme(getDefaultTheme(defaults, true));
+			} else if (!prefersDark && theme.dark) {
+				setTheme(getDefaultTheme(defaults, false));
 			}
 		},	
 		[theme, defaults]
@@ -46,13 +48,10 @@ export function ThemeProvider(props: PropsWithChildren<ThemeProviderProps>) {
 				return;
 			}
 
-			//@ts-ignore
 			window.matchMedia(DARK_MEDIA_QUERY).addEventListener("change", onThemePreferenceChange);
-
-			//@ts-ignore
 			return () => window.matchMedia(DARK_MEDIA_QUERY).removeEventListener("change", onThemePreferenceChange)
 		},
-		[]
+		[onThemePreferenceChange]
 	);
 
 	const changeTheme = useCallback(

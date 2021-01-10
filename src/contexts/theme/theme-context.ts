@@ -1,4 +1,4 @@
-import { themes } from '@lib/design';
+import { Themes } from '@lib/design';
 import { createContext, useContext } from 'react';
 
 export interface Theme {
@@ -23,7 +23,7 @@ export function useTheme() {
 }
 
 export const ThemeContext = createContext<ThemeContextValue>({
-	theme: themes.light,
+	theme: Themes.light,
 	changeTheme() {
 		throw new Error("Could not find a ThemeProvider, did you forget to render one?");
 	}

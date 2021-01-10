@@ -9,7 +9,7 @@ export enum Colors {
   PickledBluewoord = "#34415E",
 }
 
-export const themes: Record<'light' | 'dark', Theme> = {
+export const Themes: Record<'light' | 'dark', Theme> = {
   light: {
 		name: 'default-light',
 		dark: false,
@@ -27,9 +27,9 @@ export const themes: Record<'light' | 'dark', Theme> = {
 		colors: {
 			accentColor: Colors.RedOrange,
 			borderColor: Colors.SepiaBlack,
-			headingColor: Colors.SepiaBlack,
-			textColor: Colors.PickledBluewoord,
-			backgroundColor: Colors.TitanWhite,
+			headingColor: Colors.TitanWhite,
+			textColor: Colors.TitanWhite,
+			backgroundColor: Colors.SepiaBlack,
 		}
   },
 };
