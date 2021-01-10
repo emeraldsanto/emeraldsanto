@@ -29,10 +29,7 @@ export const Input: FC<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, 
   );
 };
 
-export const TextArea: FC<DetailedHTMLProps<
-	TextareaHTMLAttributes<HTMLTextAreaElement>,
-	HTMLTextAreaElement
->> = (props) => {
+export const TextArea: FC<DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>> = (props) => {
 	const { theme } = useTheme();
 
 	return (

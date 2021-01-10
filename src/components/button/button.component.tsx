@@ -2,22 +2,11 @@ import css from "styled-jsx/css";
 import { Theme, useTheme } from '@contexts/theme/theme-context';
 import { ButtonHTMLAttributes, DetailedHTMLProps, FC, Fragment } from "react";
 
-function getChildrenStyles(theme: Theme) {
-	return css.resolve`
-    button p {
-      font-size: 14px;
-      text-align: center;
-      color: ${theme.colors.backgroundColor};
-    }
-  `;
-}
-
 export const Button: FC<DetailedHTMLProps<
 	ButtonHTMLAttributes<HTMLButtonElement>,
 	HTMLButtonElement
 >> = (props) => {
 	const { theme } = useTheme();
-	const childrenStyles = getChildrenStyles(theme);
 
 	return (
     <Fragment>
@@ -28,11 +17,14 @@ export const Button: FC<DetailedHTMLProps<
           margin: 0;
           border: none;
           outline: none;
+          display: flex;
           cursor: pointer;
           min-height: 52px;
           min-width: 120px;
           border-radius: 6px;
           padding: 15px 10px;
+          align-items: center;
+          justify-content: center;
           transition: all 0.2s ease 0s;
           background-color: ${theme.colors.buttonColor};
           box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
