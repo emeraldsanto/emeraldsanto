@@ -5,6 +5,8 @@ export interface Theme {
 	name: string;
   dark: boolean;
   colors: {
+    buttonColor: string;
+    buttonColorSecondary: string;
     textColor: string;
     accentColor: string;
     borderColor: string;

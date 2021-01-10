@@ -18,6 +18,7 @@ import {
 import { toast } from "react-toastify";
 import environment from "@lib/environment";
 import { useWindowDimensions } from '@hooks/useWindowDimensions';
+import { useIsSmallFormFactor } from '@hooks/useIsSmallFormFactor';
 
 interface ContactState {
 	name: string;
@@ -76,13 +77,8 @@ const Contact: NextPage = () => {
 	);
 
 	const { t } = useTranslation();
-	const [width] = useWindowDimensions();
-
-	const isSmallFormFactor = useMemo(
-		() => width < 815,
-		[width]
-	);
-
+	const isSmallFormFactor = useIsSmallFormFactor();
+		
 	const onInputChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			dispatch({

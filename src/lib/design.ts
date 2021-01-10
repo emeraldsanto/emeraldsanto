@@ -9,27 +9,31 @@ export enum Colors {
   PickledBluewoord = "#34415E",
 }
 
-export const Themes: Record<'light' | 'dark', Theme> = {
+export const Themes: Record<"light" | "dark", Theme> = {
   light: {
-		name: 'default-light',
-		dark: false,
-		colors: {
+    name: "default-light",
+    dark: false,
+    colors: {
 			accentColor: Colors.RedOrange,
-			borderColor: Colors.SepiaBlack,
-			headingColor: Colors.SepiaBlack,
-			textColor: Colors.PickledBluewoord,
-			backgroundColor: Colors.TitanWhite,
-		}
+      buttonColor: Colors.RedOrange,
+      buttonColorSecondary: Colors.DaisyBush,
+      borderColor: Colors.SepiaBlack,
+      headingColor: Colors.SepiaBlack,
+      textColor: Colors.PickledBluewoord,
+      backgroundColor: Colors.TitanWhite,
+    },
   },
   dark: {
-		name: 'default-dark',
-		dark: true,
-		colors: {
-			accentColor: Colors.RedOrange,
-			borderColor: Colors.SepiaBlack,
-			headingColor: Colors.TitanWhite,
-			textColor: Colors.TitanWhite,
-			backgroundColor: Colors.SepiaBlack,
-		}
+    name: "default-dark",
+    dark: true,
+    colors: {
+      accentColor: Colors.RedOrange,
+      buttonColor: Colors.RedOrange,
+      buttonColorSecondary: Colors.DaisyBush,
+      borderColor: Colors.SepiaBlack,
+      headingColor: Colors.TitanWhite,
+      textColor: Colors.TitanWhite,
+      backgroundColor: Colors.SepiaBlack,
+    },
   },
 };
