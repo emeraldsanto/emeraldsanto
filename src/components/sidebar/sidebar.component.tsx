@@ -93,7 +93,6 @@ const InitialWrapper = styled.div`
 const Initial = styled.h3`
   color: ${(props) => props.theme.colors.headingColor};
   
-  ${(props) => console.log(props.theme)}
   &:hover {
     color: ${(props) => props.theme.colors.accentColor};
   }

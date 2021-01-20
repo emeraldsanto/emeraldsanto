@@ -37,7 +37,7 @@ export function ThemeProvider(props: PropsWithChildren<ThemeProviderProps>) {
 		[theme, defaults]
 	);
 
-	useLayoutEffect(
+	useEffect(
 		() => {
 			if (!canMatchMedia()) {
 				return;
