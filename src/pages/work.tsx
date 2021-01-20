@@ -1,44 +1,80 @@
 import { Page } from "@components/page/page.component";
 import { PeriodLink } from "@components/period-link/period-link.component";
-import styles from "@styles/work.module.scss";
+import { Colors } from '@lib/design';
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
 import useTranslation from "next-translate/useTranslation";
 import { Fragment } from "react";
+import styled from 'styled-components';
 
-const Work: NextPage = () => {
+function makei18nKey(experienceName: string, suffix: string) {
+  return `work:${experienceName}.${suffix}`;
+}
+
+const EXPERIENCES = [
+  {
+    name: "moka",
+    url: "https://www.moka.ai",
+    technologies: ["Node.JS", "MongoDB", "PostgreSQL", "React Native"],
+  },
+  {
+    name: "nightborn",
+    url: "https://www.nightborn.be",
+    technologies: ["React Native", "React.JS", "TypeScript", "C#", "T-SQL"],
+  },
+  {
+    name: "alithya",
+    url: "https://www.alithya.com",
+    technologies: ["React Native", "TypeScript", "Node.JS"],
+  },
+  {
+    name: "narcitymedia",
+    url: "https://www.narcitymedia.com",
+    technologies: [
+      "React Native",
+      "React.JS",
+      "TypeScript",
+      "Node.JS",
+      "MongoDB",
+    ],
+  },
+  {
+    name: "levelapp",
+    url: "https://www.levelapp.be",
+    technologies: ["React Native", "TypeScript"],
+  },
+].map((e) => ({
+  ...e,
+  name: makei18nKey(e.name, "name"),
+  title: makei18nKey(e.name, "title"),
+  period: makei18nKey(e.name, "period"),
+  location: makei18nKey(e.name, "location"),
+  description: makei18nKey(e.name, "description"),
+}));
+
+export default function Work() {
 	const { t } = useTranslation();
 
 	return (
 		<Page title={t("work:title")}>
-			<motion.div
+			<Container
 				initial="hidden"
 				animate="visible"
 				variants={TEXT_VARIANTS}
-				className={styles.container}
 			>
-				<motion.h1
-					className={styles.title}
-					variants={SINGLE_TEXT_VARIANT}
-				>
+				<Title variants={SINGLE_TEXT_VARIANT}>
 					{t("work:title")} 🔨
-				</motion.h1>
+				</Title>
 
-				<motion.p
-					className={styles.description}
-					variants={SINGLE_TEXT_VARIANT}
-				>
+				<Description variants={SINGLE_TEXT_VARIANT}>
 					{t("work:description")}
-				</motion.p>
+				</Description>
 
 				{EXPERIENCES.map((e, i) => (
 					<Fragment key={e.name}>
-						<motion.div
-							className={styles.experience}
-							variants={SINGLE_TEXT_VARIANT}
-						>
+						<Experience variants={SINGLE_TEXT_VARIANT}>
 							<div>
-								<h4>
+								<ExperienceTitle>
 									<a
 										href={e.url}
 										target="_blank"
@@ -46,31 +82,39 @@ const Work: NextPage = () => {
 									>
 										{t(e.name)}
 									</a>
-								</h4>{" "}
-								<span className={styles.location}>
+								</ExperienceTitle>
+								
+								{" "}
+
+								<ExperienceLocation>
 									{t(e.period)}
-								</span>
+								</ExperienceLocation>
 							</div>
 
-							<p className={styles.work_title}>
-								{t(e.title)}{" "}
-								<span className={styles.location}>
+							<WorkTitle>
+								{t(e.title)}
+								
+								{" "}
+
+								<ExperienceLocation>
 									{t(e.location)}
-								</span>
-							</p>
+								</ExperienceLocation>
+							</WorkTitle>
 
-							<p className={styles.work_description}>
+							<WorkDescription>
 								{t(e.description)}
-							</p>
+							</WorkDescription>
+
 							<hr />
-							<div className={styles.tech_container}>
+
+							<Technologies>
 								{e.technologies.map((t) => (
-									<span key={t} className={styles.tech}>
+									<Technology key={t}>
 										{t}
-									</span>
+									</Technology>
 								))}
-							</div>
-						</motion.div>
+							</Technologies>
+						</Experience>
 
 						{i !== EXPERIENCES.length - 1 && (
 							<motion.div variants={SINGLE_TEXT_VARIANT}>
@@ -79,12 +123,10 @@ const Work: NextPage = () => {
 						)}
 					</Fragment>
 				))}
-			</motion.div>
+			</Container>
 		</Page>
 	);
 };
-
-export default Work;
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {
@@ -109,47 +151,65 @@ const SINGLE_TEXT_VARIANT: Variants = {
 	},
 };
 
-const EXPERIENCES = [
-	{
-		name: "moka",
-		url: "https://www.moka.ai",
-		technologies: ["Node.JS", "MongoDB", "PostgreSQL", "React Native"]
-	},
-	{
-		name: "nightborn",
-		url: "https://www.nightborn.be",
-		technologies: ["React Native", "React.JS", "TypeScript", "C#", "T-SQL"]
-	},
-	{
-		name: "alithya",
-		url: "https://www.alithya.com",
-		technologies: ["React Native", "TypeScript", "Node.JS"]
-	},
-	{
-		name: "narcitymedia",
-		url: "https://www.narcitymedia.com",
-		technologies: [
-			"React Native",
-			"React.JS",
-			"TypeScript",
-			"Node.JS",
-			"MongoDB",
-		]
-	},
-	{
-		name: "levelapp",
-		url: "https://www.levelapp.be",
-		technologies: ["React Native", "TypeScript"]
-	},
-].map(e => ({
-	...e,
-	name: makei18nKey(e.name, "name"),
-	title: makei18nKey(e.name, "title"),
-	period: makei18nKey(e.name, "period"),
-	location: makei18nKey(e.name, "location"),
-	description: makei18nKey(e.name, "description")
-}));
+const Container = styled(motion.div)`
+  width: 500px;
 
-function makei18nKey(experienceName: string, suffix: string) {
-	return `work:${experienceName}.${suffix}`;
-}
+  @media only screen and (max-width: 625px) {
+		width: 100%;
+  }
+`;
+
+const Title = styled(motion.h1)`
+  margin-bottom: 25px;
+`;
+
+const Description = styled(motion.p)`
+  margin-bottom: 25px;
+  text-align: justify;
+`;
+
+const Experience = styled(motion.div)`
+  padding: 20px;
+  border-radius: 6px;
+  background-color: ${(props) => props.theme.colors.cardColor};
+  box-shadow: ${(props) => !props.theme.dark && "0px 8px 15px rgba(0, 0, 0, 0.1)"};
+`;
+
+const ExperienceTitle = styled.h4`
+  display: inline-block;
+`;
+
+const ExperienceLocation = styled.span`
+  opacity: 0.75;
+  font-size: 14px;
+  font-weight: normal;
+`;
+
+const WorkTitle = styled.p`
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: ${(props) => props.theme.colors.headingColor};
+`;
+
+const WorkDescription = styled.p`
+  margin: 15px 0;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: justify;
+`;
+
+const Technologies = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const Technology = styled.span`
+  opacity: 0.75;
+  font-size: 14px;
+  margin-top: 5px;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+`;

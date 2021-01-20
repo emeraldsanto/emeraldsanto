@@ -1,18 +1,29 @@
 import Head from "next/head";
 import { FC } from "react";
+import styled from 'styled-components';
 import { PageProps } from "./page.props";
-import styles from "./page.style.module.scss";
 
 export const Page: FC<PageProps> = (props) => {
-	const { title = "Portfolio", className = "", children, ...rest } = props;
+	const { title = "Portfolio", children, ...rest } = props;
 	return (
-		<main className={`${styles.page} ${className}`} {...rest}>
-			<Head>
-				<title key="title">Yanick Bélanger - {title}</title>
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+    <Container {...rest}>
+      <Head>
+        <title key="title">Yanick Bélanger - {title}</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-			{children}
-		</main>
-	);
+      {children}
+    </Container>
+  );
 };
+
+const Container = styled.div`
+  margin: auto;
+  padding: 20px 100px 20px 100px;
+
+  @media only screen and (max-width: 625px) {
+    padding: 20px;
+  }
+`;
+
+

@@ -2,22 +2,20 @@ import { Button } from "@components/button/button.component";
 import { Input, TextArea } from "@components/input/input.component";
 import { Loading } from "@components/loading/loading.component";
 import { Page } from "@components/page/page.component";
-import styles from "@styles/contact.module.scss";
 import { send } from "emailjs-com";
 import { motion, Variants } from "framer-motion";
-import { NextPage } from "next";
 import useTranslation from "next-translate/useTranslation";
 import {
 	ChangeEvent,
 	FormEvent,
 	Fragment,
 	useCallback,
-	useMemo,
 	useReducer
 } from "react";
 import { toast } from "react-toastify";
 import environment from "@lib/environment";
-import { useWindowDimensions } from '@hooks/useWindowDimensions';
+import { useIsSmallFormFactor } from '@hooks/useIsSmallFormFactor';
+import styled from 'styled-components';
 
 interface ContactState {
 	name: string;
@@ -69,20 +67,15 @@ function contactReducer(
 	}
 }
 
-const Contact: NextPage = () => {
+export default function Contact() {
 	const [{ name, email, subject, message, status }, dispatch] = useReducer(
 		contactReducer,
 		INITIAL_STATE
 	);
 
 	const { t } = useTranslation();
-	const [width] = useWindowDimensions();
-
-	const isSmallFormFactor = useMemo(
-		() => width < 815,
-		[width]
-	);
-
+	const isSmallFormFactor = useIsSmallFormFactor();
+		
 	const onInputChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			dispatch({
@@ -123,139 +116,110 @@ const Contact: NextPage = () => {
 
 	return (
 		<Page title={t("contact:title")}>
-			<div className={styles.form_container}>
+			<Container>
 				<motion.div
 					initial="hidden"
 					animate="visible"
 					variants={FADE_VARIANTS}
 				>
-					<motion.h1
-						className={styles.title}
-						variants={CHILD_VARIANTS}
-					>
+					<Title variants={CHILD_VARIANTS}>
 						{t("contact:title")} 📬
-					</motion.h1>
+					</Title>
 
-					<motion.p
-						className={styles.description}
-						variants={CHILD_VARIANTS}
-					>
+					<Description variants={CHILD_VARIANTS}>
 						{t("contact:description")}
-					</motion.p>
+					</Description>
 				</motion.div>
 
-				<motion.form
+				<Form
 					initial="hidden"
 					animate="visible"
-					className={styles.form}
 					onSubmit={onFormSubmit}
 					variants={DELAY_FADE_VARIANTS}
 				>
 					{isSmallFormFactor ? (
 						<Fragment>
-							<motion.div
-								className={styles.row}
-								variants={CHILD_VARIANTS}
-							>
-								<Input
+							<Row variants={CHILD_VARIANTS}>
+								<StyledInput
 									required
 									name="name"
 									value={name}
-									className={styles.input}
 									onChange={onInputChange}
 									placeholder={t("contact:name")}
 								/>
-							</motion.div>
+							</Row>
 
-							<motion.div
-								className={styles.row}
-								variants={CHILD_VARIANTS}
-							>
-								<Input
+							<Row variants={CHILD_VARIANTS}>
+								<StyledInput
 									required
 									type="email"
 									name="email"
 									value={email}
-									className={styles.input}
 									onChange={onInputChange}
 									placeholder={t("contact:email")}
 								/>
-							</motion.div>
+							</Row>
 						</Fragment>
 					) : (
-						<motion.div
-							className={styles.row}
-							variants={CHILD_VARIANTS}
-						>
-							<Input
+						<Row variants={CHILD_VARIANTS}>
+							<StyledInput
 								required
 								name="name"
 								value={name}
-								className={styles.input}
 								onChange={onInputChange}
 								placeholder={t("contact:name")}
 							/>
 
-							<Input
+							<StyledInput
 								required
 								type="email"
 								name="email"
 								value={email}
-								className={styles.input}
 								onChange={onInputChange}
 								placeholder={t("contact:email")}
 							/>
-						</motion.div>
+						</Row>
 					)}
 
 					<motion.div variants={CHILD_VARIANTS}>
-						<Input
+						<StyledInput
 							required
 							name="subject"
 							value={subject}
 							onChange={onInputChange}
-							className={styles.input}
 							style={{ width: "100%" }}
 							placeholder={t("contact:subject")}
 						/>
 					</motion.div>
 
 					<motion.div variants={CHILD_VARIANTS}>
-						<TextArea
+						<StyledTextArea
 							required
 							name="message"
 							value={message}
 							onChange={onInputChange}
-							className={styles.textarea}
 							placeholder={t("contact:message")}
 						/>
 					</motion.div>
 
-					<motion.div
+					<SubmitContainer
 						initial="hidden"
 						animate="visible"
 						variants={BUTTON_VARIANTS}
-						className={styles.submit_container}
 					>
-						<Button
-							type="submit"
-							className={styles.submit}
-							disabled={status === "loading"}
-						>
+						<Submit type="submit" disabled={status === "loading"}>
 							{status === "loading" ? (
 								<Loading />
 							) : (
 								<p>{t("contact:send")}</p>
 							)}
-						</Button>
-					</motion.div>
-				</motion.form>
-			</div>
+						</Submit>
+					</SubmitContainer>
+				</Form>
+			</Container>
 		</Page>
 	);
 };
-
-export default Contact;
 
 const FADE_VARIANTS: Variants = {
 	hidden: {
@@ -303,3 +267,73 @@ const BUTTON_VARIANTS: Variants = {
 		opacity: 1,
 	},
 };
+
+const Container = styled.div`
+  width: 500px;
+
+  @media only screen and (max-width: 815px) {
+		width: initial;
+  }
+`;
+
+const Title = styled(motion.h1)`
+  margin-bottom: 25px;
+
+  @media only screen and (max-width: 815px) {
+		margin-bottom: 20px;
+  }
+`;
+
+const Description = styled(motion.p)`
+  line-height: 22px;
+  margin-bottom: 25px;
+  text-align: justify;
+`;
+
+const Form = styled(motion.form)`
+  @media only screen and (max-width: 815px) {
+		width: 100%;
+  }
+`;
+
+const Row = styled(motion.div)`
+  display: flex;
+  justify-content: stretch;
+`;
+
+const StyledInput = styled(Input)`
+  flex-basis: 50%;
+
+  &:first-child {
+    margin-right: 20px;
+  }
+
+  @media only screen and (max-width: 815px) {
+		width: 100%;
+		flex-basis: initial;
+
+		&:first-child {
+			margin-right: 0;
+		}
+  }
+`;
+
+const StyledTextArea = styled(TextArea)`
+  width: 100%;
+
+  @media only screen and (max-width: 815px) {
+		width: 100%;
+		margin-bottom: 20px;
+  }
+`;
+
+const SubmitContainer = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+`;
+
+const Submit = styled(Button)`
+  display: flex;
+  justify-content: center;
+`;
+

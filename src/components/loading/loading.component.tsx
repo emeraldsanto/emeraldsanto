@@ -1,34 +1,30 @@
 import { motion, Transition, Variants } from "framer-motion";
 import { FC } from "react";
-import styles from "./loading.style.module.scss";
+import styled from 'styled-components';
 
 export const Loading: FC = () => {
 	return (
-		<motion.div
-			initial="start"
-			animate="end"
-			className={styles.loading_container}
-			variants={LOADING_CONTAINER_VARIANTS}
-		>
-			<motion.span
-				className={styles.loading_circle}
-				variants={LOADING_CIRCLE_VARIANTS}
-				transition={LOADING_CIRCLE_TRANSITION}
-			></motion.span>
+    <Container
+      initial="start"
+      animate="end"
+      variants={LOADING_CONTAINER_VARIANTS}
+    >
+      <Circle
+        variants={LOADING_CIRCLE_VARIANTS}
+        transition={LOADING_CIRCLE_TRANSITION}
+      ></Circle>
 
-			<motion.span
-				className={styles.loading_circle}
-				variants={LOADING_CIRCLE_VARIANTS}
-				transition={LOADING_CIRCLE_TRANSITION}
-			></motion.span>
+      <Circle
+        variants={LOADING_CIRCLE_VARIANTS}
+        transition={LOADING_CIRCLE_TRANSITION}
+      ></Circle>
 
-			<motion.span
-				className={styles.loading_circle}
-				variants={LOADING_CIRCLE_VARIANTS}
-				transition={LOADING_CIRCLE_TRANSITION}
-			></motion.span>
-		</motion.div>
-	);
+      <Circle
+        variants={LOADING_CIRCLE_VARIANTS}
+        transition={LOADING_CIRCLE_TRANSITION}
+      ></Circle>
+    </Container>
+  );
 };
 
 const LOADING_CONTAINER_VARIANTS: Variants = {
@@ -58,3 +54,18 @@ const LOADING_CIRCLE_TRANSITION: Transition = {
 	yoyo: Infinity,
 	ease: "easeInOut",
 };
+
+const Container = styled(motion.div)`
+  display: flex;
+`;
+
+const Circle = styled(motion.span)`
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.colors.backgroundColor};
+
+  &:not(:first-child) {
+    margin-left: 2px;
+  }
+`;

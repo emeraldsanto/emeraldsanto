@@ -1,28 +1,52 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
-import styles from "@styles/404.module.scss";
-import { NextPage } from "next";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
+import styled from 'styled-components';
 
-const NotFound: NextPage = () => {
+export default function NotFound() {
 	const { t } = useTranslation();
 
 	return (
-		<Page>
-			<div className={styles.container}>
-				<h1 className={styles.status}>404</h1>
-				<p className={styles.title}>{t("404:title")}</p>
-				<p className={styles.catch}>{t("404:catch")}</p>
+    <Page>
+      <Container>
+        <Status>404</Status>
+        <Title>{t("404:title")}</Title>
+        <Catch>{t("404:catch")}</Catch>
 
-				<Link href="/">
-					<Button className={styles.button}>
-						<p>{t("404:cta")}</p>
-					</Button>
-				</Link>
-			</div>
-		</Page>
-	);
+        <Link href="/">
+          <StyledButton>
+            <p>{t("404:cta")}</p>
+          </StyledButton>
+        </Link>
+      </Container>
+    </Page>
+  );
 };
 
-export default NotFound;
+const Container = styled.div`
+  width: 500px;
+
+  @media only screen and (max-width: 625px) {
+    width: 100%;
+  }
+`;
+
+const Status = styled.h1`
+  margin-bottom: 10px;
+`;
+
+const Title = styled.p`
+  font-size: 1.5em;
+`;
+
+const Catch = styled.p`
+  margin: 20px 0 30px 0;
+  text-align: justify;
+`;
+
+const StyledButton = styled(Button)`
+  @media only screen and (max-width: 625px) {
+    width: 100%;
+  }
+`;
