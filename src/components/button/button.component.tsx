@@ -29,6 +29,6 @@ const StyledButton = styled.button`
   p {
     font-size: 14px;
     text-align: center;
-    color: ${(props) => props.theme.colors.backgroundColor};
+    color: ${(props) => props.theme.colors.buttonTextColor};
   }
 `;

@@ -1,12 +1,12 @@
 import { SideBar } from "@components/sidebar/sidebar.component";
-import "@styles/toasts.scss";
 import { logPageView } from "@lib/analytics";
+import { Colors, Themes } from '@lib/design';
+import { ThemeProvider } from 'contexts/theme/theme-provider';
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
-import { ThemeProvider } from 'contexts/theme/theme-provider';
-import { Themes } from '@lib/design';
+import "react-toastify/dist/ReactToastify.min.css";
 import styled, { createGlobalStyle } from 'styled-components';
 
 export default function App(props: AppProps) {
@@ -101,5 +101,30 @@ const GlobalStyle = createGlobalStyle`
 
   a:hover {
     color: ${(props) => props.theme.colors.accentColor};
+  }
+
+  /**
+  * This customizes the react-toastify colors.
+  * See: https://github.com/fkhadra/react-toastify/issues/140#issuecomment-517921048
+  */
+  .Toastify__toast--default {
+    background: #FFF;
+    color: #AAA;
+  }
+
+  .Toastify__toast--info {
+    background: ${Colors.Danube};
+  }
+
+  .Toastify__toast--success {
+    background: #07BC0C;
+  }
+
+  .Toastify__toast--warning {
+    background: #F1C40F;
+  }
+
+  .Toastify__toast--error {
+    background: ${Colors.RedOrange};
   }
 `;

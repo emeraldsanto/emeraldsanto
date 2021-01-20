@@ -11,6 +11,7 @@ declare module "styled-components" {
 		dark: boolean;
 		colors: {
 			buttonColor: string;
+			buttonTextColor: string;
 			buttonColorSecondary: string;
 			textColor: string;
 			accentColor: string;

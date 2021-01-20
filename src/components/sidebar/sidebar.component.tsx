@@ -82,7 +82,7 @@ const InitialWrapper = styled.div`
   align-items: center;
   transition: all 0.2s;
   justify-content: center;
-  border: 1px solid ${Colors.SepiaBlack};
+  border: 1px solid ${(props) => props.theme.colors.textColor};
 
   &:hover {
     border-color: ${(props) => props.theme.colors.accentColor};
@@ -90,7 +90,7 @@ const InitialWrapper = styled.div`
 `;
 
 const Initial = styled.h3`
-  color: ${Colors.SepiaBlack};
+  color: ${(props) => props.theme.colors.textColor};
 
   &:hover {
     color: ${(props) => props.theme.colors.accentColor};
@@ -99,6 +99,7 @@ const Initial = styled.h3`
 
 const Switcher = styled(LanguageSwitcher)`
   margin: 10px 0;
+  color: ${(props) => props.theme.colors.textColor};
 
   @media only screen and (max-width: 625px) {
     margin: 0 10px;
@@ -125,7 +126,7 @@ const Icons = styled.div`
 const FAIcon = styled(FontAwesomeIcon)`
   margin-top: 15px;
   transition: color 0.2s;
-  color: ${Colors.SepiaBlack};
+  color: ${(props) => props.theme.colors.textColor};
 
   @media only screen and (max-width: 625px) {
     margin-top: 0;
