@@ -2,12 +2,14 @@ import { DefaultTheme } from 'styled-components';
 import css from "styled-jsx/css";
 
 export enum Colors {
-  TitanWhite = "#FBFBFF",
-  SepiaBlack = "#0D0106",
   Danube = "#657ED4",
   DaisyBush = "#3626A7",
-  RedOrange = "#FF331F",
+  Eclipse = "#393939",
+  Nero = "#2C2C2C",
   PickledBluewoord = "#34415E",
+  RedOrange = "#FF331F",
+  SepiaBlack = "#0D0106",
+  TitanWhite = "#FBFBFF",
 }
 
 export const Themes: Record<"light" | "dark", DefaultTheme> = {
@@ -15,6 +17,7 @@ export const Themes: Record<"light" | "dark", DefaultTheme> = {
     name: "default-light",
     dark: false,
     colors: {
+      cardColor: Colors.TitanWhite,
       accentColor: Colors.RedOrange,
       buttonColor: Colors.RedOrange,
       buttonTextColor: Colors.TitanWhite,
@@ -29,6 +32,7 @@ export const Themes: Record<"light" | "dark", DefaultTheme> = {
     name: "default-dark",
     dark: true,
     colors: {
+      cardColor: Colors.Eclipse,
       accentColor: Colors.RedOrange,
       buttonColor: Colors.RedOrange,
       buttonTextColor: Colors.TitanWhite,
@@ -36,7 +40,7 @@ export const Themes: Record<"light" | "dark", DefaultTheme> = {
       borderColor: Colors.SepiaBlack,
       headingColor: Colors.TitanWhite,
       textColor: Colors.TitanWhite,
-      backgroundColor: Colors.SepiaBlack,
+      backgroundColor: Colors.Nero,
     },
   },
 };

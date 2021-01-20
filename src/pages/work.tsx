@@ -7,6 +7,51 @@ import useTranslation from "next-translate/useTranslation";
 import { Fragment } from "react";
 import styled from 'styled-components';
 
+function makei18nKey(experienceName: string, suffix: string) {
+  return `work:${experienceName}.${suffix}`;
+}
+
+const EXPERIENCES = [
+  {
+    name: "moka",
+    url: "https://www.moka.ai",
+    technologies: ["Node.JS", "MongoDB", "PostgreSQL", "React Native"],
+  },
+  {
+    name: "nightborn",
+    url: "https://www.nightborn.be",
+    technologies: ["React Native", "React.JS", "TypeScript", "C#", "T-SQL"],
+  },
+  {
+    name: "alithya",
+    url: "https://www.alithya.com",
+    technologies: ["React Native", "TypeScript", "Node.JS"],
+  },
+  {
+    name: "narcitymedia",
+    url: "https://www.narcitymedia.com",
+    technologies: [
+      "React Native",
+      "React.JS",
+      "TypeScript",
+      "Node.JS",
+      "MongoDB",
+    ],
+  },
+  {
+    name: "levelapp",
+    url: "https://www.levelapp.be",
+    technologies: ["React Native", "TypeScript"],
+  },
+].map((e) => ({
+  ...e,
+  name: makei18nKey(e.name, "name"),
+  title: makei18nKey(e.name, "title"),
+  period: makei18nKey(e.name, "period"),
+  location: makei18nKey(e.name, "location"),
+  description: makei18nKey(e.name, "description"),
+}));
+
 const Work: NextPage = () => {
 	const { t } = useTranslation();
 
@@ -108,51 +153,6 @@ const SINGLE_TEXT_VARIANT: Variants = {
 	},
 };
 
-const EXPERIENCES = [
-	{
-		name: "moka",
-		url: "https://www.moka.ai",
-		technologies: ["Node.JS", "MongoDB", "PostgreSQL", "React Native"]
-	},
-	{
-		name: "nightborn",
-		url: "https://www.nightborn.be",
-		technologies: ["React Native", "React.JS", "TypeScript", "C#", "T-SQL"]
-	},
-	{
-		name: "alithya",
-		url: "https://www.alithya.com",
-		technologies: ["React Native", "TypeScript", "Node.JS"]
-	},
-	{
-		name: "narcitymedia",
-		url: "https://www.narcitymedia.com",
-		technologies: [
-			"React Native",
-			"React.JS",
-			"TypeScript",
-			"Node.JS",
-			"MongoDB",
-		]
-	},
-	{
-		name: "levelapp",
-		url: "https://www.levelapp.be",
-		technologies: ["React Native", "TypeScript"]
-	},
-].map(e => ({
-	...e,
-	name: makei18nKey(e.name, "name"),
-	title: makei18nKey(e.name, "title"),
-	period: makei18nKey(e.name, "period"),
-	location: makei18nKey(e.name, "location"),
-	description: makei18nKey(e.name, "description")
-}));
-
-function makei18nKey(experienceName: string, suffix: string) {
-	return `work:${experienceName}.${suffix}`;
-}
-
 const Container = styled(motion.div)`
   width: 500px;
 
@@ -173,7 +173,8 @@ const Description = styled(motion.p)`
 const Experience = styled(motion.div)`
   padding: 20px;
   border-radius: 6px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  background-color: ${(props) => props.theme.colors.cardColor};
+  box-shadow: ${(props) => !props.theme.dark && "0px 8px 15px rgba(0, 0, 0, 0.1)"};
 `;
 
 const ExperienceTitle = styled.h4`
@@ -190,7 +191,7 @@ const WorkTitle = styled.p`
   margin-top: 5px;
   font-size: 14px;
   font-weight: bold;
-  color: ${Colors.SepiaBlack};
+  color: ${(props) => props.theme.colors.headingColor};
 `;
 
 const WorkDescription = styled.p`

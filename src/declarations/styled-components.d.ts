@@ -10,6 +10,7 @@ declare module "styled-components" {
 		name: string;
 		dark: boolean;
 		colors: {
+			cardColor: string;
 			buttonColor: string;
 			buttonTextColor: string;
 			buttonColorSecondary: string;
