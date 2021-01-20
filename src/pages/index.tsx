@@ -107,10 +107,8 @@ const Buttons = styled(motion.div)`
   justify-content: space-between;
 
   @media only screen and (max-width: 625px) {
-    .buttons {
-      margin-top: 20px;
-      flex-direction: column;
-    }
+    margin-top: 20px;
+    flex-direction: column;
   }
 `;
 
@@ -123,10 +121,6 @@ const ButtonContainer = styled.div`
     &:not(:first-child) {
       margin-left: 0;
       margin-top: 15px;
-    }
-
-    &.button {
-      width: 100%;
     }
   }
 `;
