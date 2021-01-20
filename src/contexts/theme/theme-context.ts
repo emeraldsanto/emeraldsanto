@@ -1,22 +1,9 @@
 import { Themes } from '@lib/design';
 import { createContext, useContext } from 'react';
-
-export interface Theme {
-	name: string;
-  dark: boolean;
-  colors: {
-    buttonColor: string;
-    buttonColorSecondary: string;
-    textColor: string;
-    accentColor: string;
-    borderColor: string;
-    headingColor: string;
-    backgroundColor: string;
-  };
-}
+import { DefaultTheme } from 'styled-components';
 
 export interface ThemeContextValue {
-	theme: Theme;
+	theme: DefaultTheme;
 	changeTheme(name: string): void;
 }
 

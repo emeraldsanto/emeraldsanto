@@ -1,11 +1,12 @@
+import { ThemeContext } from './theme-context';
 import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { Theme, ThemeContext } from './theme-context';
+import { DefaultTheme, ThemeProvider as StyledThemeProvider } from "styled-components";
 
 export interface ThemeProviderProps {
-	themes: Array<Theme>;
+	themes: Array<DefaultTheme>;
 	defaults: {
-		light: Theme;
-		dark: Theme;
+		light: DefaultTheme;
+		dark: DefaultTheme;
 	};
 }
 
@@ -21,7 +22,7 @@ function getDefaultTheme(defaults: ThemeProviderProps['defaults'], dark?: boolea
 
 export function ThemeProvider(props: PropsWithChildren<ThemeProviderProps>) {
 	const { themes, defaults, children } = props;
-	const [theme, setTheme] = useState<Theme>(() => {
+	const [theme, setTheme] = useState<DefaultTheme>(() => {
 		if (!canMatchMedia()) {
 			return defaults.light;
 		}
@@ -67,7 +68,9 @@ export function ThemeProvider(props: PropsWithChildren<ThemeProviderProps>) {
 
 	return (
 		<ThemeContext.Provider value={{ theme, changeTheme }}>
-			{children}
+			<StyledThemeProvider theme={theme}>
+				{children}
+			</StyledThemeProvider>
 		</ThemeContext.Provider>
-	)
+	);
 }
