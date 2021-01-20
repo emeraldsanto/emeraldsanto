@@ -1,54 +1,29 @@
-import { useTheme } from '@contexts/theme/theme-context';
 import { motion, Transition, Variants } from "framer-motion";
-import { FC, Fragment } from "react";
+import { FC } from "react";
+import styled from 'styled-components';
 
 export const Loading: FC = () => {
-	const { theme } = useTheme();
-
 	return (
-    <Fragment>
-      <motion.div
-        initial="start"
-        animate="end"
-        className="loading-container"
-        variants={LOADING_CONTAINER_VARIANTS}
-      >
-        <motion.span
-          className="loading-circle"
-          variants={LOADING_CIRCLE_VARIANTS}
-          transition={LOADING_CIRCLE_TRANSITION}
-        ></motion.span>
+    <Container
+      initial="start"
+      animate="end"
+      variants={LOADING_CONTAINER_VARIANTS}
+    >
+      <Circle
+        variants={LOADING_CIRCLE_VARIANTS}
+        transition={LOADING_CIRCLE_TRANSITION}
+      ></Circle>
 
-        <motion.span
-          className="loading-circle"
-          variants={LOADING_CIRCLE_VARIANTS}
-          transition={LOADING_CIRCLE_TRANSITION}
-        ></motion.span>
+      <Circle
+        variants={LOADING_CIRCLE_VARIANTS}
+        transition={LOADING_CIRCLE_TRANSITION}
+      ></Circle>
 
-        <motion.span
-          className="loading-circle"
-          variants={LOADING_CIRCLE_VARIANTS}
-          transition={LOADING_CIRCLE_TRANSITION}
-        ></motion.span>
-      </motion.div>
-
-      <style jsx global>{`
-        .loading-container {
-          display: flex;
-        }
-
-        .loading-container .loading-circle {
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background-color: ${theme.colors.backgroundColor};
-        }
-
-        .loading-container .loading-circle:not(:first-child) {
-          margin-left: 2px;
-        }
-      `}</style>
-    </Fragment>
+      <Circle
+        variants={LOADING_CIRCLE_VARIANTS}
+        transition={LOADING_CIRCLE_TRANSITION}
+      ></Circle>
+    </Container>
   );
 };
 
@@ -79,3 +54,18 @@ const LOADING_CIRCLE_TRANSITION: Transition = {
 	yoyo: Infinity,
 	ease: "easeInOut",
 };
+
+const Container = styled(motion.div)`
+  display: flex;
+`;
+
+const Circle = styled(motion.span)`
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.colors.backgroundColor};
+
+  &:not(:first-child) {
+    margin-left: 2px;
+  }
+`;
