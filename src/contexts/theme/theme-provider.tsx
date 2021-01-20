@@ -1,5 +1,5 @@
 import { ThemeContext } from './theme-context';
-import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { PropsWithChildren, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { DefaultTheme, ThemeProvider as StyledThemeProvider } from "styled-components";
 
 export interface ThemeProviderProps {
@@ -22,13 +22,7 @@ function getDefaultTheme(defaults: ThemeProviderProps['defaults'], dark?: boolea
 
 export function ThemeProvider(props: PropsWithChildren<ThemeProviderProps>) {
 	const { themes, defaults, children } = props;
-	const [theme, setTheme] = useState<DefaultTheme>(() => {
-		if (!canMatchMedia()) {
-			return defaults.light;
-		}
-
-		return getDefaultTheme(defaults, window.matchMedia(DARK_MEDIA_QUERY).matches);
-	});
+	const [theme, setTheme] = useState<DefaultTheme>(defaults.light);
 
 	const onThemePreferenceChange = useCallback(
 		() => {
@@ -43,11 +37,13 @@ export function ThemeProvider(props: PropsWithChildren<ThemeProviderProps>) {
 		[theme, defaults]
 	);
 
-	useEffect(
+	useLayoutEffect(
 		() => {
 			if (!canMatchMedia()) {
 				return;
 			}
+
+			onThemePreferenceChange();
 
 			window.matchMedia(DARK_MEDIA_QUERY).addEventListener("change", onThemePreferenceChange);
 			return () => window.matchMedia(DARK_MEDIA_QUERY).removeEventListener("change", onThemePreferenceChange)
