@@ -1,11 +1,10 @@
 import { Page } from "@components/page/page.component";
 import { motion, Variants } from "framer-motion";
-import { NextPage } from "next";
 import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
 import styled from 'styled-components';
 
-const About: NextPage = () => {
+export default function About() {
 	const { t } = useTranslation();
 
 	return (
@@ -61,8 +60,6 @@ const About: NextPage = () => {
 		</Page>
 	);
 };
-
-export default About;
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {

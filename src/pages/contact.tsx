@@ -4,7 +4,6 @@ import { Loading } from "@components/loading/loading.component";
 import { Page } from "@components/page/page.component";
 import { send } from "emailjs-com";
 import { motion, Variants } from "framer-motion";
-import { NextPage } from "next";
 import useTranslation from "next-translate/useTranslation";
 import {
 	ChangeEvent,
@@ -68,7 +67,7 @@ function contactReducer(
 	}
 }
 
-const Contact: NextPage = () => {
+export default function Contact() {
 	const [{ name, email, subject, message, status }, dispatch] = useReducer(
 		contactReducer,
 		INITIAL_STATE
@@ -221,8 +220,6 @@ const Contact: NextPage = () => {
 		</Page>
 	);
 };
-
-export default Contact;
 
 const FADE_VARIANTS: Variants = {
 	hidden: {

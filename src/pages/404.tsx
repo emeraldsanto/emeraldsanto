@@ -1,11 +1,10 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
-import { NextPage } from "next";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import styled from 'styled-components';
 
-const NotFound: NextPage = () => {
+export default function NotFound() {
 	const { t } = useTranslation();
 
 	return (
@@ -24,8 +23,6 @@ const NotFound: NextPage = () => {
     </Page>
   );
 };
-
-export default NotFound;
 
 const Container = styled.div`
   width: 500px;

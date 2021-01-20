@@ -21,8 +21,8 @@ const PAGES = [
   },
 ];
 
-const Index: NextPage = () => {
-	const { t } = useTranslation();
+export default function Index() {
+  const { t } = useTranslation();
 
 	return (
     <Page>
@@ -58,8 +58,6 @@ const Index: NextPage = () => {
     </Page>
   );
 };
-
-export default Index;
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {

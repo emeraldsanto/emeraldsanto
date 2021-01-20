@@ -52,7 +52,7 @@ const EXPERIENCES = [
   description: makei18nKey(e.name, "description"),
 }));
 
-const Work: NextPage = () => {
+export default function Work() {
 	const { t } = useTranslation();
 
 	return (
@@ -127,8 +127,6 @@ const Work: NextPage = () => {
 		</Page>
 	);
 };
-
-export default Work;
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {
