@@ -1,8 +1,7 @@
-import next from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { AnchorHTMLAttributes, DetailedHTMLProps, FC, HTMLAttributes, useMemo } from 'react';
+import React, { DetailedHTMLProps, FC, HTMLAttributes, useMemo } from 'react';
 import i18n from "../../../i18n";
 
 export const LanguageSwitcher: FC<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> = (props) => {
