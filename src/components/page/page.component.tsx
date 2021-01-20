@@ -6,7 +6,7 @@ import { PageProps } from "./page.props";
 export const Page: FC<PageProps> = (props) => {
 	const { title = "Portfolio", children, ...rest } = props;
 	return (
-    <Container {...rest as any}>
+    <Container {...rest}>
       <Head>
         <title key="title">Yanick Bélanger - {title}</title>
         <link rel="icon" href="/favicon.ico" />
