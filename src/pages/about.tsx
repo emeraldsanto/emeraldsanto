@@ -1,69 +1,52 @@
 import { Page } from "@components/page/page.component";
-import styles from "@styles/about.module.scss";
 import { motion, Variants } from "framer-motion";
 import { NextPage } from "next";
-import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
+import Image from "next/image";
+import styled from 'styled-components';
 
 const About: NextPage = () => {
 	const { t } = useTranslation();
 
 	return (
 		<Page title={t("about:title")}>
-			<div className={styles.container}>
-				<motion.div
+			<Container>
+				<Side
 					initial="hidden"
 					animate="visible"
-					className={styles.side}
 					variants={TEXT_VARIANTS}
 				>
-					<motion.h1
-						className={styles.title}
-						variants={SINGLE_TEXT_VARIANT}
-					>
+					<Title variants={SINGLE_TEXT_VARIANT}>
 						{t("about:title")} 🤔
-					</motion.h1>
+					</Title>
 
-					<motion.p
-						className={styles.description}
-						variants={SINGLE_TEXT_VARIANT}
-					>
+					<Description variants={SINGLE_TEXT_VARIANT}>
 						{t("about:firstParagraph")}
-					</motion.p>
+					</Description>
 
 					<br />
 
-					<motion.p
-						className={styles.description}
-						variants={SINGLE_TEXT_VARIANT}
-					>
+					<Description variants={SINGLE_TEXT_VARIANT}>
 						{t("about:secondParagraph")}
-					</motion.p>
+					</Description>
 
 					<br />
 
-					<motion.p
-						className={styles.description}
-						variants={SINGLE_TEXT_VARIANT}
-					>
+					<Description variants={SINGLE_TEXT_VARIANT}>
 						{t("about:thirdParagraph")}
-					</motion.p>
+					</Description>
 
 					<br />
 
-					<motion.p
-						className={styles.description}
-						variants={SINGLE_TEXT_VARIANT}
-					>
+					<Description variants={SINGLE_TEXT_VARIANT}>
 						{t("about:fourthParagraph")}
-					</motion.p>
-				</motion.div>
+					</Description>
+				</Side>
 
-				<div className={styles.side}>
-					<motion.div
+				<Side>
+					<Portrait
 						initial="hidden"
 						animate="visible"
-						className={styles.portrait}
 						variants={PORTRAIT_VARIANTS}
 					>
 						<Image
@@ -72,9 +55,9 @@ const About: NextPage = () => {
 							objectFit="cover"
 							src="/static/assets/portrait-min.jpg"
 						/>
-					</motion.div>
-				</div>
-			</div>
+					</Portrait>
+				</Side>
+			</Container>
 		</Page>
 	);
 };
@@ -114,3 +97,57 @@ const PORTRAIT_VARIANTS: Variants = {
 		translateX: 0,
 	},
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+  @media only screen and (max-width: 1000px) {
+		flex-direction: column-reverse;
+  }
+`;
+
+const Side = styled(motion.div)`
+  display: flex;
+  max-width: 500px;
+  flex-direction: column;
+
+  &:first-child {
+    margin-right: 100px;
+  }
+
+  @media only screen and (max-width: 1000px) {
+		&:first-child {
+			margin-right: 0;
+			margin-top: 25px;
+		}
+  }
+`;
+
+const Title = styled(motion.h1)`
+  margin-bottom: 50px;
+
+  @media only screen and (max-width: 1000px) {
+		margin-bottom: 25px;
+  }
+`;
+
+const Description = styled(motion.p)`
+  line-height: 22px;
+  text-align: justify;
+`;
+
+const Portrait = styled(motion.div)`
+  width: 350px;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+  @media only screen and (max-width: 625px) {
+		width: 150px;
+		height: 150px;
+  }
+`;
