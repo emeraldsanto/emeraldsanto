@@ -1,5 +1,4 @@
 import { DefaultTheme } from 'styled-components';
-import css from "styled-jsx/css";
 
 export enum Colors {
   Danube = "#657ED4",
@@ -44,7 +43,3 @@ export const Themes: Record<"light" | "dark", DefaultTheme> = {
     },
   },
 };
-
-export function combineClassNames(className: string, style: string | ReturnType<typeof css['resolve']>) {
-  return `${className} ${typeof style === "string" ? style : style.className}`;
-}
