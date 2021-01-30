@@ -59,7 +59,7 @@ export default class LocalizedDocument extends Document<DocumentProps> {
           {/* Global site tag (gtag.js) - Google Analytics */}
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=${environment.services.ga.trackingId}"
+            src={`https://www.googletagmanager.com/gtag/js?id=${environment.services.ga.trackingId}`}
           ></script>
           <script
             dangerouslySetInnerHTML={{

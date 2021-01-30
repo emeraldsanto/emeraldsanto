@@ -2,21 +2,21 @@ import { Button } from "@components/button/button.component";
 import { Input, TextArea } from "@components/input/input.component";
 import { Loading } from "@components/loading/loading.component";
 import { Page } from "@components/page/page.component";
-import { send } from "emailjs-com";
+import { useIsSmallFormFactor } from '@hooks/useIsSmallFormFactor';
+import { sendEmail } from '@lib/email';
+import { pipe } from 'fp-ts/lib/pipeable';
+import { fold, map, mapLeft } from 'fp-ts/lib/TaskEither';
 import { motion, Variants } from "framer-motion";
 import useTranslation from "next-translate/useTranslation";
 import {
-	ChangeEvent,
-	FormEvent,
-	Fragment,
-	useCallback,
-	useReducer
+  ChangeEvent,
+  FormEvent,
+  Fragment,
+  useCallback,
+  useReducer
 } from "react";
 import { toast } from "react-toastify";
-import environment from "@lib/environment";
-import { useIsSmallFormFactor } from '@hooks/useIsSmallFormFactor';
 import styled from 'styled-components';
-
 interface ContactState {
 	name: string;
 	email: string;
@@ -87,29 +87,21 @@ export default function Contact() {
 	);
 
 	const onFormSubmit = useCallback(
-		async (event: FormEvent) => {
+		(event: FormEvent) => {
 			event.preventDefault();
 			dispatch({ name: "submit" });
 
-			try {
-				await send(
-          environment.services.emailjs.serviceId,
-          environment.services.emailjs.templateId,
-          {
-            name,
-            email,
-            subject,
-            message,
-          },
-          environment.services.emailjs.userId
-        );
-
-				dispatch({ name: "success" });
-				toast(t("contact:sendSuccess"), { type: "success" });
-			} catch (error) {
-				dispatch({ name: "error" });
-				toast(t("contact:sendError"), { type: "error" });
-			}
+      return pipe(
+        sendEmail({ name, email, subject, message }),
+        mapLeft(() => {
+          dispatch({ name: "error" });
+          toast(t("contact:sendError"), { type: "error" });
+        }),
+        map(() => {
+          dispatch({ name: "success" });
+          toast(t("contact:sendSuccess"), { type: "success" });
+        })
+      )()
 		},
 		[t, name, email, subject, message, dispatch]
 	);
