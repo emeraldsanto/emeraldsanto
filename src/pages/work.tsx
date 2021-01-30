@@ -1,8 +1,6 @@
 import { Page } from "@components/page/page.component";
 import { PeriodLink } from "@components/period-link/period-link.component";
-import { Colors } from '@lib/design';
 import { motion, Variants } from "framer-motion";
-import { NextPage } from "next";
 import useTranslation from "next-translate/useTranslation";
 import { Fragment } from "react";
 import styled from 'styled-components';

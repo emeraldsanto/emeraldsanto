@@ -24,7 +24,7 @@ export function useIsSmallFormFactor(): boolean {
 
 		// @ts-ignore
     return () => media.removeEventListener("change", updateTarget);
-  }, [updateTarget]);
+  }, [updateTarget, setTargetReached]);
 	
 	return targetReached;
 }
