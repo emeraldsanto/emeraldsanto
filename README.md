@@ -1,6 +1,6 @@
 ### Greetings 👋
 
-I'm Yanick, a 22 year old mobile developer from Montreal, Canada. I specialize in cross-platform development using React Native and Flutter, but that doesn't mean native development scares me. Oh, and I absolutely love TypeScript.
+I'm Yanick, a 23 year old mobile developer from Montreal, Canada. I specialize in cross-platform development using React Native and Flutter, but that doesn't mean native development scares me. Oh, and I absolutely love TypeScript.
 
 ### What I'm currently doing
 
@@ -12,6 +12,7 @@ If you or your company is looking for an experienced React Native developer, or 
 
 ### Where to find me?
 
+- [Personal website](https://yanickbelanger.dev)
 - [LinkedIn](https://www.linkedin.com/in/yanick-bélanger)
 - [Twitter](https://www.twitter.com/yanthedev)
 - [Email](mailto:yanick.belanger@yahoo.com)
