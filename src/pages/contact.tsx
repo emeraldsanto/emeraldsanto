@@ -17,6 +17,7 @@ import {
 import { toast } from "react-toastify";
 import styled from 'styled-components';
 import { match, __ } from 'ts-pattern';
+
 interface ContactState {
 	name: string;
 	email: string;
@@ -51,14 +52,10 @@ const contactReducer = (state: ContactState, action: ContactAction): ContactStat
     .otherwise(() => ({ ...state }));
 
 export default function Contact() {
-	const [{ name, email, subject, message, status }, dispatch] = useReducer(
-		contactReducer,
-		INITIAL_STATE
-	);
+  const { t } = useTranslation();
+  const isSmallFormFactor = useIsSmallFormFactor();
+	const [{ name, email, subject, message, status }, dispatch] = useReducer(contactReducer, INITIAL_STATE);
 
-	const { t } = useTranslation();
-	const isSmallFormFactor = useIsSmallFormFactor();
-		
 	const onInputChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			dispatch({
