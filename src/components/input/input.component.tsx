@@ -1,17 +1,16 @@
-import {
-  DetailedHTMLProps,
-  FC,
-  InputHTMLAttributes,
-  TextareaHTMLAttributes
-} from "react";
+import { DetailedHTMLProps, FC, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-export const Input: FC<Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "ref">> = (props) => {
-	return <StyledInput {...props} />
+export const Input: FC<Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'ref'>> = (
+  props
+) => {
+  return <StyledInput {...props} />;
 };
 
-export const TextArea: FC<Omit<DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, "ref">> = (props) => {
-	return <StyledTextArea {...props} />
+export const TextArea: FC<
+  Omit<DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'ref'>
+> = (props) => {
+  return <StyledTextArea {...props} />;
 };
 
 const StyledInput = styled.input`

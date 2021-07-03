@@ -4,6 +4,9 @@ module.exports = {
     defaultLocale: 'en',
   },
   images: {
-    domains: ['a.storyblok.com']
-  }
+    domains: ['a.storyblok.com'],
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
