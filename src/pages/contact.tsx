@@ -3,9 +3,8 @@ import { Input, TextArea } from "@components/input/input.component";
 import { Loading } from "@components/loading/loading.component";
 import { Page } from "@components/page/page.component";
 import { useIsSmallFormFactor } from '@hooks/useIsSmallFormFactor';
+import { to } from '@lib/async';
 import { sendEmail } from '@lib/email';
-import { pipe } from 'fp-ts/lib/pipeable';
-import { fold, map, mapLeft } from 'fp-ts/lib/TaskEither';
 import { motion, Variants } from "framer-motion";
 import useTranslation from "next-translate/useTranslation";
 import {
@@ -17,6 +16,7 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import styled from 'styled-components';
+import { match, __ } from 'ts-pattern';
 interface ContactState {
 	name: string;
 	email: string;
@@ -42,30 +42,13 @@ const INITIAL_STATE: ContactState = {
 	status: "idle",
 };
 
-function contactReducer(
-	state: ContactState,
-	action: ContactAction
-): ContactState {
-	switch (action.name) {
-		case "success":
-			return INITIAL_STATE;
-		case "error":
-			return {
-				...state,
-				status: "error",
-			};
-		case "submit":
-			return {
-				...state,
-				status: "loading",
-			};
-		default:
-			return {
-				...state,
-				[action.name]: [action.payload],
-			};
-	}
-}
+const contactReducer = (state: ContactState, action: ContactAction): ContactState => 
+  match<ContactAction, ContactState>(action)
+    .with({ name: "success" }, () => INITIAL_STATE)
+    .with({ name: "error" }, () => ({ ...state, status: "error" }))
+    .with({ name: "submit" }, () => ({ ...state, status: "loading" }))
+    .with({ payload: __ }, (a) => ({ ...state, [action.name]: a.payload }))
+    .otherwise(() => ({ ...state }));
 
 export default function Contact() {
 	const [{ name, email, subject, message, status }, dispatch] = useReducer(
@@ -87,21 +70,19 @@ export default function Contact() {
 	);
 
 	const onFormSubmit = useCallback(
-		(event: FormEvent) => {
+		async (event: FormEvent) => {
 			event.preventDefault();
 			dispatch({ name: "submit" });
 
-      return pipe(
-        sendEmail({ name, email, subject, message }),
-        mapLeft(() => {
-          dispatch({ name: "error" });
-          toast(t("contact:sendError"), { type: "error" });
-        }),
-        map(() => {
-          dispatch({ name: "success" });
-          toast(t("contact:sendSuccess"), { type: "success" });
-        })
-      )()
+      const [error] = await to(sendEmail({ name, email, subject, message }));
+
+      if (error) {
+        dispatch({ name: "error" });
+        toast(t("contact:sendError"), { type: "error" });
+      } else {
+        dispatch({ name: "success" });
+        toast(t("contact:sendSuccess"), { type: "success" });
+      }
 		},
 		[t, name, email, subject, message, dispatch]
 	);

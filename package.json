@@ -30,14 +30,14 @@
 		"@fortawesome/react-fontawesome": "0.1.14",
 		"@types/styled-components": "5.1.7",
 		"emailjs-com": "2.6.4",
-		"fp-ts": "2.9.3",
 		"framer-motion": "3.2.1",
 		"next": "10.0.5",
 		"next-translate": "1.0.1",
 		"react": "17.0.1",
 		"react-dom": "17.0.1",
 		"react-toastify": "6.2.0",
-		"styled-components": "5.2.1"
+		"styled-components": "5.2.1",
+		"ts-pattern": "^3.2.1"
 	},
 	"devDependencies": {
 		"@types/gtag.js": "0.0.4",
