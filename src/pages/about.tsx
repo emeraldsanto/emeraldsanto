@@ -1,5 +1,5 @@
 import { Page } from "@components/page/page.component";
-import { CMS, StoryPageProps, useLiveStory, withEditable } from '@lib/storyblok';
+import { CMS, ImageBlock, ParagraphBlock, StoryPageProps, withEditable } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { Fragment } from 'react';
@@ -7,7 +7,8 @@ import styled from 'styled-components';
 
 type AboutProps = StoryPageProps<{
   title: string
-  paragraphs: Array<{ text: string }>;
+  paragraphs: Array<ParagraphBlock>
+  portrait: ImageBlock
 }>;
 
 function About({ story }: AboutProps) {
@@ -44,7 +45,7 @@ function About({ story }: AboutProps) {
 							width={350}
 							height={350}
 							objectFit="cover"
-							src="/static/assets/portrait-min.jpg"
+							src={story.content.portrait.filename}
 						/>
 					</Portrait>
 				</Side>

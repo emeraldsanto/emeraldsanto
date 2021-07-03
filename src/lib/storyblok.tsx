@@ -17,6 +17,35 @@ export interface StoryPageProps<TContent extends Record<string, unknown>> {
   preview: boolean
 }
 
+export interface ButtonBlock {
+  text: string
+  url: string
+}
+
+export interface ExperienceBlock {
+  employer: string
+  url?: string
+  periodStart: string
+  periodEnd?: string
+  jobTitle: string
+  location: string
+  description: string
+  tags: Array<ParagraphBlock>
+}
+
+export interface ImageBlock {
+  alt: string
+  copyright: string
+  fieldtype: 'asset'
+  filename: string
+  name: string
+  title: string
+}
+
+export interface ParagraphBlock {
+  text: string
+}
+
 export namespace CMS {
   export const client = new Storyblok({
     accessToken: environment.services.storyblock.accessToken,
@@ -28,10 +57,10 @@ export namespace CMS {
 
   export const getStory: ContextAwareStoryblok<'getStory'> = (slug, params, context) => {
     return client.getStory(slug, {
+      ...params,
       version: context.preview ? "draft" : "published",
       cv: context.preview ? Date.now() : undefined,
       language: context.locale,
-      ...params,
     });
   }
 
@@ -109,7 +138,7 @@ export function withEditable<TProps extends StoryPageProps<any>>(Component: Comp
 
     return (
       <SbEditable content={liveStory.content}>
-        <Component {...{ story: liveStory, preview, ...rest } as any} />
+        <Component {...{ story: liveStory, preview, ...rest } as TProps} />
       </SbEditable>
     )
   }

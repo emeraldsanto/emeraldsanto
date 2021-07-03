@@ -1,6 +1,6 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
-import { CMS, StoryPageProps, withEditable } from '@lib/storyblok';
+import { ButtonBlock, CMS, StoryPageProps, withEditable } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import styled from 'styled-components';
 type IndexProps = StoryPageProps<{
   greeting: string
   presentation: string
-  buttons: Array<{ text: string, url: string }>
+  buttons: Array<ButtonBlock>
 }>
 
 function Index({ story }: IndexProps) {
