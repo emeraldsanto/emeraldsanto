@@ -1,45 +1,37 @@
 import { Page } from "@components/page/page.component";
+import { CMS, StoryPageProps, useLiveStory, withEditable } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
-import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
+import { Fragment } from 'react';
 import styled from 'styled-components';
 
-export default function About() {
-	const { t } = useTranslation();
+type AboutProps = StoryPageProps<{
+  title: string
+  paragraphs: Array<{ text: string }>;
+}>;
 
+function About({ story }: AboutProps) {
 	return (
-		<Page title={t("about:title")}>
+		<Page title={story.content.title}>
 			<Container>
 				<Side
 					initial="hidden"
 					animate="visible"
 					variants={TEXT_VARIANTS}
 				>
-					<Title variants={SINGLE_TEXT_VARIANT}>
-						{t("about:title")} 🤔
-					</Title>
+          <Title variants={SINGLE_TEXT_VARIANT}>
+            {story.content.title} 🤔
+          </Title>
 
-					<Description variants={SINGLE_TEXT_VARIANT}>
-						{t("about:firstParagraph")}
-					</Description>
+          {story.content.paragraphs.map((paragraph) => (
+            <Fragment>
+              <Description variants={SINGLE_TEXT_VARIANT}>
+                {paragraph.text}
+              </Description>
 
-					<br />
-
-					<Description variants={SINGLE_TEXT_VARIANT}>
-						{t("about:secondParagraph")}
-					</Description>
-
-					<br />
-
-					<Description variants={SINGLE_TEXT_VARIANT}>
-						{t("about:thirdParagraph")}
-					</Description>
-
-					<br />
-
-					<Description variants={SINGLE_TEXT_VARIANT}>
-						{t("about:fourthParagraph")}
-					</Description>
+              <br />
+            </Fragment>
+          ))}
 				</Side>
 
 				<Side>
@@ -60,6 +52,10 @@ export default function About() {
 		</Page>
 	);
 };
+
+export const getStaticProps = CMS.getStaticProps('about');
+
+export default withEditable(About);
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {

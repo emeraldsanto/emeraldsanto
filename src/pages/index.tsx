@@ -1,6 +1,6 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
-import { CMS, StoryPageProps } from '@lib/storyblok';
+import { CMS, StoryPageProps, withEditable } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ type IndexProps = StoryPageProps<{
   buttons: Array<{ text: string, url: string }>
 }>
 
-export default function Index({ story }: IndexProps) {
+function Index({ story }: IndexProps) {
 	return (
     <Page>
       <div>
@@ -48,6 +48,8 @@ export default function Index({ story }: IndexProps) {
 };
 
 export const getStaticProps = CMS.getStaticProps('home');
+
+export default withEditable(Index);
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {
