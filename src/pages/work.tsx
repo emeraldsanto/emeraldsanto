@@ -9,30 +9,24 @@ function formatPeriod(experience: ExperienceBlock) {
   const start = new Date(experience.periodStart);
   const end = experience.periodEnd ? new Date(experience.periodEnd) : '...';
 
-  return `${start.getMonth() + 1}/${start.getFullYear()} - ${typeof end === 'string' ? end : `${end.getMonth() + 1}/${end.getFullYear()}`}`;
+  return `${start.getMonth() + 1}/${start.getFullYear()} - ${
+    typeof end === 'string' ? end : `${end.getMonth() + 1}/${end.getFullYear()}`
+  }`;
 }
 
 type WorkProps = StoryPageProps<{
-  title: string
-  presentation: string
-  experiences: Array<ExperienceBlock>
-}>
+  title: string;
+  presentation: string;
+  experiences: Array<ExperienceBlock>;
+}>;
 
 function Work({ story }: WorkProps) {
   return (
     <Page title={story.content.title}>
-      <Container
-        initial="hidden"
-        animate="visible"
-        variants={TEXT_VARIANTS}
-      >
-        <Title variants={SINGLE_TEXT_VARIANT}>
-          {story.content.title} 🔨
-        </Title>
+      <Container initial="hidden" animate="visible" variants={TEXT_VARIANTS}>
+        <Title variants={SINGLE_TEXT_VARIANT}>{story.content.title} 🔨</Title>
 
-        <Description variants={SINGLE_TEXT_VARIANT}>
-          {story.content.presentation}
-        </Description>
+        <Description variants={SINGLE_TEXT_VARIANT}>{story.content.presentation}</Description>
 
         {story.content.experiences.map((e, i) => (
           <Fragment key={e.employer}>
@@ -42,36 +36,21 @@ function Work({ story }: WorkProps) {
                   <a href={e.url} target="_blank" rel="noopener noreferrer">
                     {e.employer}
                   </a>
-                </ExperienceTitle>
-								
-                {' '}
-
-                <ExperienceLocation>
-                  {formatPeriod(e)}
-                </ExperienceLocation>
+                </ExperienceTitle>{' '}
+                <ExperienceLocation>{formatPeriod(e)}</ExperienceLocation>
               </div>
 
               <WorkTitle>
-                {e.jobTitle}
-								
-                {' '}
-
-                <ExperienceLocation>
-                  {e.location}
-                </ExperienceLocation>
+                {e.jobTitle} <ExperienceLocation>{e.location}</ExperienceLocation>
               </WorkTitle>
 
-              <WorkDescription>
-                {e.description}
-              </WorkDescription>
+              <WorkDescription>{e.description}</WorkDescription>
 
               <hr />
 
               <Technologies>
                 {e.tags.map((t) => (
-                  <Technology key={t.text}>
-                    {t.text}
-                  </Technology>
+                  <Technology key={t.text}>{t.text}</Technology>
                 ))}
               </Technologies>
             </Experience>
@@ -119,7 +98,7 @@ const Container = styled(motion.div)`
   width: 500px;
 
   @media only screen and (max-width: 625px) {
-		width: 100%;
+    width: 100%;
   }
 `;
 

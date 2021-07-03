@@ -6,30 +6,22 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 type IndexProps = StoryPageProps<{
-  greeting: string
-  presentation: string
-  buttons: Array<ButtonBlock>
-}>
+  greeting: string;
+  presentation: string;
+  buttons: Array<ButtonBlock>;
+}>;
 
 function Index({ story }: IndexProps) {
   return (
     <Page>
       <div>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={TEXT_VARIANTS}
-        >
+        <motion.div initial="hidden" animate="visible" variants={TEXT_VARIANTS}>
           <Greeting>{story.content.greeting}</Greeting>
 
           <Presentation>{story.content.presentation}</Presentation>
         </motion.div>
 
-        <Buttons
-          initial="hidden"
-          animate="visible"
-          variants={BUTTON_VARIANTS}
-        >
+        <Buttons initial="hidden" animate="visible" variants={BUTTON_VARIANTS}>
           {story.content.buttons.map((button) => (
             <ButtonContainer key={button.url}>
               <motion.div variants={SINGLE_BUTTON_VARIANTS}>

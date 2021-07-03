@@ -4,25 +4,12 @@ import styled from 'styled-components';
 
 export const Loading: FC = () => {
   return (
-    <Container
-      initial="start"
-      animate="end"
-      variants={LOADING_CONTAINER_VARIANTS}
-    >
-      <Circle
-        variants={LOADING_CIRCLE_VARIANTS}
-        transition={LOADING_CIRCLE_TRANSITION}
-      ></Circle>
+    <Container initial="start" animate="end" variants={LOADING_CONTAINER_VARIANTS}>
+      <Circle variants={LOADING_CIRCLE_VARIANTS} transition={LOADING_CIRCLE_TRANSITION}></Circle>
 
-      <Circle
-        variants={LOADING_CIRCLE_VARIANTS}
-        transition={LOADING_CIRCLE_TRANSITION}
-      ></Circle>
+      <Circle variants={LOADING_CIRCLE_VARIANTS} transition={LOADING_CIRCLE_TRANSITION}></Circle>
 
-      <Circle
-        variants={LOADING_CIRCLE_VARIANTS}
-        transition={LOADING_CIRCLE_TRANSITION}
-      ></Circle>
+      <Circle variants={LOADING_CIRCLE_VARIANTS} transition={LOADING_CIRCLE_TRANSITION}></Circle>
     </Container>
   );
 };

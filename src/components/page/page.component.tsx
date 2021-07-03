@@ -25,5 +25,3 @@ const Container = styled.div`
     padding: 20px;
   }
 `;
-
-

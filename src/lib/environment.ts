@@ -1,4 +1,3 @@
-
 const environment = {
   previewSecret: process.env.NEXT_PUBLIC_PREVIEW_SECRET,
   services: {
@@ -11,8 +10,8 @@ const environment = {
       trackingId: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_TRACKING_ID!,
     },
     storyblock: {
-      accessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN
-    }
+      accessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
+    },
   },
 };
 

@@ -7,33 +7,27 @@ import { to } from '@lib/async';
 import { sendEmail } from '@lib/email';
 import { CMS, StoryPageProps, withEditable } from '@lib/storyblok';
 import { motion, Variants } from 'framer-motion';
-import {
-  ChangeEvent,
-  FormEvent,
-  Fragment,
-  useCallback,
-  useReducer
-} from 'react';
+import { ChangeEvent, FormEvent, Fragment, useCallback, useReducer } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { match, __ } from 'ts-pattern';
 
 interface ContactState {
-	name: string;
-	email: string;
-	subject: string;
-	message: string;
-	status: 'idle' | 'loading' | 'error';
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  status: 'idle' | 'loading' | 'error';
 }
 
 type ContactAction =
-	| { name: 'error' }
-	| { name: 'submit' }
-	| { name: 'success' }
-	| { name: 'name'; payload: ContactState['name'] }
-	| { name: 'email'; payload: ContactState['email'] }
-	| { name: 'subject'; payload: ContactState['subject'] }
-	| { name: 'message'; payload: ContactState['message'] };
+  | { name: 'error' }
+  | { name: 'submit' }
+  | { name: 'success' }
+  | { name: 'name'; payload: ContactState['name'] }
+  | { name: 'email'; payload: ContactState['email'] }
+  | { name: 'subject'; payload: ContactState['subject'] }
+  | { name: 'message'; payload: ContactState['message'] };
 
 const INITIAL_STATE: ContactState = {
   name: '',
@@ -43,7 +37,7 @@ const INITIAL_STATE: ContactState = {
   status: 'idle',
 };
 
-const contactReducer = (state: ContactState, action: ContactAction): ContactState => 
+const contactReducer = (state: ContactState, action: ContactAction): ContactState =>
   match<ContactAction, ContactState>(action)
     .with({ name: 'success' }, () => INITIAL_STATE)
     .with({ name: 'error' }, () => ({ ...state, status: 'error' }))
@@ -52,15 +46,15 @@ const contactReducer = (state: ContactState, action: ContactAction): ContactStat
     .otherwise(() => ({ ...state }));
 
 type ContactProps = StoryPageProps<{
-  title: string
-  presentation: string
-  fullNameField: string
-  emailField: string
-  subjectField: string
-  messageField: string
-  buttonCTA: string
-  sendSuccessMessage: string
-  sendErrorMessage: string
+  title: string;
+  presentation: string;
+  fullNameField: string;
+  emailField: string;
+  subjectField: string;
+  messageField: string;
+  buttonCTA: string;
+  sendSuccessMessage: string;
+  sendErrorMessage: string;
 }>;
 
 function Contact({ story }: ContactProps) {
@@ -98,26 +92,13 @@ function Contact({ story }: ContactProps) {
   return (
     <Page title={story.content.title}>
       <Container>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={FADE_VARIANTS}
-        >
-          <Title variants={CHILD_VARIANTS}>
-            {story.content.title} 📬
-          </Title>
+        <motion.div initial="hidden" animate="visible" variants={FADE_VARIANTS}>
+          <Title variants={CHILD_VARIANTS}>{story.content.title} 📬</Title>
 
-          <Description variants={CHILD_VARIANTS}>
-            {story.content.presentation}
-          </Description>
+          <Description variants={CHILD_VARIANTS}>{story.content.presentation}</Description>
         </motion.div>
 
-        <Form
-          initial="hidden"
-          animate="visible"
-          onSubmit={onFormSubmit}
-          variants={DELAY_FADE_VARIANTS}
-        >
+        <Form initial="hidden" animate="visible" onSubmit={onFormSubmit} variants={DELAY_FADE_VARIANTS}>
           {isSmallFormFactor ? (
             <Fragment>
               <Row variants={CHILD_VARIANTS}>
@@ -183,17 +164,9 @@ function Contact({ story }: ContactProps) {
             />
           </motion.div>
 
-          <SubmitContainer
-            initial="hidden"
-            animate="visible"
-            variants={BUTTON_VARIANTS}
-          >
+          <SubmitContainer initial="hidden" animate="visible" variants={BUTTON_VARIANTS}>
             <Submit type="submit" disabled={status === 'loading'}>
-              {status === 'loading' ? (
-                <Loading />
-              ) : (
-                <p>{story.content.buttonCTA}</p>
-              )}
+              {status === 'loading' ? <Loading /> : <p>{story.content.buttonCTA}</p>}
             </Submit>
           </SubmitContainer>
         </Form>
@@ -257,7 +230,7 @@ const Container = styled.div`
   width: 500px;
 
   @media only screen and (max-width: 815px) {
-		width: initial;
+    width: initial;
   }
 `;
 
@@ -265,7 +238,7 @@ const Title = styled(motion.h1)`
   margin-bottom: 25px;
 
   @media only screen and (max-width: 815px) {
-		margin-bottom: 20px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -277,7 +250,7 @@ const Description = styled(motion.p)`
 
 const Form = styled(motion.form)`
   @media only screen and (max-width: 815px) {
-		width: 100%;
+    width: 100%;
   }
 `;
 
@@ -294,12 +267,12 @@ const StyledInput = styled(Input)`
   }
 
   @media only screen and (max-width: 815px) {
-		width: 100%;
-		flex-basis: initial;
+    width: 100%;
+    flex-basis: initial;
 
-		&:first-child {
-			margin-right: 0;
-		}
+    &:first-child {
+      margin-right: 0;
+    }
   }
 `;
 
@@ -307,8 +280,8 @@ const StyledTextArea = styled(TextArea)`
   width: 100%;
 
   @media only screen and (max-width: 815px) {
-		width: 100%;
-		margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 20px;
   }
 `;
 
@@ -321,4 +294,3 @@ const Submit = styled(Button)`
   display: flex;
   justify-content: center;
 `;
-

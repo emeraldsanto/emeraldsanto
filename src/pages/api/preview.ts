@@ -9,7 +9,7 @@ export default async function preview(req: NextApiRequest, res: NextApiResponse)
     return res.status(401).json({ message: 'Invalid token' });
   }
 
-  res.setPreviewData({ });
+  res.setPreviewData({});
 
   // Set cookie to None, so it can be read in the Storyblok iframe
   const cookies = res.getHeader('Set-Cookie');

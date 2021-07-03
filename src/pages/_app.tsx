@@ -14,19 +14,13 @@ export default function App(props: AppProps): JSX.Element {
 
   const router = useRouter();
 
-  useEffect(
-    () => {
-      router.events.on('routeChangeComplete', logPageView);
-      return () => router.events.off('routeChangeComplete', logPageView);
-    },
-    [router.events]
-  );
+  useEffect(() => {
+    router.events.on('routeChangeComplete', logPageView);
+    return () => router.events.off('routeChangeComplete', logPageView);
+  }, [router.events]);
 
   return (
-    <ThemeProvider
-      themes={[Themes.light, Themes.dark]}
-      defaults={{ light: Themes.light, dark: Themes.dark }}
-    >
+    <ThemeProvider themes={[Themes.light, Themes.dark]} defaults={{ light: Themes.light, dark: Themes.dark }}>
       <GlobalStyle />
 
       <Fragment>
@@ -36,7 +30,6 @@ export default function App(props: AppProps): JSX.Element {
           <Component {...pageProps} />
         </Main>
         <ToastContainer />
-
       </Fragment>
     </ThemeProvider>
   );
@@ -44,9 +37,9 @@ export default function App(props: AppProps): JSX.Element {
 
 const Main = styled.main`
   @media only screen and (min-width: 625px) {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 `;
 

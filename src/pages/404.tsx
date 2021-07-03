@@ -5,9 +5,9 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 type NotFoundProps = StoryPageProps<{
-  title: string
-  catch: string
-  buttonCTA: string
+  title: string;
+  catch: string;
+  buttonCTA: string;
 }>;
 
 function NotFound({ story }: NotFoundProps) {

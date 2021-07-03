@@ -16,6 +16,5 @@ export function sendEmail(args: SendEmailArguments): Promise<EmailJSResponseStat
   const { serviceId, templateId, userId } = environment.services.emailjs;
 
   // Importing at the file level causes issues with SSR 🤔
-  return import('emailjs-com')
-    .then((module) => module.send(serviceId, templateId, args, userId));
+  return import('emailjs-com').then((module) => module.send(serviceId, templateId, args, userId));
 }

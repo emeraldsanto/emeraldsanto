@@ -1,5 +1,5 @@
 import { LanguageSwitcher } from '@components/language-switcher/language-switcher.component';
-import { faGithubSquare, faLinkedin, faTwitterSquare} from '@fortawesome/free-brands-svg-icons';
+import { faGithubSquare, faLinkedin, faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { FC } from 'react';
@@ -38,13 +38,7 @@ export const SideBar: FC = () => {
 
       <Icons>
         {SOCIALS.map((s) => (
-          <a
-            key={s.url}
-            href={s.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={s.name}
-          >
+          <a key={s.url} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name}>
             <FAIcon size="lg" icon={s.icon} />
           </a>
         ))}
@@ -86,12 +80,11 @@ const InitialWrapper = styled.div`
   &:hover {
     border-color: ${(props) => props.theme.colors.accentColor};
   }
-
-  `;
+`;
 
 const Initial = styled.h3`
   color: ${(props) => props.theme.colors.headingColor};
-  
+
   &:hover {
     color: ${(props) => props.theme.colors.accentColor};
   }
