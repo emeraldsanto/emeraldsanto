@@ -1,7 +1,7 @@
-import { EmailJSResponseStatus, send } from 'emailjs-com';
+import type { EmailJSResponseStatus } from 'emailjs-com';
 import environment from './environment';
 
-interface SendEmailArguments {
+interface SendEmailArguments extends Record<string, unknown> {
   name: string;
   email: string;
   subject: string;
@@ -15,5 +15,7 @@ interface SendEmailArguments {
 export function sendEmail(args: SendEmailArguments): Promise<EmailJSResponseStatus> {
   const { serviceId, templateId, userId } = environment.services.emailjs;
 
-  return send(serviceId, templateId, args, userId);
+  // Importing at the file level causes issues with SSR 🤔
+  return import('emailjs-com')
+    .then((module) => module.send(serviceId, templateId, args, userId))
 }
