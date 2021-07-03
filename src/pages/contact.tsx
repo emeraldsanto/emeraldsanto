@@ -5,8 +5,8 @@ import { Page } from "@components/page/page.component";
 import { useIsSmallFormFactor } from '@hooks/useIsSmallFormFactor';
 import { to } from '@lib/async';
 import { sendEmail } from '@lib/email';
+import { CMS, StoryPageProps, withEditable } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
-import useTranslation from "next-translate/useTranslation";
 import {
   ChangeEvent,
   FormEvent,
@@ -51,8 +51,19 @@ const contactReducer = (state: ContactState, action: ContactAction): ContactStat
     .with({ payload: __ }, (a) => ({ ...state, [action.name]: a.payload }))
     .otherwise(() => ({ ...state }));
 
-export default function Contact() {
-  const { t } = useTranslation();
+type ContactProps = StoryPageProps<{
+  title: string
+  presentation: string
+  fullNameField: string
+  emailField: string
+  subjectField: string
+  messageField: string
+  buttonCTA: string
+  sendSuccessMessage: string
+  sendErrorMessage: string
+}>;
+
+function Contact({ story }: ContactProps) {
   const isSmallFormFactor = useIsSmallFormFactor();
 	const [{ name, email, subject, message, status }, dispatch] = useReducer(contactReducer, INITIAL_STATE);
 
@@ -75,17 +86,17 @@ export default function Contact() {
 
       if (error) {
         dispatch({ name: "error" });
-        toast(t("contact:sendError"), { type: "error" });
+        toast(story.content.sendErrorMessage, { type: "error" });
       } else {
         dispatch({ name: "success" });
-        toast(t("contact:sendSuccess"), { type: "success" });
+        toast(story.content.sendSuccessMessage, { type: "success" });
       }
 		},
-		[t, name, email, subject, message, dispatch]
+		[story, name, email, subject, message, dispatch]
 	);
 
 	return (
-		<Page title={t("contact:title")}>
+		<Page title={story.content.title}>
 			<Container>
 				<motion.div
 					initial="hidden"
@@ -93,11 +104,11 @@ export default function Contact() {
 					variants={FADE_VARIANTS}
 				>
 					<Title variants={CHILD_VARIANTS}>
-						{t("contact:title")} 📬
+						{story.content.title} 📬
 					</Title>
 
 					<Description variants={CHILD_VARIANTS}>
-						{t("contact:description")}
+						{story.content.presentation}
 					</Description>
 				</motion.div>
 
@@ -115,7 +126,7 @@ export default function Contact() {
 									name="name"
 									value={name}
 									onChange={onInputChange}
-									placeholder={t("contact:name")}
+									placeholder={story.content.fullNameField}
 								/>
 							</Row>
 
@@ -126,7 +137,7 @@ export default function Contact() {
 									name="email"
 									value={email}
 									onChange={onInputChange}
-									placeholder={t("contact:email")}
+									placeholder={story.content.emailField}
 								/>
 							</Row>
 						</Fragment>
@@ -137,7 +148,7 @@ export default function Contact() {
 								name="name"
 								value={name}
 								onChange={onInputChange}
-								placeholder={t("contact:name")}
+								placeholder={story.content.fullNameField}
 							/>
 
 							<StyledInput
@@ -146,7 +157,7 @@ export default function Contact() {
 								name="email"
 								value={email}
 								onChange={onInputChange}
-								placeholder={t("contact:email")}
+                placeholder={story.content.emailField}
 							/>
 						</Row>
 					)}
@@ -158,7 +169,7 @@ export default function Contact() {
 							value={subject}
 							onChange={onInputChange}
 							style={{ width: "100%" }}
-							placeholder={t("contact:subject")}
+							placeholder={story.content.subjectField}
 						/>
 					</motion.div>
 
@@ -168,7 +179,7 @@ export default function Contact() {
 							name="message"
 							value={message}
 							onChange={onInputChange}
-							placeholder={t("contact:message")}
+							placeholder={story.content.messageField}
 						/>
 					</motion.div>
 
@@ -181,7 +192,7 @@ export default function Contact() {
 							{status === "loading" ? (
 								<Loading />
 							) : (
-								<p>{t("contact:send")}</p>
+								<p>{story.content.buttonCTA}</p>
 							)}
 						</Submit>
 					</SubmitContainer>
@@ -190,6 +201,10 @@ export default function Contact() {
 		</Page>
 	);
 };
+
+export const getStaticProps = CMS.getStaticProps('contact');
+
+export default withEditable(Contact);
 
 const FADE_VARIANTS: Variants = {
 	hidden: {

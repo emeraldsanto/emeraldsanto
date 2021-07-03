@@ -1,28 +1,36 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
-import useTranslation from "next-translate/useTranslation";
+import { CMS, StoryPageProps, withEditable } from '@lib/storyblok';
 import Link from "next/link";
 import styled from 'styled-components';
 
-export default function NotFound() {
-	const { t } = useTranslation();
+type NotFoundProps = StoryPageProps<{
+  title: string
+  catch: string
+  buttonCTA: string
+}>;
 
+function NotFound({ story }: NotFoundProps) {
 	return (
     <Page>
       <Container>
         <Status>404</Status>
-        <Title>{t("404:title")}</Title>
-        <Catch>{t("404:catch")}</Catch>
+        <Title>{story.content.title}</Title>
+        <Catch>{story.content.catch}</Catch>
 
         <Link href="/">
           <StyledButton>
-            <p>{t("404:cta")}</p>
+            <p>{story.content.buttonCTA}</p>
           </StyledButton>
         </Link>
       </Container>
     </Page>
   );
 };
+
+export const getStaticProps = CMS.getStaticProps('not-found');
+
+export default withEditable(NotFound);
 
 const Container = styled.div`
   width: 500px;
