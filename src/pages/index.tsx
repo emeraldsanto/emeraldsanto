@@ -1,10 +1,13 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
+import { client } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
-import { NextPage } from "next";
+import { GetStaticProps } from "next";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
+import { Story } from 'storyblok-js-client';
 import styled from 'styled-components';
+import i18n from '../../i18n';
 
 const PAGES = [
   {
@@ -21,7 +24,12 @@ const PAGES = [
   },
 ];
 
-export default function Index() {
+export interface StoryProps {
+  story: Story['data']['story']
+  preview: boolean
+}
+
+export default function Index({ story }: StoryProps) {
   const { t } = useTranslation();
 
 	return (
@@ -32,9 +40,9 @@ export default function Index() {
           animate="visible"
           variants={TEXT_VARIANTS}
         >
-          <Greeting>{t("home:greeting")}</Greeting>
+          <Greeting>{story.content.greeting}</Greeting>
 
-          <Presentation>{t("home:presentation")}</Presentation>
+          <Presentation>{story.content.presentation}</Presentation>
         </motion.div>
 
         <Buttons
@@ -58,6 +66,22 @@ export default function Index() {
     </Page>
   );
 };
+
+export const getStaticProps: GetStaticProps<StoryProps> = async (context) => {
+  const response = await client.getStory("home", {
+    version: context.preview ? "draft" : "published",
+    cv: context.preview ? Date.now() : undefined,
+    language: context.locale,
+  });
+  
+  return {
+    props: {
+      story: response.data.story,
+      preview: context.preview ?? false
+    },
+    revalidate: 10
+  }
+}
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {
