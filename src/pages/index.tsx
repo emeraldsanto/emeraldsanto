@@ -1,29 +1,17 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
+import { ButtonBlock, CMS, StoryPageProps, withEditable } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
-import { NextPage } from "next";
-import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import styled from 'styled-components';
 
-const PAGES = [
-  {
-    text: "home:aboutMe",
-    url: "/about",
-  },
-  {
-    text: "home:myWork",
-    url: "/work",
-  },
-  {
-    text: "home:contactMe",
-    url: "/contact",
-  },
-];
+type IndexProps = StoryPageProps<{
+  greeting: string
+  presentation: string
+  buttons: Array<ButtonBlock>
+}>
 
-export default function Index() {
-  const { t } = useTranslation();
-
+function Index({ story }: IndexProps) {
 	return (
     <Page>
       <div>
@@ -32,9 +20,9 @@ export default function Index() {
           animate="visible"
           variants={TEXT_VARIANTS}
         >
-          <Greeting>{t("home:greeting")}</Greeting>
+          <Greeting>{story.content.greeting}</Greeting>
 
-          <Presentation>{t("home:presentation")}</Presentation>
+          <Presentation>{story.content.presentation}</Presentation>
         </motion.div>
 
         <Buttons
@@ -42,12 +30,12 @@ export default function Index() {
           animate="visible"
           variants={BUTTON_VARIANTS}
         >
-          {PAGES.map((p) => (
-            <ButtonContainer key={p.url}>
+          {story.content.buttons.map((button) => (
+            <ButtonContainer key={button.url}>
               <motion.div variants={SINGLE_BUTTON_VARIANTS}>
-                <Link href={p.url}>
+                <Link href={button.url}>
                   <StyledButton type="button">
-                    <p>{t(p.text)}</p>
+                    <p>{button.text}</p>
                   </StyledButton>
                 </Link>
               </motion.div>
@@ -58,6 +46,10 @@ export default function Index() {
     </Page>
   );
 };
+
+export const getStaticProps = CMS.getStaticProps('home');
+
+export default withEditable(Index);
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {

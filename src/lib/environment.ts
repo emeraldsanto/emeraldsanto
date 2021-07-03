@@ -8,7 +8,10 @@ const environment = {
 		},
 		ga: {
 			trackingId: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_TRACKING_ID!,
-		}
+		},
+    storyblock: {
+      accessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN
+    }
   },
 };
 

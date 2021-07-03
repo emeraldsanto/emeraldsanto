@@ -1,120 +1,82 @@
 import { Page } from "@components/page/page.component";
 import { PeriodLink } from "@components/period-link/period-link.component";
+import { CMS, ExperienceBlock, StoryPageProps, withEditable } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
-import useTranslation from "next-translate/useTranslation";
 import { Fragment } from "react";
 import styled from 'styled-components';
 
-function makei18nKey(experienceName: string, suffix: string) {
-  return `work:${experienceName}.${suffix}`;
+function formatPeriod(experience: ExperienceBlock) {
+  const start = new Date(experience.periodStart);
+  const end = experience.periodEnd ? new Date(experience.periodEnd) : '...';
+
+  return `${start.getMonth() + 1}/${start.getFullYear()} - ${typeof end === 'string' ? end : `${end.getMonth() + 1}/${end.getFullYear()}`}`
 }
 
-const EXPERIENCES = [
-  {
-    name: "moka",
-    url: "https://www.moka.ai",
-    technologies: ["Node.JS", "MongoDB", "PostgreSQL", "React Native"],
-  },
-  {
-    name: "nightborn",
-    url: "https://www.nightborn.be",
-    technologies: ["React Native", "React.JS", "TypeScript", "C#", "T-SQL"],
-  },
-  {
-    name: "alithya",
-    url: "https://www.alithya.com",
-    technologies: ["React Native", "TypeScript", "Node.JS"],
-  },
-  {
-    name: "narcitymedia",
-    url: "https://www.narcitymedia.com",
-    technologies: [
-      "React Native",
-      "React.JS",
-      "TypeScript",
-      "Node.JS",
-      "MongoDB",
-    ],
-  },
-  {
-    name: "levelapp",
-    url: "https://www.levelapp.be",
-    technologies: ["React Native", "TypeScript"],
-  },
-].map((e) => ({
-  ...e,
-  name: makei18nKey(e.name, "name"),
-  title: makei18nKey(e.name, "title"),
-  period: makei18nKey(e.name, "period"),
-  location: makei18nKey(e.name, "location"),
-  description: makei18nKey(e.name, "description"),
-}));
+type WorkProps = StoryPageProps<{
+  title: string
+  presentation: string
+  experiences: Array<ExperienceBlock>
+}>
 
-export default function Work() {
-	const { t } = useTranslation();
-
+function Work({ story }: WorkProps) {
 	return (
-		<Page title={t("work:title")}>
+		<Page title={story.content.title}>
 			<Container
 				initial="hidden"
 				animate="visible"
 				variants={TEXT_VARIANTS}
 			>
 				<Title variants={SINGLE_TEXT_VARIANT}>
-					{t("work:title")} 🔨
+					{story.content.title} 🔨
 				</Title>
 
 				<Description variants={SINGLE_TEXT_VARIANT}>
-					{t("work:description")}
+					{story.content.presentation}
 				</Description>
 
-				{EXPERIENCES.map((e, i) => (
-					<Fragment key={e.name}>
+				{story.content.experiences.map((e, i) => (
+					<Fragment key={e.employer}>
 						<Experience variants={SINGLE_TEXT_VARIANT}>
 							<div>
 								<ExperienceTitle>
-									<a
-										href={e.url}
-										target="_blank"
-										rel="noopener"
-									>
-										{t(e.name)}
+									<a href={e.url} target="_blank" rel="noopener">
+										{e.employer}
 									</a>
 								</ExperienceTitle>
 								
 								{" "}
 
 								<ExperienceLocation>
-									{t(e.period)}
+									{formatPeriod(e)}
 								</ExperienceLocation>
 							</div>
 
 							<WorkTitle>
-								{t(e.title)}
+								{e.jobTitle}
 								
 								{" "}
 
 								<ExperienceLocation>
-									{t(e.location)}
+									{e.location}
 								</ExperienceLocation>
 							</WorkTitle>
 
 							<WorkDescription>
-								{t(e.description)}
+								{e.description}
 							</WorkDescription>
 
 							<hr />
 
 							<Technologies>
-								{e.technologies.map((t) => (
-									<Technology key={t}>
-										{t}
+								{e.tags.map((t) => (
+									<Technology key={t.text}>
+										{t.text}
 									</Technology>
 								))}
 							</Technologies>
 						</Experience>
 
-						{i !== EXPERIENCES.length - 1 && (
+						{i !== story.content.experiences.length - 1 && (
 							<motion.div variants={SINGLE_TEXT_VARIANT}>
 								<PeriodLink />
 							</motion.div>
@@ -125,6 +87,10 @@ export default function Work() {
 		</Page>
 	);
 };
+
+export const getStaticProps = CMS.getStaticProps('work');
+
+export default withEditable(Work);
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {

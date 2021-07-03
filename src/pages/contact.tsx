@@ -3,11 +3,10 @@ import { Input, TextArea } from "@components/input/input.component";
 import { Loading } from "@components/loading/loading.component";
 import { Page } from "@components/page/page.component";
 import { useIsSmallFormFactor } from '@hooks/useIsSmallFormFactor';
+import { to } from '@lib/async';
 import { sendEmail } from '@lib/email';
-import { pipe } from 'fp-ts/lib/pipeable';
-import { fold, map, mapLeft } from 'fp-ts/lib/TaskEither';
+import { CMS, StoryPageProps, withEditable } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
-import useTranslation from "next-translate/useTranslation";
 import {
   ChangeEvent,
   FormEvent,
@@ -17,6 +16,8 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import styled from 'styled-components';
+import { match, __ } from 'ts-pattern';
+
 interface ContactState {
 	name: string;
 	email: string;
@@ -42,40 +43,30 @@ const INITIAL_STATE: ContactState = {
 	status: "idle",
 };
 
-function contactReducer(
-	state: ContactState,
-	action: ContactAction
-): ContactState {
-	switch (action.name) {
-		case "success":
-			return INITIAL_STATE;
-		case "error":
-			return {
-				...state,
-				status: "error",
-			};
-		case "submit":
-			return {
-				...state,
-				status: "loading",
-			};
-		default:
-			return {
-				...state,
-				[action.name]: [action.payload],
-			};
-	}
-}
+const contactReducer = (state: ContactState, action: ContactAction): ContactState => 
+  match<ContactAction, ContactState>(action)
+    .with({ name: "success" }, () => INITIAL_STATE)
+    .with({ name: "error" }, () => ({ ...state, status: "error" }))
+    .with({ name: "submit" }, () => ({ ...state, status: "loading" }))
+    .with({ payload: __ }, (a) => ({ ...state, [action.name]: a.payload }))
+    .otherwise(() => ({ ...state }));
 
-export default function Contact() {
-	const [{ name, email, subject, message, status }, dispatch] = useReducer(
-		contactReducer,
-		INITIAL_STATE
-	);
+type ContactProps = StoryPageProps<{
+  title: string
+  presentation: string
+  fullNameField: string
+  emailField: string
+  subjectField: string
+  messageField: string
+  buttonCTA: string
+  sendSuccessMessage: string
+  sendErrorMessage: string
+}>;
 
-	const { t } = useTranslation();
-	const isSmallFormFactor = useIsSmallFormFactor();
-		
+function Contact({ story }: ContactProps) {
+  const isSmallFormFactor = useIsSmallFormFactor();
+	const [{ name, email, subject, message, status }, dispatch] = useReducer(contactReducer, INITIAL_STATE);
+
 	const onInputChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			dispatch({
@@ -87,27 +78,25 @@ export default function Contact() {
 	);
 
 	const onFormSubmit = useCallback(
-		(event: FormEvent) => {
+		async (event: FormEvent) => {
 			event.preventDefault();
 			dispatch({ name: "submit" });
 
-      return pipe(
-        sendEmail({ name, email, subject, message }),
-        mapLeft(() => {
-          dispatch({ name: "error" });
-          toast(t("contact:sendError"), { type: "error" });
-        }),
-        map(() => {
-          dispatch({ name: "success" });
-          toast(t("contact:sendSuccess"), { type: "success" });
-        })
-      )()
+      const [error] = await to(sendEmail({ name, email, subject, message }));
+
+      if (error) {
+        dispatch({ name: "error" });
+        toast(story.content.sendErrorMessage, { type: "error" });
+      } else {
+        dispatch({ name: "success" });
+        toast(story.content.sendSuccessMessage, { type: "success" });
+      }
 		},
-		[t, name, email, subject, message, dispatch]
+		[story, name, email, subject, message, dispatch]
 	);
 
 	return (
-		<Page title={t("contact:title")}>
+		<Page title={story.content.title}>
 			<Container>
 				<motion.div
 					initial="hidden"
@@ -115,11 +104,11 @@ export default function Contact() {
 					variants={FADE_VARIANTS}
 				>
 					<Title variants={CHILD_VARIANTS}>
-						{t("contact:title")} 📬
+						{story.content.title} 📬
 					</Title>
 
 					<Description variants={CHILD_VARIANTS}>
-						{t("contact:description")}
+						{story.content.presentation}
 					</Description>
 				</motion.div>
 
@@ -137,7 +126,7 @@ export default function Contact() {
 									name="name"
 									value={name}
 									onChange={onInputChange}
-									placeholder={t("contact:name")}
+									placeholder={story.content.fullNameField}
 								/>
 							</Row>
 
@@ -148,7 +137,7 @@ export default function Contact() {
 									name="email"
 									value={email}
 									onChange={onInputChange}
-									placeholder={t("contact:email")}
+									placeholder={story.content.emailField}
 								/>
 							</Row>
 						</Fragment>
@@ -159,7 +148,7 @@ export default function Contact() {
 								name="name"
 								value={name}
 								onChange={onInputChange}
-								placeholder={t("contact:name")}
+								placeholder={story.content.fullNameField}
 							/>
 
 							<StyledInput
@@ -168,7 +157,7 @@ export default function Contact() {
 								name="email"
 								value={email}
 								onChange={onInputChange}
-								placeholder={t("contact:email")}
+                placeholder={story.content.emailField}
 							/>
 						</Row>
 					)}
@@ -180,7 +169,7 @@ export default function Contact() {
 							value={subject}
 							onChange={onInputChange}
 							style={{ width: "100%" }}
-							placeholder={t("contact:subject")}
+							placeholder={story.content.subjectField}
 						/>
 					</motion.div>
 
@@ -190,7 +179,7 @@ export default function Contact() {
 							name="message"
 							value={message}
 							onChange={onInputChange}
-							placeholder={t("contact:message")}
+							placeholder={story.content.messageField}
 						/>
 					</motion.div>
 
@@ -203,7 +192,7 @@ export default function Contact() {
 							{status === "loading" ? (
 								<Loading />
 							) : (
-								<p>{t("contact:send")}</p>
+								<p>{story.content.buttonCTA}</p>
 							)}
 						</Submit>
 					</SubmitContainer>
@@ -212,6 +201,10 @@ export default function Contact() {
 		</Page>
 	);
 };
+
+export const getStaticProps = CMS.getStaticProps('contact');
+
+export default withEditable(Contact);
 
 const FADE_VARIANTS: Variants = {
 	hidden: {
