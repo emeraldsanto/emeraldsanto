@@ -17,5 +17,5 @@ export function sendEmail(args: SendEmailArguments): Promise<EmailJSResponseStat
 
   // Importing at the file level causes issues with SSR 🤔
   return import('emailjs-com')
-    .then((module) => module.send(serviceId, templateId, args, userId))
+    .then((module) => module.send(serviceId, templateId, args, userId));
 }

@@ -1,7 +1,7 @@
-import { Page } from "@components/page/page.component";
+import { Page } from '@components/page/page.component';
 import { CMS, ImageBlock, ParagraphBlock, StoryPageProps, withEditable } from '@lib/storyblok';
-import { motion, Variants } from "framer-motion";
-import Image from "next/image";
+import { motion, Variants } from 'framer-motion';
+import Image from 'next/image';
 import { Fragment } from 'react';
 import styled from 'styled-components';
 
@@ -12,20 +12,20 @@ type AboutProps = StoryPageProps<{
 }>;
 
 function About({ story }: AboutProps) {
-	return (
-		<Page title={story.content.title}>
-			<Container>
-				<Side
-					initial="hidden"
-					animate="visible"
-					variants={TEXT_VARIANTS}
-				>
+  return (
+    <Page title={story.content.title}>
+      <Container>
+        <Side
+          initial="hidden"
+          animate="visible"
+          variants={TEXT_VARIANTS}
+        >
           <Title variants={SINGLE_TEXT_VARIANT}>
             {story.content.title} 🤔
           </Title>
 
           {story.content.paragraphs.map((paragraph) => (
-            <Fragment>
+            <Fragment key={paragraph.text.slice(0, 10)}>
               <Description variants={SINGLE_TEXT_VARIANT}>
                 {paragraph.text}
               </Description>
@@ -33,63 +33,63 @@ function About({ story }: AboutProps) {
               <br />
             </Fragment>
           ))}
-				</Side>
+        </Side>
 
-				<Side>
-					<Portrait
-						initial="hidden"
-						animate="visible"
-						variants={PORTRAIT_VARIANTS}
-					>
-						<Image
-							width={350}
-							height={350}
-							objectFit="cover"
-							src={story.content.portrait.filename}
-						/>
-					</Portrait>
-				</Side>
-			</Container>
-		</Page>
-	);
-};
+        <Side>
+          <Portrait
+            initial="hidden"
+            animate="visible"
+            variants={PORTRAIT_VARIANTS}
+          >
+            <Image
+              width={350}
+              height={350}
+              objectFit="cover"
+              src={story.content.portrait.filename}
+            />
+          </Portrait>
+        </Side>
+      </Container>
+    </Page>
+  );
+}
 
 export const getStaticProps = CMS.getStaticProps('about');
 
 export default withEditable(About);
 
 const TEXT_VARIANTS: Variants = {
-	hidden: {
-		opacity: 0,
-	},
-	visible: {
-		opacity: 1,
-		transition: {
-			staggerChildren: 0.2,
-		},
-	},
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const SINGLE_TEXT_VARIANT: Variants = {
-	hidden: {
-		opacity: 0,
-		translateX: -50,
-	},
-	visible: {
-		opacity: 1,
-		translateX: 0,
-	},
+  hidden: {
+    opacity: 0,
+    translateX: -50,
+  },
+  visible: {
+    opacity: 1,
+    translateX: 0,
+  },
 };
 
 const PORTRAIT_VARIANTS: Variants = {
-	hidden: {
-		opacity: 0,
-		translateX: 50,
-	},
-	visible: {
-		opacity: 1,
-		translateX: 0,
-	},
+  hidden: {
+    opacity: 0,
+    translateX: 50,
+  },
+  visible: {
+    opacity: 1,
+    translateX: 0,
+  },
 };
 
 const Container = styled.div`

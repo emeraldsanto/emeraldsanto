@@ -1,7 +1,7 @@
-import { Button } from "@components/button/button.component";
-import { Page } from "@components/page/page.component";
+import { Button } from '@components/button/button.component';
+import { Page } from '@components/page/page.component';
 import { CMS, StoryPageProps, withEditable } from '@lib/storyblok';
-import Link from "next/link";
+import Link from 'next/link';
 import styled from 'styled-components';
 
 type NotFoundProps = StoryPageProps<{
@@ -11,7 +11,7 @@ type NotFoundProps = StoryPageProps<{
 }>;
 
 function NotFound({ story }: NotFoundProps) {
-	return (
+  return (
     <Page>
       <Container>
         <Status>404</Status>
@@ -26,7 +26,7 @@ function NotFound({ story }: NotFoundProps) {
       </Container>
     </Page>
   );
-};
+}
 
 export const getStaticProps = CMS.getStaticProps('not-found');
 

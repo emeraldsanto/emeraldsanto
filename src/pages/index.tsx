@@ -1,8 +1,8 @@
-import { Button } from "@components/button/button.component";
-import { Page } from "@components/page/page.component";
+import { Button } from '@components/button/button.component';
+import { Page } from '@components/page/page.component';
 import { ButtonBlock, CMS, StoryPageProps, withEditable } from '@lib/storyblok';
-import { motion, Variants } from "framer-motion";
-import Link from "next/link";
+import { motion, Variants } from 'framer-motion';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 type IndexProps = StoryPageProps<{
@@ -12,7 +12,7 @@ type IndexProps = StoryPageProps<{
 }>
 
 function Index({ story }: IndexProps) {
-	return (
+  return (
     <Page>
       <div>
         <motion.div
@@ -45,44 +45,44 @@ function Index({ story }: IndexProps) {
       </div>
     </Page>
   );
-};
+}
 
 export const getStaticProps = CMS.getStaticProps('home');
 
 export default withEditable(Index);
 
 const TEXT_VARIANTS: Variants = {
-	hidden: {
-		scale: 0.65,
-		opacity: 0,
-	},
-	visible: {
-		scale: 1,
-		opacity: 1,
-	},
+  hidden: {
+    scale: 0.65,
+    opacity: 0,
+  },
+  visible: {
+    scale: 1,
+    opacity: 1,
+  },
 };
 
 const BUTTON_VARIANTS: Variants = {
-	hidden: {
-		opacity: 0,
-	},
-	visible: {
-		opacity: 1,
-		transition: {
-			staggerChildren: 0.2,
-		},
-	},
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const SINGLE_BUTTON_VARIANTS: Variants = {
-	hidden: {
-		opacity: 0,
-		translateY: 50,
-	},
-	visible: {
-		opacity: 1,
-		translateY: 0,
-	},
+  hidden: {
+    opacity: 0,
+    translateY: 50,
+  },
+  visible: {
+    opacity: 1,
+    translateY: 0,
+  },
 };
 
 const Greeting = styled.h1`

@@ -1,11 +1,11 @@
-import Head from "next/head";
-import { FC } from "react";
+import Head from 'next/head';
+import { FC } from 'react';
 import styled from 'styled-components';
-import { PageProps } from "./page.props";
+import { PageProps } from './page.props';
 
 export const Page: FC<PageProps> = (props) => {
-	const { title = "Portfolio", children, ...rest } = props;
-	return (
+  const { title = 'Portfolio', children, ...rest } = props;
+  return (
     <Container {...rest}>
       <Head>
         <title key="title">Yanick Bélanger - {title}</title>

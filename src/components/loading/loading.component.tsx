@@ -1,9 +1,9 @@
-import { motion, Transition, Variants } from "framer-motion";
-import { FC } from "react";
+import { motion, Transition, Variants } from 'framer-motion';
+import { FC } from 'react';
 import styled from 'styled-components';
 
 export const Loading: FC = () => {
-	return (
+  return (
     <Container
       initial="start"
       animate="end"
@@ -28,31 +28,31 @@ export const Loading: FC = () => {
 };
 
 const LOADING_CONTAINER_VARIANTS: Variants = {
-	start: {
-		transition: {
-			staggerChildren: 0.2,
-		},
-	},
-	end: {
-		transition: {
-			staggerChildren: 0.2,
-		},
-	},
+  start: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+  end: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const LOADING_CIRCLE_VARIANTS: Variants = {
-	start: {
-		y: "0%",
-	},
-	end: {
-		y: "100%",
-	},
+  start: {
+    y: '0%',
+  },
+  end: {
+    y: '100%',
+  },
 };
 
 const LOADING_CIRCLE_TRANSITION: Transition = {
-	duration: 0.5,
-	yoyo: Infinity,
-	ease: "easeInOut",
+  duration: 0.5,
+  yoyo: Infinity,
+  ease: 'easeInOut',
 };
 
 const Container = styled(motion.div)`

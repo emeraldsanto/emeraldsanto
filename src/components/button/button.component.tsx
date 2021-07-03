@@ -1,8 +1,8 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, FC } from "react";
-import styled from "styled-components";
+import { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react';
+import styled from 'styled-components';
 
-export const Button: FC<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "ref">> = (props) => {
-	return <StyledButton {...props} />
+export const Button: FC<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'ref'>> = (props) => {
+  return <StyledButton {...props} />;
 };
 
 const StyledButton = styled.button`
