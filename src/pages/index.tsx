@@ -1,37 +1,17 @@
 import { Button } from "@components/button/button.component";
 import { Page } from "@components/page/page.component";
-import { client } from '@lib/storyblok';
+import { CMS, StoryPageProps } from '@lib/storyblok';
 import { motion, Variants } from "framer-motion";
-import { GetStaticProps } from "next";
-import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
-import { Story } from 'storyblok-js-client';
 import styled from 'styled-components';
-import i18n from '../../i18n';
 
-const PAGES = [
-  {
-    text: "home:aboutMe",
-    url: "/about",
-  },
-  {
-    text: "home:myWork",
-    url: "/work",
-  },
-  {
-    text: "home:contactMe",
-    url: "/contact",
-  },
-];
+type IndexProps = StoryPageProps<{
+  greeting: string
+  presentation: string
+  buttons: Array<{ text: string, url: string }>
+}>
 
-export interface StoryProps {
-  story: Story['data']['story']
-  preview: boolean
-}
-
-export default function Index({ story }: StoryProps) {
-  const { t } = useTranslation();
-
+export default function Index({ story }: IndexProps) {
 	return (
     <Page>
       <div>
@@ -50,12 +30,12 @@ export default function Index({ story }: StoryProps) {
           animate="visible"
           variants={BUTTON_VARIANTS}
         >
-          {PAGES.map((p) => (
-            <ButtonContainer key={p.url}>
+          {story.content.buttons.map((button) => (
+            <ButtonContainer key={button.url}>
               <motion.div variants={SINGLE_BUTTON_VARIANTS}>
-                <Link href={p.url}>
+                <Link href={button.url}>
                   <StyledButton type="button">
-                    <p>{t(p.text)}</p>
+                    <p>{button.text}</p>
                   </StyledButton>
                 </Link>
               </motion.div>
@@ -67,21 +47,7 @@ export default function Index({ story }: StoryProps) {
   );
 };
 
-export const getStaticProps: GetStaticProps<StoryProps> = async (context) => {
-  const response = await client.getStory("home", {
-    version: context.preview ? "draft" : "published",
-    cv: context.preview ? Date.now() : undefined,
-    language: context.locale,
-  });
-  
-  return {
-    props: {
-      story: response.data.story,
-      preview: context.preview ?? false
-    },
-    revalidate: 10
-  }
-}
+export const getStaticProps = CMS.getStaticProps('home');
 
 const TEXT_VARIANTS: Variants = {
 	hidden: {
