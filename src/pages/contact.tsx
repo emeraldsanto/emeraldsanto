@@ -78,7 +78,7 @@ function Contact({ story }: ContactProps) {
 	);
 
 	const onFormSubmit = useCallback(
-		(event: FormEvent) => {
+		async (event: FormEvent) => {
 			event.preventDefault();
 			dispatch({ name: "submit" });
 
