@@ -8,7 +8,7 @@ type ContextAwareStoryblok<TKey extends keyof Storyblok> = (...args: [...Paramet
 
 export interface SpecificStory<TContent extends Record<string, unknown>> extends Story {
   data: {
-    story: Story['data']['story'] & { content: TContent }
+    story: Story['data']['story'] & { content: TContent, lang: string }
   }
 }
 
@@ -81,6 +81,11 @@ export namespace CMS {
 
 export function useLiveStory<TContent extends Record<string, unknown>>(story: SpecificStory<TContent>['data']['story'], preview: boolean): SpecificStory<TContent>['data']['story'] {
   const [liveStory, setLiveStory] = useState(story);
+
+  useEffect(
+    () => setLiveStory(story),
+    [story.lang]
+  );
 
   useEffect(
     () => {
