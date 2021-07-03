@@ -1,31 +1,30 @@
 import { LanguageSwitcher } from '@components/language-switcher/language-switcher.component';
-import { faGithubSquare, faLinkedin, faTwitterSquare} from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Colors } from '@lib/design';
-import Link from "next/link";
-import { FC } from "react";
+import { faGithubSquare, faLinkedin, faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
+import { FC } from 'react';
 import styled from 'styled-components';
 
 const SOCIALS = [
-	{
-		name: "GitHub",
-		icon: faGithubSquare,
-		url: "https://www.github.com/emeraldsanto",
-	},
-	{
-		name: "LinkedIn",
-		icon: faLinkedin,
-		url: "https://www.linkedin.com/in/yanick-belanger-dev",
-	},
-	{
-		name: "Twitter",
-		icon: faTwitterSquare,
-		url: "https://www.twitter.com/yanthedev",
-	},
+  {
+    name: 'GitHub',
+    icon: faGithubSquare,
+    url: 'https://www.github.com/emeraldsanto',
+  },
+  {
+    name: 'LinkedIn',
+    icon: faLinkedin,
+    url: 'https://www.linkedin.com/in/yanick-belanger-dev',
+  },
+  {
+    name: 'Twitter',
+    icon: faTwitterSquare,
+    url: 'https://www.twitter.com/yanthedev',
+  },
 ];
 
 export const SideBar: FC = () => {
-	return (
+  return (
     <Aside>
       <Link href="/">
         <InitialWrapper>
@@ -39,13 +38,7 @@ export const SideBar: FC = () => {
 
       <Icons>
         {SOCIALS.map((s) => (
-          <a
-            key={s.url}
-            href={s.url}
-            target="_blank"
-            rel="noopener"
-            aria-label={s.name}
-          >
+          <a key={s.url} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name}>
             <FAIcon size="lg" icon={s.icon} />
           </a>
         ))}
@@ -87,12 +80,11 @@ const InitialWrapper = styled.div`
   &:hover {
     border-color: ${(props) => props.theme.colors.accentColor};
   }
-
-  `;
+`;
 
 const Initial = styled.h3`
   color: ${(props) => props.theme.colors.headingColor};
-  
+
   &:hover {
     color: ${(props) => props.theme.colors.accentColor};
   }

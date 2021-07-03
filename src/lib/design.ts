@@ -1,19 +1,19 @@
 import { DefaultTheme } from 'styled-components';
 
 export enum Colors {
-  Danube = "#657ED4",
-  DaisyBush = "#3626A7",
-  Eclipse = "#393939",
-  Nero = "#2C2C2C",
-  PickledBluewoord = "#34415E",
-  RedOrange = "#FF331F",
-  SepiaBlack = "#0D0106",
-  TitanWhite = "#FBFBFF",
+  Danube = '#657ED4',
+  DaisyBush = '#3626A7',
+  Eclipse = '#393939',
+  Nero = '#2C2C2C',
+  PickledBluewoord = '#34415E',
+  RedOrange = '#FF331F',
+  SepiaBlack = '#0D0106',
+  TitanWhite = '#FBFBFF',
 }
 
-export const Themes: Record<"light" | "dark", DefaultTheme> = {
+export const Themes: Record<'light' | 'dark', DefaultTheme> = {
   light: {
-    name: "default-light",
+    name: 'default-light',
     dark: false,
     colors: {
       cardColor: Colors.TitanWhite,
@@ -28,7 +28,7 @@ export const Themes: Record<"light" | "dark", DefaultTheme> = {
     },
   },
   dark: {
-    name: "default-dark",
+    name: 'default-dark',
     dark: true,
     colors: {
       cardColor: Colors.Eclipse,

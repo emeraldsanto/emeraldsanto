@@ -1,95 +1,78 @@
-import { Page } from "@components/page/page.component";
+import { Page } from '@components/page/page.component';
 import { CMS, ImageBlock, ParagraphBlock, StoryPageProps, withEditable } from '@lib/storyblok';
-import { motion, Variants } from "framer-motion";
-import Image from "next/image";
+import { motion, Variants } from 'framer-motion';
+import Image from 'next/image';
 import { Fragment } from 'react';
 import styled from 'styled-components';
 
 type AboutProps = StoryPageProps<{
-  title: string
-  paragraphs: Array<ParagraphBlock>
-  portrait: ImageBlock
+  title: string;
+  paragraphs: Array<ParagraphBlock>;
+  portrait: ImageBlock;
 }>;
 
 function About({ story }: AboutProps) {
-	return (
-		<Page title={story.content.title}>
-			<Container>
-				<Side
-					initial="hidden"
-					animate="visible"
-					variants={TEXT_VARIANTS}
-				>
-          <Title variants={SINGLE_TEXT_VARIANT}>
-            {story.content.title} 🤔
-          </Title>
+  return (
+    <Page title={story.content.title}>
+      <Container>
+        <Side initial="hidden" animate="visible" variants={TEXT_VARIANTS}>
+          <Title variants={SINGLE_TEXT_VARIANT}>{story.content.title} 🤔</Title>
 
           {story.content.paragraphs.map((paragraph) => (
-            <Fragment>
-              <Description variants={SINGLE_TEXT_VARIANT}>
-                {paragraph.text}
-              </Description>
+            <Fragment key={paragraph.text.slice(0, 10)}>
+              <Description variants={SINGLE_TEXT_VARIANT}>{paragraph.text}</Description>
 
               <br />
             </Fragment>
           ))}
-				</Side>
+        </Side>
 
-				<Side>
-					<Portrait
-						initial="hidden"
-						animate="visible"
-						variants={PORTRAIT_VARIANTS}
-					>
-						<Image
-							width={350}
-							height={350}
-							objectFit="cover"
-							src={story.content.portrait.filename}
-						/>
-					</Portrait>
-				</Side>
-			</Container>
-		</Page>
-	);
-};
+        <Side>
+          <Portrait initial="hidden" animate="visible" variants={PORTRAIT_VARIANTS}>
+            <Image width={350} height={350} objectFit="cover" src={story.content.portrait.filename} />
+          </Portrait>
+        </Side>
+      </Container>
+    </Page>
+  );
+}
 
 export const getStaticProps = CMS.getStaticProps('about');
 
 export default withEditable(About);
 
 const TEXT_VARIANTS: Variants = {
-	hidden: {
-		opacity: 0,
-	},
-	visible: {
-		opacity: 1,
-		transition: {
-			staggerChildren: 0.2,
-		},
-	},
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const SINGLE_TEXT_VARIANT: Variants = {
-	hidden: {
-		opacity: 0,
-		translateX: -50,
-	},
-	visible: {
-		opacity: 1,
-		translateX: 0,
-	},
+  hidden: {
+    opacity: 0,
+    translateX: -50,
+  },
+  visible: {
+    opacity: 1,
+    translateX: 0,
+  },
 };
 
 const PORTRAIT_VARIANTS: Variants = {
-	hidden: {
-		opacity: 0,
-		translateX: 50,
-	},
-	visible: {
-		opacity: 1,
-		translateX: 0,
-	},
+  hidden: {
+    opacity: 0,
+    translateX: 50,
+  },
+  visible: {
+    opacity: 1,
+    translateX: 0,
+  },
 };
 
 const Container = styled.div`
@@ -99,7 +82,7 @@ const Container = styled.div`
   justify-content: space-evenly;
 
   @media only screen and (max-width: 1000px) {
-		flex-direction: column-reverse;
+    flex-direction: column-reverse;
   }
 `;
 
@@ -113,10 +96,10 @@ const Side = styled(motion.div)`
   }
 
   @media only screen and (max-width: 1000px) {
-		&:first-child {
-			margin-right: 0;
-			margin-top: 25px;
-		}
+    &:first-child {
+      margin-right: 0;
+      margin-top: 25px;
+    }
   }
 `;
 
@@ -124,7 +107,7 @@ const Title = styled(motion.h1)`
   margin-bottom: 50px;
 
   @media only screen and (max-width: 1000px) {
-		margin-bottom: 25px;
+    margin-bottom: 25px;
   }
 `;
 
@@ -141,7 +124,7 @@ const Portrait = styled(motion.div)`
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 
   @media only screen and (max-width: 625px) {
-		width: 150px;
-		height: 150px;
+    width: 150px;
+    height: 150px;
   }
 `;

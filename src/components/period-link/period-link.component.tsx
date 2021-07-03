@@ -1,13 +1,13 @@
-import { FC } from "react";
+import { FC } from 'react';
 import styled from 'styled-components';
 
 export const PeriodLink: FC = () => {
-	return (
-		<Container>
-			<Bullet />
-			<Line />
-			<Bullet />
-		</Container>
+  return (
+    <Container>
+      <Bullet />
+      <Line />
+      <Bullet />
+    </Container>
   );
 };
 

@@ -1,52 +1,45 @@
-import { SideBar } from "@components/sidebar/sidebar.component";
-import { logPageView } from "@lib/analytics";
+import { SideBar } from '@components/sidebar/sidebar.component';
+import { logPageView } from '@lib/analytics';
 import { Colors, Themes } from '@lib/design';
 import { ThemeProvider } from 'contexts/theme/theme-provider';
-import { AppProps } from "next/app";
-import { useRouter } from "next/router";
-import React, { Fragment, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
+import { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import React, { Fragment, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import styled, { createGlobalStyle } from 'styled-components';
 
-export default function App(props: AppProps) {
-	const { Component, pageProps } = props;
+export default function App(props: AppProps): JSX.Element {
+  const { Component, pageProps } = props;
 
-	const router = useRouter();
+  const router = useRouter();
 
-	useEffect(
-		() => {
-			router.events.on("routeChangeComplete", logPageView);
-			return () => router.events.off("routeChangeComplete", logPageView);
-		},
-		[router.events]
-	);
+  useEffect(() => {
+    router.events.on('routeChangeComplete', logPageView);
+    return () => router.events.off('routeChangeComplete', logPageView);
+  }, [router.events]);
 
-	return (
-		<ThemeProvider
-			themes={[Themes.light, Themes.dark]}
-			defaults={{ light: Themes.light, dark: Themes.dark }}
-		>
-			<GlobalStyle />
+  return (
+    <ThemeProvider themes={[Themes.light, Themes.dark]} defaults={{ light: Themes.light, dark: Themes.dark }}>
+      <GlobalStyle />
 
-			<Fragment>
-				<SideBar />
+      <Fragment>
+        <SideBar />
 
-				<Main>
-					<Component {...pageProps} />
-				</Main>
-			<ToastContainer />
-
-			</Fragment>
-		</ThemeProvider>
-	);
-};
+        <Main>
+          <Component {...pageProps} />
+        </Main>
+        <ToastContainer />
+      </Fragment>
+    </ThemeProvider>
+  );
+}
 
 const Main = styled.main`
   @media only screen and (min-width: 625px) {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 `;
 

@@ -1,24 +1,21 @@
 import environment from '@lib/environment';
-import Document, {
-	DocumentContext,
-	DocumentProps,
-	Head,
-	Html,
-	Main,
-	NextScript
-} from "next/document";
+import Document, { DocumentContext, DocumentProps, Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class LocalizedDocument extends Document<DocumentProps> {
-	
-  static async getInitialProps(context: DocumentContext) {
+  static async getInitialProps(context: DocumentContext): Promise<{
+    styles: JSX.Element;
+    html: string;
+    head?: (JSX.Element | null)[] | undefined;
+  }> {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = context.renderPage;
 
     try {
-      context.renderPage = () => originalRenderPage({
-				enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
-			});
+      context.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        });
 
       const initialProps = await Document.getInitialProps(context);
       return {
@@ -30,19 +27,16 @@ export default class LocalizedDocument extends Document<DocumentProps> {
           </>
         ),
       };
-		} finally {
-			sheet.seal();
-		}
+    } finally {
+      sheet.seal();
+    }
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <Html>
         <Head>
-          <meta
-            name="description"
-            content="Website showcasing the work and experience of Yanick Bélanger"
-          />
+          <meta name="description" content="Website showcasing the work and experience of Yanick Bélanger" />
 
           <meta property="og:image" content="/static/assets/portrait-min.jpg" />
 
