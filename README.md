@@ -4,7 +4,7 @@ I'm Yanick, a 24 year old mobile developer from Montreal, Canada. I specialize i
 
 ### What I'm currently doing
 
-I work at [Vercel](https://vercel.com) building scalable solutions for our enterprise customers. The tech stack I'm using daily consists of React (Native), TypeScript and NodeJS. On top of that I also do freelancing work for an incredible [sustainability focused project](https://partage.club).
+I work at [Vercel](https://vercel.com) building scalable solutions for our enterprise customers. The tech stack I'm using daily consists of React (Native), TypeScript and Node.js. On top of that I also do freelancing work for an incredible [sustainability focused project](https://partage.club).
 
 ### Have a project for me?
 
