@@ -1,10 +1,10 @@
 ### Greetings 👋
 
-I'm Yanick, a 23 year old mobile developer from Montreal, Canada. I specialize in cross-platform development using React Native and Flutter, but that doesn't mean native development scares me. Oh, and I absolutely love TypeScript.
+I'm Yanick, a 25 year old mobile developer from Montreal, Canada. I specialize in cross-platform development using React Native and Flutter, but that doesn't mean native development scares me. Oh, and I absolutely love TypeScript.
 
 ### What I'm currently doing
 
-I work for a fintech [startup](https://www.moka.ai) building full-stack cross-platform mobile applications. The tech stack I'm using daily consists of React Native, TypeScript and NodeJS. On top of that I also do freelancing work for an awesome [startup](https://nightborn.be) based in Brussels, Belgium.
+I work for [Vercel](https://vercel.com), building scalable infrastructure and platform abuse solutions.
 
 ### Have a project for me?
 
