@@ -8,3 +8,7 @@
   --font-serif: "Roboto Slab", serif;
   --font-sans-serif: "Poppins", sans-serif;
 }
+
+* {
+  box-sizing: border-box;
+}
