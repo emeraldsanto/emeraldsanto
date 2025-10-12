@@ -21,7 +21,7 @@ const { class: className, title } = Astro.props;
 	<body class="bg-background flex flex-col sm:flex-row h-full w-full">
     <Sidebar />
     <main class="flex flex-col flex-1">
-      <div class:list={["m-auto px-5 sm:px-25 py-5", className]}>
+      <div class:list={["max-w-4xl m-auto px-5 sm:px-25 py-5", className]}>
         <slot />
       </div>
     </main>

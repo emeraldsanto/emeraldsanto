@@ -1,32 +1,22 @@
 ---
+import Link from '@/components/link.astro';
 import Page from '@/layouts/page.astro';
-import ButtonLink from '../components/button-link.astro';
-
-const pages = [
-  {
-    label: 'About',
-    href: '/about',
-  },
-  {
-    label: 'Work',
-    href: '/work',
-  },
-  {
-    label: 'Contact',
-    href: '/contact',
-  },
-];
 ---
 
-<Page title="Code">
-  <header class="flex flex-col gap-4">
-    <h1 class="text-5xl font-bold font-serif">Hi!</h1>
-    <h2 class="text-6xl font-bold font-serif">I&apos;m Yanick.</h2>
+<Page class='flex flex-col gap-6' title='Code'>
+  <header class='flex flex-col gap-4'>
+    <h1 class='text-5xl font-bold font-serif'>Hi!</h1>
+    <h2 class='text-6xl font-bold font-serif'>I&apos;m Yanick.</h2>
   </header>
 
-  <div class="flex flex-row gap-4 mt-8">
-    {pages.map((page) => (
-      <ButtonLink href={page.href}>{page.label}</ButtonLink>
-    ))}
-  </div>
+  <p class='font-sans'>
+    Software Engineer at <Link href='https://vercel.com'>Vercel</Link>, where I have been fortunate to solve a variety
+    of problems across Trust & Safety, Platform Engineering, CDN, and Identity.
+  </p>
+
+  <p class='font-sans'>
+    I previously worked on the <Link href='https://www.partage.club'>Partage Club</Link> and <Link
+      href='https://www.mogo.ca'>MogoTrade</Link
+    > mobile applications.
+  </p>
 </Page>
