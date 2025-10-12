@@ -20,9 +20,9 @@ const socials = [
 ];
 ---
 
-<aside class="fixed flex flex-col h-full items-center justify-between py-5 w-[70px]">
+<aside class="flex flex-row items-center justify-between p-5 sm:fixed sm:flex-col sm:h-full sm:w-[70px] static w-[70px] w-full">
   Y
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-row sm:flex-col gap-2">
     {socials.map((social) =>
       <a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
         <Image alt={`The ${social.name} logo`} height={24} src={social.icon} width={24} />
