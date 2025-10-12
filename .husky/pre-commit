@@ -1,0 +1,2 @@
+pnpm exec biome format --write --staged
+pnpm exec biome check --staged
