@@ -1,7 +1,32 @@
 ---
 import Page from '@/layouts/page.astro';
+import ButtonLink from '../components/button-link.astro';
+
+const pages = [
+  {
+    label: 'About',
+    href: '/about',
+  },
+  {
+    label: 'Work',
+    href: '/work',
+  },
+  {
+    label: 'Contact',
+    href: '/contact',
+  },
+];
 ---
 
 <Page title="Code">
-  Hello
+  <header class="flex flex-col gap-4">
+    <h1 class="text-5xl font-bold font-serif">Hi!</h1>
+    <h2 class="text-6xl font-bold font-serif">I&apos;m Yanick.</h2>
+  </header>
+
+  <div class="flex flex-row gap-4 mt-8">
+    {pages.map((page) => (
+      <ButtonLink href={page.href}>{page.label}</ButtonLink>
+    ))}
+  </div>
 </Page>
