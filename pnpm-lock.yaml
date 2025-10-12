@@ -4,16 +4,21 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@tailwindcss/vite':
-    specifier: ^4.1.14
-    version: 4.1.14(vite@6.3.6)
-  astro:
-    specifier: ^5.14.4
-    version: 5.14.4(typescript@5.9.3)
-  tailwindcss:
-    specifier: ^4.1.14
-    version: 4.1.14
+importers:
+
+  .: {}
+
+  apps/code:
+    dependencies:
+      '@tailwindcss/vite':
+        specifier: ^4.1.14
+        version: 4.1.14(vite@6.3.6)
+      astro:
+        specifier: ^5.14.4
+        version: 5.14.4(typescript@5.9.3)
+      tailwindcss:
+        specifier: ^4.1.14
+        version: 4.1.14
 
 packages:
 
@@ -1379,7 +1384,6 @@ packages:
   /detect-libc@2.1.2:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
-    requiresBuild: true
     dev: false
 
   /deterministic-object-hash@2.0.2:
