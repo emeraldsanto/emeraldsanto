@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+
+const socials = [
+  {
+    icon: '/icons/github-square.svg',
+    name: 'GitHub',
+    url: 'https://github.com/emeraldsanto',
+  },
+  {
+    icon: '/icons/linkedin-square.svg',
+    name: 'LinkedIn',
+    url: 'https://linkedin.com/in/yanick-belanger-dev',
+  },
+  {
+    icon: '/icons/x-square.svg',
+    name: 'X',
+    url: 'https://x.com/yanthedev',
+  },
+];
+---
+
+<aside class="fixed flex flex-col h-full items-center justify-between py-5 w-[70px]">
+  Y
+  <div class="flex flex-col gap-2">
+    {socials.map((social) =>
+      <a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
+        <Image alt={`The ${social.name} logo`} height={24} src={social.icon} width={24} />
+      </a>
+    )}
+  </div>
+</aside>
