@@ -3,12 +3,6 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: rgb(251, 251, 255);
-
   --font-serif: "Roboto Slab", serif;
   --font-sans-serif: "Poppins", sans-serif;
-}
-
-* {
-  box-sizing: border-box;
 }
