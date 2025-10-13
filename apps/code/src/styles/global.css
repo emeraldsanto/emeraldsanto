@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Mozilla+Headline&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mozilla+Text&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-crown-of-thorns: #7a2525;
+  --color-maroon-oak: #500b0b;
+  --color-temptress: #330000;
+
+  --font-mozilla-headline: "Mozilla Headline", sans-serif;
+  --font-mozilla-text: "Mozilla Text", sans-serif;
+}
