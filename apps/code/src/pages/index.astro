@@ -3,27 +3,34 @@ import Link from '@/components/link.astro';
 import Page from '@/layouts/page.astro';
 ---
 
-<Page class='flex flex-col gap-6'>
-  <header class='flex flex-col gap-4'>
-    <h1 class='text-4xl font-bold font-serif'>Hi!</h1>
-    <h2 class='text-5xl font-bold font-serif'>I&apos;m Yanick.</h2>
-  </header>
+<Page>
+  <h1 class='font-medium font-mozilla-headline text-xl md:text-2xl'>Yanick Bélanger</h1>
 
-  <p class='font-sans'>
-    Software Engineer at <Link href='https://vercel.com'>Vercel</Link>, where I have been fortunate to solve a variety
-    of problems across Trust & Safety, Platform Engineering, CDN, and Identity.
+  <p class='font-mozilla-text mt-5 text-base'>
+    I&apos;m a Software Engineer at <Link href='https://vercel.com' rel='noopener noreferrer' target='_blank'
+      >Vercel</Link
+    >, where I have been fortunate to solve a variety of problems across Trust & Safety, Platform Engineering, CDN, and
+    Identity. In the past, I worked on the <Link
+      href='https://www.partage.club'
+      rel='noopener noreferrer'
+      target='_blank'>Partage Club</Link
+    > and <Link href='https://www.mogo.ca' rel='noopener noreferrer' target='_blank'>MogoTrade</Link> mobile applications
+    over my 6-year career.
   </p>
 
-  <p class='font-sans'>
-    I previously worked on the <Link href='https://www.partage.club'>Partage Club</Link> and <Link
-      href='https://www.mogo.ca'>MogoTrade</Link
-    > mobile applications.
+  <p class='font-mozilla-text mt-5 text-base'>
+    I have a passion for building scalable, reliable, and resilient systems that cross language boundaries. Outside of
+    work, I dedicate my time to learning about urban planning, creative writing, and other non-technical topics.
   </p>
 
-  <hr class='border-t border-slate-300' />
-
-  <p class='font-sans'>
-    Let's talk <Link href='https://x.com/yanthedev'>@yanthedev</Link> or <Link href='mailto:hey@yanickbelanger.dev'
-      >hey@yanickbelanger.dev</Link>
+  <p class='font-mozilla-text mt-5 text-base'>
+    Check out my <Link href='https://github.com/emeraldsanto' rel='noopener noreferrer' target='_blank'>code</Link>, <Link
+      href='https://instagram.com/yan.blgr'
+      rel='noopener noreferrer'
+      target='_blank'>photography</Link
+    >, or <Link href='https://www.goodreads.com/emeraldsanto' rel='noopener noreferrer' target='_blank'
+      >book reviews</Link
+    >. Get in touch at <Link href='https://x.com/yanthedev' rel='noopener noreferrer' target='_blank'>@yanthedev</Link> or
+    <Link href='mailto:hey@yanickbelanger.dev'>hey@yanickbelanger.dev</Link> if you see anything you like.
   </p>
 </Page>
