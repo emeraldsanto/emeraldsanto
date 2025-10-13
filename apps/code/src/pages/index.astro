@@ -1,10 +1,9 @@
 ---
-import { Image } from 'astro:assets';
 import Link from '@/components/link.astro';
 import Page from '@/layouts/page.astro';
 ---
 
-<Page class='flex flex-col gap-6' title='Code'>
+<Page class='flex flex-col gap-6'>
   <header class='flex flex-col gap-4'>
     <h1 class='text-4xl font-bold font-serif'>Hi!</h1>
     <h2 class='text-5xl font-bold font-serif'>I&apos;m Yanick.</h2>
@@ -14,8 +13,6 @@ import Page from '@/layouts/page.astro';
     Software Engineer at <Link href='https://vercel.com'>Vercel</Link>, where I have been fortunate to solve a variety
     of problems across Trust & Safety, Platform Engineering, CDN, and Identity.
   </p>
-
-  <Image alt='Mermaid diagram showing a timeline' height={300} src='/images/history-of-vercel.png' width={700} />
 
   <p class='font-sans'>
     I previously worked on the <Link href='https://www.partage.club'>Partage Club</Link> and <Link
