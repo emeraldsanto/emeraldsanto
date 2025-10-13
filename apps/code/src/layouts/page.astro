@@ -10,7 +10,7 @@ interface Props {
 const { class: className, title } = Astro.props;
 ---
 
-<html class="h-full" lang="en">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -18,12 +18,9 @@ const { class: className, title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>Yanick Bélanger – {title}</title>
 	</head>
-	<body class="bg-background flex flex-col sm:flex-row h-full w-full">
-    <Sidebar />
-    <main class="flex flex-col flex-1">
-      <div class:list={["max-w-4xl m-auto px-5 sm:px-25 py-5", className]}>
-        <slot />
-      </div>
+	<body class="bg-zinc-50">
+    <main class:list={["max-w-4xl mx-auto p-8 sm:p-24", className]}>
+      <slot />
     </main>
 	</body>
 </html>

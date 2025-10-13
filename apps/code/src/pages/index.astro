@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Link from '@/components/link.astro';
 import Page from '@/layouts/page.astro';
 ---
@@ -14,9 +15,18 @@ import Page from '@/layouts/page.astro';
     of problems across Trust & Safety, Platform Engineering, CDN, and Identity.
   </p>
 
+  <Image alt='Mermaid diagram showing a timeline' height={300} src='/images/history-of-vercel.png' width={700} />
+
   <p class='font-sans'>
     I previously worked on the <Link href='https://www.partage.club'>Partage Club</Link> and <Link
       href='https://www.mogo.ca'>MogoTrade</Link
     > mobile applications.
+  </p>
+
+  <hr class='border-t border-slate-300' />
+
+  <p class='font-sans'>
+    Let's talk <Link href='https://x.com/yanthedev'>@yanthedev</Link> or <Link href='mailto:hey@yanickbelanger.dev'
+      >hey@yanickbelanger.dev</Link>
   </p>
 </Page>
