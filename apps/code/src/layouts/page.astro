@@ -1,6 +1,5 @@
 ---
 import '@/styles/global.css';
-import Sidebar from '../components/sidebar.astro';
 
 interface Props {
   class?: string;
@@ -12,10 +11,10 @@ const { class: className, title } = Astro.props;
 
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon"/>
 		<title>Yanick Bélanger – {title}</title>
 	</head>
 	<body class="bg-zinc-50">
