@@ -1,0 +1,15 @@
+{
+  "name": "@emeraldsanto/photos",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^8.2.10",
+    "astro": "^5.14.5"
+  }
+}
