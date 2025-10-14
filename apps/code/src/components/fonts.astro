@@ -1,0 +1,9 @@
+---
+const families = ['Mozilla Headline', 'Mozilla Text'];
+const href = `https://fonts.googleapis.com/css2?family=${families.map((family) => family.replaceAll(' ', '+')).join('|')}:wght@200..700&display=swap`;
+---
+
+<link rel='preconnect' href='https://fonts.googleapis.com' />
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+<link rel='preload' as='style' href={href} />
+<link rel='stylesheet' href={href} />
