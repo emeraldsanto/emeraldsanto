@@ -1,23 +1,25 @@
 ---
+import Fonts from '@/components/fonts.astro';
 import '@/styles/global.css';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 ---
 
-<html lang="en">
-	<head>
-    <meta charset="utf-8" />
-    <meta name="description" content="Software Developer."/>
-		<meta name="generator" content={Astro.generator} />
-		<meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon"/>
-		<title>Yanick Bélanger</title>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='description' content='Software Developer.' />
+    <meta name='generator' content={Astro.generator} />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='icon' href='/favicon.ico' sizes='48x48' type='image/x-icon' />
+    <title>Yanick Bélanger</title>
     <Analytics />
+    <Fonts />
     <SpeedInsights />
-	</head>
-	<body class="bg-zinc-50">
-    <main class="max-w-3xl mx-auto py-16 px-8">
+  </head>
+  <body class='bg-zinc-50'>
+    <main class='max-w-3xl mx-auto py-16 px-8'>
       <slot />
     </main>
-	</body>
+  </body>
 </html>
