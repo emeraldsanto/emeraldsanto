@@ -5,7 +5,7 @@ import { defineConfig, envField } from 'astro/config';
 export default defineConfig({
   adapter: vercel({
     imagesConfig: {
-      sizes: [],
+      sizes: [1080],
       remotePatterns: [
         {
           hostname: 'jh6xyt4qgcm2yqdg.public.blob.vercel-storage.com',

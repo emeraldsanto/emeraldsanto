@@ -1,7 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import { BLOB_READ_WRITE_TOKEN } from 'astro:env/server';
 import { list } from '@vercel/blob';
-import type { GetStaticPaths, InferGetStaticParamsType } from 'astro';
+import type {
+  GetStaticPaths,
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+} from 'astro';
 
 export const getStaticPaths = (async () => {
   const prefix = 'albums/';
@@ -14,12 +19,26 @@ export const getStaticPaths = (async () => {
 
   return folders.map((folder) => ({
     params: { album: folder.replace(prefix, '') },
+    props: { key: folder },
   }));
 }) satisfies GetStaticPaths;
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { album } = Astro.params;
+const { key } = Astro.props;
+
+const { blobs } = await list({
+  prefix: key,
+  token: BLOB_READ_WRITE_TOKEN,
+});
 ---
 
 <h1>{album}</h1>
+
+{
+  blobs
+    .filter((blob) => blob.pathname !== key)
+    .map((blob) => <Image alt={blob.pathname} src={blob.downloadUrl} height={200} width={200} />)
+}
