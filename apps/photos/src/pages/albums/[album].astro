@@ -45,7 +45,7 @@ const { blobs } = await list({
         .sort(() => Math.random() - 0.5)
         .map((blob, index) => (
           <Image
-            alt={blob.pathname}
+            alt={`Image from the ${album} album`}
             class='rounded-sm mb-4 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg'
             inferSize
             priority={index < 9}
