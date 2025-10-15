@@ -1,6 +1,12 @@
 ---
 import '@/styles/global.css';
 import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+  animated?: boolean;
+}
+
+const { animated } = Astro.props;
 ---
 
 <html lang='en'>
@@ -12,7 +18,7 @@ import { ClientRouter } from 'astro:transitions';
     <link rel='icon' href='/favicon.ico' sizes='48x48' type='image/x-icon' />
     <title>Yanick Bélanger</title>
 
-    <ClientRouter />
+    {animated ? <ClientRouter /> : null}
   </head>
   <body class='bg-zinc-50'>
     <main class='max-w-3xl mx-auto py-16 px-8'>
