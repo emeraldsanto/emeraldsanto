@@ -1,5 +1,5 @@
 import vercel from '@astrojs/vercel';
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,4 +17,12 @@ export default defineConfig({
     },
     imageService: true,
   }),
+  env: {
+    schema: {
+      BLOB_READ_WRITE_TOKEN: envField.string({
+        access: 'secret',
+        context: 'server',
+      }),
+    },
+  },
 });

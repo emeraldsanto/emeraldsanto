@@ -1,0 +1,25 @@
+---
+import { BLOB_READ_WRITE_TOKEN } from 'astro:env/server';
+import { list } from '@vercel/blob';
+import type { GetStaticPaths, InferGetStaticParamsType } from 'astro';
+
+export const getStaticPaths = (async () => {
+  const prefix = 'albums/';
+
+  const { folders } = await list({
+    mode: 'folded',
+    prefix,
+    token: BLOB_READ_WRITE_TOKEN,
+  });
+
+  return folders.map((folder) => ({
+    params: { album: folder.replace(prefix, '') },
+  }));
+}) satisfies GetStaticPaths;
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+
+const { album } = Astro.params;
+---
+
+<h1>{album}</h1>
