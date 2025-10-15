@@ -5,7 +5,6 @@ import { defineConfig, envField } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   adapter: vercel({ imageService: true }),
-
   env: {
     schema: {
       BLOB_READ_WRITE_TOKEN: envField.string({
@@ -14,11 +13,9 @@ export default defineConfig({
       }),
     },
   },
-
   image: {
     domains: ['jh6xyt4qgcm2yqdg.public.blob.vercel-storage.com'],
   },
-
   vite: {
     plugins: [tailwindcss()],
   },
