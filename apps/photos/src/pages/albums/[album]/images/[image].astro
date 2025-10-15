@@ -1,28 +1,20 @@
 ---
 import { Image as AstroImage } from 'astro:assets';
-import { BLOB_READ_WRITE_TOKEN } from 'astro:env/server';
-import { list } from '@vercel/blob';
 import type {
   GetStaticPaths,
   InferGetStaticParamsType,
   InferGetStaticPropsType,
 } from 'astro';
+import { listBlobs, listFolders } from '@/utils/blob';
 
 export const getStaticPaths = (async () => {
   const prefix = 'albums/';
 
-  const { folders } = await list({
-    mode: 'folded',
-    prefix,
-    token: BLOB_READ_WRITE_TOKEN,
-  });
+  const folders = await listFolders(prefix);
 
   const matrix = await Promise.all(
     folders.map(async (folder) => {
-      const { blobs } = await list({
-        prefix: folder,
-        token: BLOB_READ_WRITE_TOKEN,
-      });
+      const blobs = await listBlobs(folder);
 
       return blobs
         .filter((blob) => blob.pathname !== folder)

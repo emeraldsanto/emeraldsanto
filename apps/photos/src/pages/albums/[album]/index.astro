@@ -8,15 +8,12 @@ import type {
   InferGetStaticPropsType,
 } from 'astro';
 import Page from '@/layouts/page.astro';
+import { listFolders } from '@/utils/blob';
 
 export const getStaticPaths = (async () => {
   const prefix = 'albums/';
 
-  const { folders } = await list({
-    mode: 'folded',
-    prefix,
-    token: BLOB_READ_WRITE_TOKEN,
-  });
+  const folders = await listFolders(prefix);
 
   return folders.map((folder) => ({
     params: { album: folder.replace(prefix, '') },
