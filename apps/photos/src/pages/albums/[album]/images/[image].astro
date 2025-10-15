@@ -17,15 +17,13 @@ export const getStaticPaths = (async () => {
     folders.map(async (folder) => {
       const blobs = await listBlobs(folder);
 
-      return blobs
-        .filter((blob) => blob.pathname !== folder)
-        .map((blob) => ({
-          params: {
-            album: folder.replace(prefix, ''),
-            image: blob.pathname.replace(folder, ''),
-          },
-          props: { downloadUrl: blob.downloadUrl },
-        }));
+      return blobs.map((blob) => ({
+        params: {
+          album: folder.replace(prefix, ''),
+          image: blob.pathname.replace(folder, ''),
+        },
+        props: { downloadUrl: blob.downloadUrl },
+      }));
     }),
   );
 

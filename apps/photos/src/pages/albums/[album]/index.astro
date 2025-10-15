@@ -8,7 +8,7 @@ import type {
   InferGetStaticPropsType,
 } from 'astro';
 import Page from '@/layouts/page.astro';
-import { listFolders } from '@/utils/blob';
+import { listBlobs, listFolders } from '@/utils/blob';
 import { capitalize } from '@/utils/str';
 
 export const getStaticPaths = (async () => {
@@ -28,10 +28,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { album } = Astro.params;
 const { key } = Astro.props;
 
-const { blobs } = await list({
-  prefix: key,
-  token: BLOB_READ_WRITE_TOKEN,
-});
+const blobs = await listBlobs(key);
 ---
 
 <Page animated>
@@ -39,7 +36,6 @@ const { blobs } = await list({
   <section class='mx-auto my-8 columns-2 md:columns-3'>
     {
       blobs
-        .filter((blob) => blob.pathname !== key)
         .sort(() => Math.random() - 0.5)
         .map((blob, index) => (
           <a href={`/albums/${album}/images/${blob.pathname.replace(`albums/${album}/`, '')}`}>
