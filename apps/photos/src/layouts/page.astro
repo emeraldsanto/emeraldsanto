@@ -1,5 +1,6 @@
 ---
 import '@/styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <html lang='en'>
@@ -10,6 +11,8 @@ import '@/styles/global.css';
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' href='/favicon.ico' sizes='48x48' type='image/x-icon' />
     <title>Yanick Bélanger</title>
+
+    <ClientRouter />
   </head>
   <body class='bg-zinc-50'>
     <main class='max-w-3xl mx-auto py-16 px-8'>

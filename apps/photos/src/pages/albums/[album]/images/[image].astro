@@ -5,6 +5,7 @@ import type {
   InferGetStaticParamsType,
   InferGetStaticPropsType,
 } from 'astro';
+import Page from '@/layouts/page.astro';
 import { listBlobs, listFolders } from '@/utils/blob';
 
 export const getStaticPaths = (async () => {
@@ -38,11 +39,14 @@ const { album, image } = Astro.params;
 const { downloadUrl } = Astro.props;
 ---
 
-<AstroImage
-  alt={`Image from the ${album} album`}
-  class='rounded-sm mb-4 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg'
-  inferSize
-  priority
-  quality={100}
-  src={downloadUrl}
-/>
+<Page>
+  <AstroImage
+    alt={`Image from the ${album} album`}
+    inferSize
+    priority
+    quality={100}
+    src={downloadUrl}
+    transition:animate='fade'
+    transition:name={image}
+  />
+</Page>

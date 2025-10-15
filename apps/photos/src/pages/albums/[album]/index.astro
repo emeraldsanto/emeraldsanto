@@ -49,6 +49,8 @@ const { blobs } = await list({
               priority={index < 9}
               quality={50}
               src={blob.downloadUrl}
+              transition:animate='fade'
+              transition:name={blob.pathname.replace(`albums/${album}/`, '')}
             />
           </a>
         ))
