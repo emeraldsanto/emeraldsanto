@@ -9,6 +9,7 @@ import type {
 } from 'astro';
 import Page from '@/layouts/page.astro';
 import { listFolders } from '@/utils/blob';
+import { capitalize } from '@/utils/str';
 
 export const getStaticPaths = (async () => {
   const prefix = 'albums/';
@@ -34,7 +35,7 @@ const { blobs } = await list({
 ---
 
 <Page animated>
-  <h1>{album}</h1>
+  <h1>{capitalize(album)}</h1>
   <section class='mx-auto my-8 columns-2 md:columns-3'>
     {
       blobs
