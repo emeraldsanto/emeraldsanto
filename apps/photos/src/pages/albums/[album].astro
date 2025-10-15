@@ -38,10 +38,11 @@ const { blobs } = await list({
 
 <Page>
   <h1>{album}</h1>
-  <section class='mx-auto my-8 sm:columns-2 md:columns-3'>
+  <section class='mx-auto my-8 columns-2 md:columns-3'>
     {
       blobs
         .filter((blob) => blob.pathname !== key)
+        .sort(() => Math.random() - 0.5)
         .map((blob, index) => (
           <Image
             alt={blob.pathname}
