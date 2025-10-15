@@ -4,12 +4,14 @@ import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   animated?: boolean;
+  class?: string;
+  full?: boolean;
 }
 
-const { animated } = Astro.props;
+const { animated, class: className, full } = Astro.props;
 ---
 
-<html lang='en'>
+<html lang='en' class:list={[{ 'h-full': full }]}>
   <head>
     <meta charset='utf-8' />
     <meta name='description' content='Photographer.' />
@@ -20,8 +22,8 @@ const { animated } = Astro.props;
 
     {animated ? <ClientRouter /> : null}
   </head>
-  <body class='bg-zinc-50'>
-    <main class='max-w-3xl mx-auto py-16 px-8'>
+  <body class:list={['bg-zinc-50', { 'h-full': full }]}>
+    <main class:list={['max-w-3xl mx-auto py-16 px-8', { 'min-h-full flex flex-col': full }, className]}>
       <slot />
     </main>
   </body>

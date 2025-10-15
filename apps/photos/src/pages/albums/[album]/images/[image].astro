@@ -39,9 +39,10 @@ const { album, image } = Astro.params;
 const { downloadUrl } = Astro.props;
 ---
 
-<Page animated>
+<Page animated full>
   <AstroImage
     alt={`Image from the ${album} album`}
+    class='mx-auto my-auto max-w-full sm:max-w-xl'
     inferSize
     priority
     quality={100}
