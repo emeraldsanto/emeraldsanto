@@ -44,14 +44,16 @@ const { blobs } = await list({
         .filter((blob) => blob.pathname !== key)
         .sort(() => Math.random() - 0.5)
         .map((blob, index) => (
-          <Image
-            alt={`Image from the ${album} album`}
-            class='rounded-sm mb-4 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg'
-            inferSize
-            priority={index < 9}
-            quality={50}
-            src={blob.downloadUrl}
-          />
+          <a href={`/albums/${album}/images/${blob.pathname.replace(`albums/${album}/`, '')}`}>
+            <Image
+              alt={`Image from the ${album} album`}
+              class='rounded-sm mb-4 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg'
+              inferSize
+              priority={index < 9}
+              quality={50}
+              src={blob.downloadUrl}
+            />
+          </a>
         ))
     }
   </section>
