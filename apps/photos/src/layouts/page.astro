@@ -25,7 +25,7 @@ const { animated, class: className, full } = Astro.props;
     {animated ? <ClientRouter /> : null}
   </head>
   <body class:list={['bg-zinc-50', { 'h-full': full }]}>
-    <main class:list={['max-w-3xl mx-auto py-16 px-8', { 'min-h-full flex flex-col': full }, className]}>
+    <main class:list={['max-w-3xl mx-auto py-16 px-8', { 'min-h-full': full }, className]}>
       <slot />
     </main>
   </body>
