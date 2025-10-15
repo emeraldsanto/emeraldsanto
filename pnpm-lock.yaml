@@ -38,12 +38,18 @@ importers:
       '@astrojs/vercel':
         specifier: ^8.2.10
         version: 8.2.10(astro@5.14.5)
+      '@tailwindcss/vite':
+        specifier: ^4.1.14
+        version: 4.1.14(vite@6.3.6)
       '@vercel/blob':
         specifier: ^2.0.0
         version: 2.0.0
       astro:
         specifier: ^5.14.5
         version: 5.14.5(@vercel/blob@2.0.0)(typescript@5.9.3)
+      tailwindcss:
+        specifier: ^4.1.14
+        version: 4.1.14
 
 packages:
 
