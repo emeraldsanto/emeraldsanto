@@ -1,0 +1,67 @@
+---
+import { Image as AstroImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import Single from '@/layouts/single.astro';
+
+export const getStaticPaths = (async () => {
+  const categories = await getCollection('categories');
+  const allImages = await getCollection('images');
+
+  const paths = [];
+
+  for (const category of categories) {
+    const categoryImages = allImages
+      .filter((entry) => entry.id.split('/')[0] === category.id)
+      .sort((a, b) => a.data.order - b.data.order);
+
+    categoryImages.forEach((entry, index) => {
+      const slug = entry.id.split('/').pop() ?? entry.id;
+      const prev = categoryImages[index - 1];
+      const next = categoryImages[index + 1];
+
+      paths.push({
+        params: { category: category.id, image: slug },
+        props: {
+          image: entry.data.image,
+          caption: entry.data.caption,
+          prevSlug: prev ? prev.id.split('/').pop() : undefined,
+          nextSlug: next ? next.id.split('/').pop() : undefined,
+        },
+      });
+    });
+  }
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+const { category, image } = Astro.params;
+const { image: imageSrc, caption, prevSlug, nextSlug } = Astro.props;
+---
+
+<Single activeCategory={category!}>
+  <div class='flex flex-col items-center'>
+    <AstroImage
+      src={imageSrc}
+      alt={caption ?? ''}
+      class='my-auto max-w-full'
+      quality={100}
+      transition:name={image}
+    />
+    {caption && (
+      <p class='mt-4 text-center text-sm italic text-zinc-500'>{caption}</p>
+    )}
+    <div class='mt-8 flex gap-8 text-sm'>
+      {prevSlug && (
+        <a href={`/${category}/${prevSlug}`} class='text-maroon-oak underline decoration-1 underline-offset-3 hover:text-crown-of-thorns'>
+          ← Previous
+        </a>
+      )}
+      {nextSlug && (
+        <a href={`/${category}/${nextSlug}`} class='text-maroon-oak underline decoration-1 underline-offset-3 hover:text-crown-of-thorns'>
+          Next →
+        </a>
+      )}
+    </div>
+  </div>
+</Single>
