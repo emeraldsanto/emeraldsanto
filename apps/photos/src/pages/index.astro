@@ -1,11 +1,21 @@
 ---
+import { getCollection } from 'astro:content';
+import PhotoGrid from '@/components/photo-grid.astro';
+import Gallery from '@/layouts/gallery.astro';
+
+const allImages = await getCollection('images');
+
+const featured = allImages
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({
+    image: entry.data.image,
+    caption: entry.data.caption,
+    slug: entry.id.split('/').pop() ?? entry.id,
+    category: entry.id.split('/')[0],
+  }));
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width' />
-    <title>Yanick Bélanger</title>
-  </head>
-  <body></body>
-</html>
+<Gallery>
+  <PhotoGrid images={featured} />
+</Gallery>
