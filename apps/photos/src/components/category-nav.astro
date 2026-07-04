@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  active?: string;
+}
+
+const { active } = Astro.props;
+
+const categories = (await getCollection('categories')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<nav class='flex flex-wrap gap-x-6 gap-y-3 border-y border-zinc-200 py-3.5 text-sm'>
+  <a
+    href='/'
+    class:list={[
+      'decoration-1 underline-offset-3 transition-colors duration-200',
+      active === undefined
+        ? 'font-medium text-crown-of-thorns no-underline'
+        : 'text-maroon-oak underline decoration-maroon-oak hover:text-crown-of-thorns hover:decoration-crown-of-thorns',
+    ]}
+  >
+    All
+  </a>
+  {
+    categories.map((category) => (
+      <a
+        href={`/${category.id}`}
+        class:list={[
+          'decoration-1 underline-offset-3 transition-colors duration-200',
+          active === category.id
+            ? 'font-medium text-crown-of-thorns no-underline'
+            : 'text-maroon-oak underline decoration-maroon-oak hover:text-crown-of-thorns hover:decoration-crown-of-thorns',
+        ]}
+      >
+        {category.data.name}
+      </a>
+    ))
+  }
+</nav>

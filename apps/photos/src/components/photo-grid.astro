@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface GridImage {
+  image: ImageMetadata;
+  caption?: string;
+  slug: string;
+  category: string;
+}
+
+interface Props {
+  images: GridImage[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class='columns-1 gap-4 sm:columns-2 md:columns-3'>
+  {
+    images.map((entry) => (
+      <figure class='mb-4 break-inside-avoid'>
+        <a href={`/${entry.category}/${entry.slug}`}>
+          <Image
+            src={entry.image}
+            alt={entry.caption ?? ''}
+            class='rounded-sm transition-all duration-300 hover:shadow-lg'
+            loading='lazy'
+            transition:name={entry.slug}
+          />
+        </a>
+        {entry.caption && (
+          <figcaption class='mt-2 text-sm italic text-zinc-500'>
+            {entry.caption}
+          </figcaption>
+        )}
+      </figure>
+    ))
+  }
+</div>
