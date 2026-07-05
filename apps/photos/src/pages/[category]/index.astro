@@ -18,7 +18,7 @@ const allImages = await getCollection('images');
 
 const categoryImages = allImages
   .filter((entry) => entry.id.split('/')[0] === category)
-  .sort((a, b) => a.data.order - b.data.order)
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
   .map((entry) => ({
     image: entry.data.image,
     caption: entry.data.caption,

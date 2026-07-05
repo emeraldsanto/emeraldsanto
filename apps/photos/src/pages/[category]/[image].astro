@@ -13,7 +13,7 @@ export const getStaticPaths = (async () => {
   for (const category of categories) {
     const categoryImages = allImages
       .filter((entry) => entry.id.split('/')[0] === category.id)
-      .sort((a, b) => a.data.order - b.data.order);
+      .sort((a, b) => b.data.date.localeCompare(a.data.date));
 
     categoryImages.forEach((entry, index) => {
       const slug = entry.id.split('/').pop() ?? entry.id;
@@ -25,6 +25,8 @@ export const getStaticPaths = (async () => {
         props: {
           image: entry.data.image,
           caption: entry.data.caption,
+          date: entry.data.date,
+          location: entry.data.location,
           prevSlug: prev ? prev.id.split('/').pop() : undefined,
           nextSlug: next ? next.id.split('/').pop() : undefined,
         },
@@ -36,7 +38,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { category, image } = Astro.params;
-const { image: imageSrc, caption, prevSlug, nextSlug } = Astro.props;
+const { image: imageSrc, caption, date, location, prevSlug, nextSlug } = Astro.props;
 ---
 
 <Single activeCategory={category!}>
@@ -50,6 +52,13 @@ const { image: imageSrc, caption, prevSlug, nextSlug } = Astro.props;
     />
     {caption && (
       <p class='mt-4 text-center text-sm italic text-zinc-500'>{caption}</p>
+    )}
+    {(date || location) && (
+      <p class='mt-2 text-center text-sm text-zinc-500'>
+        {date && new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        {date && location && ' — '}
+        {location}
+      </p>
     )}
     <div class='mt-8 flex gap-8 text-sm'>
       {prevSlug && (

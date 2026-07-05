@@ -7,7 +7,7 @@ const allImages = await getCollection('images');
 
 const featured = allImages
   .filter((entry) => entry.data.featured)
-  .sort((a, b) => a.data.order - b.data.order)
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
   .map((entry) => ({
     image: entry.data.image,
     caption: entry.data.caption,

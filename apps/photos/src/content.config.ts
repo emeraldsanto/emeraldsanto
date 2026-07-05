@@ -16,7 +16,8 @@ const images = defineCollection({
       image: image(),
       featured: z.boolean().default(false),
       caption: z.string().optional(),
-      order: z.number().default(0),
+      date: z.string(),
+      location: z.string().optional(),
     }),
 });
 
