@@ -1,14 +1,24 @@
 ---
 import { Image as AstroImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import type { GetStaticPaths } from 'astro';
+import type { GetStaticPaths, ImageMetadata } from 'astro';
 import Single from '@/layouts/single.astro';
+
+type Props = {
+  image: ImageMetadata;
+  caption?: string;
+  date: string;
+  location?: string;
+  prevSlug?: string;
+  nextSlug?: string;
+};
 
 export const getStaticPaths = (async () => {
   const categories = await getCollection('categories');
   const allImages = await getCollection('images');
 
-  const paths = [];
+  const paths: { params: { category: string; image: string }; props: Props }[] =
+    [];
 
   for (const category of categories) {
     const categoryImages = allImages
@@ -38,7 +48,14 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { category, image } = Astro.params;
-const { image: imageSrc, caption, date, location, prevSlug, nextSlug } = Astro.props;
+const {
+  image: imageSrc,
+  caption,
+  date,
+  location,
+  prevSlug,
+  nextSlug,
+} = Astro.props;
 ---
 
 <Single activeCategory={category!}>

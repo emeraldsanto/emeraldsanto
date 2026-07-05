@@ -48,7 +48,10 @@ export default config({
               label: 'Caption (optional)',
               multiline: true,
             }),
-            date: fields.date({ label: 'Date', validation: { required: true } }),
+            date: fields.date({
+              label: 'Date',
+              validation: { isRequired: true },
+            }),
             location: fields.text({ label: 'Location (optional)' }),
           },
         }),
