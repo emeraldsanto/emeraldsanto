@@ -9,12 +9,10 @@ export const getStaticPaths = (async () => {
 
   return categories.map((category) => ({
     params: { category: category.id },
-    props: { categoryName: category.data.name },
   }));
 }) satisfies GetStaticPaths;
 
 const { category } = Astro.params;
-const { categoryName } = Astro.props;
 
 const allImages = await getCollection('images');
 

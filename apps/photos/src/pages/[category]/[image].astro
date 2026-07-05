@@ -46,7 +46,7 @@ const { image: imageSrc, caption, prevSlug, nextSlug } = Astro.props;
       alt={caption ?? ''}
       class='my-auto max-w-full'
       quality={100}
-      transition:name={image}
+      transition:name={`${category}-${image}`}
     />
     {caption && (
       <p class='mt-4 text-center text-sm italic text-zinc-500'>{caption}</p>
