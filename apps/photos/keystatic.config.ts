@@ -4,7 +4,6 @@ const categories = [
   'concerts',
   'events',
   'portraits',
-  'weddings',
   'sports',
 ] as const;
 
