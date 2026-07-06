@@ -23,7 +23,7 @@ export const getStaticPaths = (async () => {
   for (const category of categories) {
     const categoryImages = allImages
       .filter((entry) => entry.id.split('/')[0] === category.id)
-      .sort((a, b) => b.data.date.localeCompare(a.data.date));
+      .sort(() => Math.random() - 0.5);
 
     categoryImages.forEach((entry, index) => {
       const slug = entry.id.split('/').pop() ?? entry.id;
