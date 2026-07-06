@@ -1,11 +1,6 @@
 import { collection, config, fields } from '@keystatic/core';
 
-const categories = [
-  'concerts',
-  'events',
-  'portraits',
-  'sports',
-] as const;
+const categories = ['concerts', 'events', 'sports'] as const;
 
 export default config({
   storage: {
