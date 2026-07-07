@@ -1,7 +1,7 @@
 {
   "name": "francos-2026-linlin-004",
   "image": "/src/assets/categories/concerts/francos-2026-linlin-004/image.jpg",
-  "featured": false,
+  "featured": true,
   "date": "2026-06-19",
   "location": "Place des Arts, Montreal"
 }

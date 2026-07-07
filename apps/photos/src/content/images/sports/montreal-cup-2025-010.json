@@ -1,7 +1,7 @@
 {
   "name": "montreal-cup-2025-010",
   "image": "/src/assets/categories/sports/montreal-cup-2025-010/image.jpg",
-  "featured": false,
+  "featured": true,
   "date": "2025-08-31",
   "location": "Hochelaga, Montreal"
 }
