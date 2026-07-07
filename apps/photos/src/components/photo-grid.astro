@@ -23,7 +23,7 @@ const { images, priority = 6 } = Astro.props;
       <figure class='mb-4 break-inside-avoid'>
         <a
           href={`/${entry.category}/${entry.slug}`}
-          aria-label={entry.caption ?? `Photo from ${entry.category}`}
+          aria-label={entry.caption ?? `Photo from ${entry.category[0]?.toUpperCase()}${entry.category.slice(1)}`}
         >
           <Image
             src={entry.image}
