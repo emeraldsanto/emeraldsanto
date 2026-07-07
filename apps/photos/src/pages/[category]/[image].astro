@@ -2,9 +2,12 @@
 import { Image as AstroImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths, ImageMetadata, Params } from 'astro';
-import Single from '@/layouts/single.astro';
+import Gallery from '@/layouts/gallery.astro';
+import { categoryFromId, slugFromId } from '@/utils/images';
 
 type Props = {
+  category: string;
+  slug: string;
   date: string;
   caption?: string;
   location?: string;
@@ -21,7 +24,7 @@ export const getStaticPaths = (async () => {
 
   const imagesByCategory = new Map<string, typeof images>();
   for (const entry of images) {
-    const category = entry.id.split('/')[0];
+    const category = categoryFromId(entry.id);
     const bucket = imagesByCategory.get(category);
     if (bucket) {
       bucket.push(entry);
@@ -43,15 +46,17 @@ export const getStaticPaths = (async () => {
       paths.push({
         params: {
           category: category.id,
-          image: current.id.split('/').pop() ?? current.id,
+          image: slugFromId(current.id),
         },
         props: {
+          category: category.id,
+          slug: slugFromId(current.id),
           caption: current.data.caption,
           date: current.data.date,
           image: current.data.image,
           location: current.data.location,
-          nextSlug: next ? next.id.split('/').pop() : undefined,
-          prevSlug: prev ? prev.id.split('/').pop() : undefined,
+          nextSlug: next ? slugFromId(next.id) : undefined,
+          prevSlug: prev ? slugFromId(prev.id) : undefined,
         },
       });
     }
@@ -60,8 +65,9 @@ export const getStaticPaths = (async () => {
   return paths;
 }) satisfies GetStaticPaths;
 
-const { category, image } = Astro.params;
 const {
+  category,
+  slug,
   caption,
   date,
   image: imageSrc,
@@ -71,14 +77,14 @@ const {
 } = Astro.props;
 ---
 
-<Single activeCategory={category!}>
+<Gallery activeCategory={category}>
   <div class='flex flex-col items-center'>
     <AstroImage
       alt={caption ?? ''}
       class='my-auto w-full max-w-2xl'
       quality={100}
       src={imageSrc}
-      transition:name={`${category}-${image}`}
+      transition:name={`${category}-${slug}`}
     />
     {caption && (
       <p class='mt-4 text-center text-sm italic text-zinc-500'>{caption}</p>
@@ -103,4 +109,4 @@ const {
       )}
     </div>
   </div>
-</Single>
+</Gallery>
