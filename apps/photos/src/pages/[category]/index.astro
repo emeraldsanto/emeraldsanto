@@ -7,26 +7,24 @@ import Gallery from '@/layouts/gallery.astro';
 export const getStaticPaths = (async () => {
   const categories = await getCollection('categories');
 
-  return categories.map((category) => ({
-    params: { category: category.id },
-  }));
+  return categories.map((category) => ({ params: { category: category.id } }));
 }) satisfies GetStaticPaths;
 
 const { category } = Astro.params;
 
-const allImages = await getCollection('images');
+const images = await getCollection('images');
 
-const categoryImages = allImages
+const imagesFromCategory = images
   .filter((entry) => entry.id.split('/')[0] === category)
   .sort(() => Math.random() - 0.5)
   .map((entry) => ({
-    image: entry.data.image,
     caption: entry.data.caption,
-    slug: entry.id.split('/').pop() ?? entry.id,
     category: entry.id.split('/')[0],
+    image: entry.data.image,
+    slug: entry.id.split('/').pop() ?? entry.id,
   }));
 ---
 
 <Gallery activeCategory={category}>
-  <PhotoGrid images={categoryImages} />
+  <PhotoGrid images={imagesFromCategory} />
 </Gallery>

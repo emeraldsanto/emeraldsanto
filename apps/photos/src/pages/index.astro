@@ -3,16 +3,16 @@ import { getCollection } from 'astro:content';
 import PhotoGrid from '@/components/photo-grid.astro';
 import Gallery from '@/layouts/gallery.astro';
 
-const allImages = await getCollection('images');
+const images = await getCollection('images');
 
-const featured = allImages
+const featured = images
   .filter((entry) => entry.data.featured)
   .sort(() => Math.random() - 0.5)
   .map((entry) => ({
-    image: entry.data.image,
     caption: entry.data.caption,
-    slug: entry.id.split('/').pop() ?? entry.id,
     category: entry.id.split('/')[0],
+    image: entry.data.image,
+    slug: entry.id.split('/').pop() ?? entry.id,
   }));
 ---
 

@@ -1,47 +1,51 @@
 ---
 import { Image as AstroImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import type { GetStaticPaths, ImageMetadata } from 'astro';
+import type { GetStaticPaths, ImageMetadata, Params } from 'astro';
 import Single from '@/layouts/single.astro';
 
 type Props = {
-  image: ImageMetadata;
-  caption?: string;
   date: string;
+  caption?: string;
   location?: string;
   prevSlug?: string;
   nextSlug?: string;
+  image: ImageMetadata;
 };
 
 export const getStaticPaths = (async () => {
-  const categories = await getCollection('categories');
-  const allImages = await getCollection('images');
+  const [categories, images] = await Promise.all([
+    getCollection('categories'),
+    getCollection('images'),
+  ]);
 
-  const paths: { params: { category: string; image: string }; props: Props }[] =
-    [];
+  const paths: { params: Params; props: Props }[] = [];
 
   for (const category of categories) {
-    const categoryImages = allImages
-      .filter((entry) => entry.id.split('/')[0] === category.id)
-      .sort(() => Math.random() - 0.5);
+    const imagesFromCategory = images.filter(
+      (entry) => entry.id.split('/')[0] === category.id,
+    );
 
-    categoryImages.forEach((entry, index) => {
-      const slug = entry.id.split('/').pop() ?? entry.id;
-      const prev = categoryImages[index - 1];
-      const next = categoryImages[index + 1];
+    for (let i = 0; i < imagesFromCategory.length; i++) {
+      const current = imagesFromCategory[i];
+      const next = imagesFromCategory[i + 1];
+      const prev = imagesFromCategory[i - 1];
 
       paths.push({
-        params: { category: category.id, image: slug },
+        params: {
+          category: category.id,
+          image: current.id.split('/').pop() ?? current.id,
+        },
         props: {
-          image: entry.data.image,
-          caption: entry.data.caption,
-          date: entry.data.date,
-          location: entry.data.location,
-          prevSlug: prev ? prev.id.split('/').pop() : undefined,
+          caption: current.data.caption,
+          date: current.data.date,
+          image: current.data.image,
+          location: current.data.location,
           nextSlug: next ? next.id.split('/').pop() : undefined,
+          prevSlug: prev ? prev.id.split('/').pop() : undefined,
         },
       });
-    });
+    }
   }
 
   return paths;
@@ -49,22 +53,22 @@ export const getStaticPaths = (async () => {
 
 const { category, image } = Astro.params;
 const {
-  image: imageSrc,
   caption,
   date,
+  image: imageSrc,
   location,
-  prevSlug,
   nextSlug,
+  prevSlug,
 } = Astro.props;
 ---
 
 <Single activeCategory={category!}>
   <div class='flex flex-col items-center'>
     <AstroImage
-      src={imageSrc}
       alt={caption ?? ''}
       class='my-auto w-full max-w-2xl'
       quality={100}
+      src={imageSrc}
       transition:name={`${category}-${image}`}
     />
     {caption && (
