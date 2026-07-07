@@ -30,6 +30,7 @@ const { images, priority = 6 } = Astro.props;
             alt={entry.caption ?? ''}
             class='rounded-sm transition-all duration-300 hover:shadow-lg'
             loading={index < priority ? 'eager' : 'lazy'}
+            fetchpriority={index === 0 ? 'high' : 'auto'}
             sizes='(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
             transition:name={`${entry.category}-${entry.slug}`}
           />
