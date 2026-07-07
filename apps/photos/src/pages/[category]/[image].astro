@@ -1,0 +1,113 @@
+---
+import { Image as AstroImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths, ImageMetadata, Params } from 'astro';
+import Gallery from '@/layouts/gallery.astro';
+import { categoryFromId, slugFromId } from '@/utils/images';
+
+type Props = {
+  category: string;
+  slug: string;
+  date: string;
+  caption?: string;
+  location?: string;
+  prevSlug: string;
+  nextSlug: string;
+  image: ImageMetadata;
+};
+
+export const getStaticPaths = (async () => {
+  const [categories, images] = await Promise.all([
+    getCollection('categories'),
+    getCollection('images'),
+  ]);
+
+  const imagesByCategory = new Map<string, typeof images>();
+  for (const entry of images) {
+    const category = categoryFromId(entry.id);
+    const bucket = imagesByCategory.get(category);
+    if (bucket) {
+      bucket.push(entry);
+    } else {
+      imagesByCategory.set(category, [entry]);
+    }
+  }
+
+  const paths: { params: Params; props: Props }[] = [];
+
+  for (const category of categories) {
+    const imagesFromCategory = imagesByCategory.get(category.id) ?? [];
+
+    if (imagesFromCategory.length === 0) continue;
+
+    for (let i = 0; i < imagesFromCategory.length; i++) {
+      const current = imagesFromCategory[i];
+      const next = imagesFromCategory[(i + 1) % imagesFromCategory.length];
+      const prev =
+        imagesFromCategory[
+          (i - 1 + imagesFromCategory.length) % imagesFromCategory.length
+        ];
+
+      paths.push({
+        params: {
+          category: category.id,
+          image: slugFromId(current.id),
+        },
+        props: {
+          category: category.id,
+          slug: slugFromId(current.id),
+          caption: current.data.caption,
+          date: current.data.date,
+          image: current.data.image,
+          location: current.data.location,
+          nextSlug: slugFromId(next.id),
+          prevSlug: slugFromId(prev.id),
+        },
+      });
+    }
+  }
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+const {
+  category,
+  slug,
+  caption,
+  date,
+  image: imageSrc,
+  location,
+  nextSlug,
+  prevSlug,
+} = Astro.props;
+---
+
+<Gallery activeCategory={category}>
+  <div class='flex flex-col items-center'>
+    <AstroImage
+      alt={caption ?? ''}
+      class='my-auto w-full max-w-2xl'
+      quality={100}
+      src={imageSrc}
+      transition:name={`${category}-${slug}`}
+    />
+    {caption && (
+      <p class='mt-4 text-center text-sm italic text-zinc-500'>{caption}</p>
+    )}
+    {(date || location) && (
+      <p class='mt-2 text-center text-sm text-zinc-500'>
+        {date && new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        {date && location && ' — '}
+        {location}
+      </p>
+    )}
+    <div class='mt-8 flex gap-8 text-sm'>
+      <a href={`/${category}/${prevSlug}`} class='text-maroon-oak underline decoration-1 underline-offset-3 hover:text-crown-of-thorns'>
+        ← Previous
+      </a>
+      <a href={`/${category}/${nextSlug}`} class='text-maroon-oak underline decoration-1 underline-offset-3 hover:text-crown-of-thorns'>
+        Next →
+      </a>
+    </div>
+  </div>
+</Gallery>

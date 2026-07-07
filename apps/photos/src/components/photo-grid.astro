@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface GridImage {
+  image: ImageMetadata;
+  caption?: string;
+  slug: string;
+  category: string;
+}
+
+interface Props {
+  images: GridImage[];
+  priority?: number;
+}
+
+const { images, priority = 6 } = Astro.props;
+---
+
+<div class='columns-1 gap-4 sm:columns-2 md:columns-3'>
+  {
+    images.map((entry, index) => (
+      <figure class='mb-4 break-inside-avoid'>
+        <a
+          href={`/${entry.category}/${entry.slug}`}
+          aria-label={entry.caption ?? `Photo from ${entry.category[0]?.toUpperCase()}${entry.category.slice(1)}`}
+        >
+          <Image
+            src={entry.image}
+            alt={entry.caption ?? ''}
+            class='rounded-sm transition-all duration-300 hover:shadow-lg'
+            loading={index < priority ? 'eager' : 'lazy'}
+            fetchpriority={index === 0 ? 'high' : 'auto'}
+            sizes='(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
+            transition:name={`${entry.category}-${entry.slug}`}
+          />
+        </a>
+        {entry.caption && (
+          <figcaption class='mt-2 text-sm italic text-zinc-500'>
+            {entry.caption}
+          </figcaption>
+        )}
+      </figure>
+    ))
+  }
+</div>

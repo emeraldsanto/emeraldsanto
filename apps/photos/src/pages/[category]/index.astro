@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import PhotoGrid from '@/components/photo-grid.astro';
+import Gallery from '@/layouts/gallery.astro';
+import { categoryFromId, toGridImage } from '@/utils/images';
+
+export const getStaticPaths = (async () => {
+  const categories = await getCollection('categories');
+
+  return categories.map((category) => ({ params: { category: category.id } }));
+}) satisfies GetStaticPaths;
+
+const { category } = Astro.params;
+
+const images = await getCollection('images');
+
+const imagesFromCategory = images
+  .filter((entry) => categoryFromId(entry.id) === category)
+  .sort(() => Math.random() - 0.5)
+  .map(toGridImage);
+---
+
+<Gallery activeCategory={category}>
+  <PhotoGrid images={imagesFromCategory} />
+</Gallery>
