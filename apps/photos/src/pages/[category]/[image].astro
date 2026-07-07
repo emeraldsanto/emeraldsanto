@@ -11,8 +11,8 @@ type Props = {
   date: string;
   caption?: string;
   location?: string;
-  prevSlug?: string;
-  nextSlug?: string;
+  prevSlug: string;
+  nextSlug: string;
   image: ImageMetadata;
 };
 
@@ -38,10 +38,15 @@ export const getStaticPaths = (async () => {
   for (const category of categories) {
     const imagesFromCategory = imagesByCategory.get(category.id) ?? [];
 
+    if (imagesFromCategory.length === 0) continue;
+
     for (let i = 0; i < imagesFromCategory.length; i++) {
       const current = imagesFromCategory[i];
-      const next = imagesFromCategory[i + 1];
-      const prev = imagesFromCategory[i - 1];
+      const next = imagesFromCategory[(i + 1) % imagesFromCategory.length];
+      const prev =
+        imagesFromCategory[
+          (i - 1 + imagesFromCategory.length) % imagesFromCategory.length
+        ];
 
       paths.push({
         params: {
@@ -55,8 +60,8 @@ export const getStaticPaths = (async () => {
           date: current.data.date,
           image: current.data.image,
           location: current.data.location,
-          nextSlug: next ? slugFromId(next.id) : undefined,
-          prevSlug: prev ? slugFromId(prev.id) : undefined,
+          nextSlug: slugFromId(next.id),
+          prevSlug: slugFromId(prev.id),
         },
       });
     }
@@ -97,16 +102,12 @@ const {
       </p>
     )}
     <div class='mt-8 flex gap-8 text-sm'>
-      {prevSlug && (
-        <a href={`/${category}/${prevSlug}`} class='text-maroon-oak underline decoration-1 underline-offset-3 hover:text-crown-of-thorns'>
-          ← Previous
-        </a>
-      )}
-      {nextSlug && (
-        <a href={`/${category}/${nextSlug}`} class='text-maroon-oak underline decoration-1 underline-offset-3 hover:text-crown-of-thorns'>
-          Next →
-        </a>
-      )}
+      <a href={`/${category}/${prevSlug}`} class='text-maroon-oak underline decoration-1 underline-offset-3 hover:text-crown-of-thorns'>
+        ← Previous
+      </a>
+      <a href={`/${category}/${nextSlug}`} class='text-maroon-oak underline decoration-1 underline-offset-3 hover:text-crown-of-thorns'>
+        Next →
+      </a>
     </div>
   </div>
 </Gallery>
