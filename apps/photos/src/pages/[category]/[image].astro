@@ -19,12 +19,21 @@ export const getStaticPaths = (async () => {
     getCollection('images'),
   ]);
 
+  const imagesByCategory = new Map<string, typeof images>();
+  for (const entry of images) {
+    const category = entry.id.split('/')[0];
+    const bucket = imagesByCategory.get(category);
+    if (bucket) {
+      bucket.push(entry);
+    } else {
+      imagesByCategory.set(category, [entry]);
+    }
+  }
+
   const paths: { params: Params; props: Props }[] = [];
 
   for (const category of categories) {
-    const imagesFromCategory = images.filter(
-      (entry) => entry.id.split('/')[0] === category.id,
-    );
+    const imagesFromCategory = imagesByCategory.get(category.id) ?? [];
 
     for (let i = 0; i < imagesFromCategory.length; i++) {
       const current = imagesFromCategory[i];
