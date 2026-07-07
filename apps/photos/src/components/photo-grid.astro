@@ -21,7 +21,10 @@ const { images, priority = 6 } = Astro.props;
   {
     images.map((entry, index) => (
       <figure class='mb-4 break-inside-avoid'>
-        <a href={`/${entry.category}/${entry.slug}`}>
+        <a
+          href={`/${entry.category}/${entry.slug}`}
+          aria-label={entry.caption ?? `Photo from ${entry.category}`}
+        >
           <Image
             src={entry.image}
             alt={entry.caption ?? ''}
