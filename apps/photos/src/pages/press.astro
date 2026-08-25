@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Gallery from '@/layouts/gallery.astro';
+import { formatPublishedAt, LANGUAGE_LABELS } from '@/utils/publications';
+
+const publications = await getCollection('publications').then((entries) =>
+  entries.sort(
+    (a, b) =>
+      new Date(b.data.publishedAt).getTime() -
+      new Date(a.data.publishedAt).getTime(),
+  ),
+);
+---
+
+<Gallery activeCategory='press' title='Press'>
+  <ul class='divide-y divide-zinc-200'>
+    {
+      publications.map((entry) => (
+        <li>
+          <a
+            href={entry.data.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            class='group flex items-baseline justify-between gap-6 py-5'
+          >
+            <div>
+              <span class='font-mozilla-headline font-medium text-maroon-oak transition-colors duration-200 group-hover:text-crown-of-thorns'>
+                {entry.data.outlet}
+              </span>
+              <p class='mt-1 text-sm text-zinc-700'>{entry.data.title}</p>
+              <p class='mt-1 text-xs text-zinc-500'>
+                {formatPublishedAt(entry.data.publishedAt)} ·{' '}
+                {LANGUAGE_LABELS[entry.data.language]} · {entry.data.note}
+              </p>
+            </div>
+            <span
+              aria-hidden='true'
+              class='shrink-0 text-sm text-zinc-400 transition-colors duration-200 group-hover:text-crown-of-thorns'
+            >
+              ↗
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Gallery>

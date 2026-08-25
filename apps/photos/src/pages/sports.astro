@@ -1,0 +1,11 @@
+---
+import PhotoGrid from '@/components/photo-grid.astro';
+import Gallery from '@/layouts/gallery.astro';
+import { imagesForCategory } from '@/utils/images';
+
+const images = await imagesForCategory('sports');
+---
+
+<Gallery activeCategory='sports' title='Sports'>
+  <PhotoGrid images={images} />
+</Gallery>

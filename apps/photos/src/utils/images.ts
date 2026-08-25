@@ -1,3 +1,4 @@
+import { getCollection } from 'astro:content';
 import type { ImageMetadata } from 'astro';
 
 export function categoryFromId(id: string) {
@@ -21,4 +22,11 @@ export function toGridImage(entry: {
     image: entry.data.image,
     slug: slugFromId(entry.id),
   };
+}
+
+export async function imagesForCategory(category: string) {
+  return (await getCollection('images'))
+    .filter((entry) => categoryFromId(entry.id) === category)
+    .sort(() => Math.random() - 0.5)
+    .map(toGridImage);
 }

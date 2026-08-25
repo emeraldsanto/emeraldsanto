@@ -26,7 +26,10 @@ export default config({
       entryLayout: 'form',
       schema: {
         outlet: fields.slug({ name: { label: 'Outlet' } }),
-        title: fields.text({ label: 'Title', validation: { isRequired: true } }),
+        title: fields.text({
+          label: 'Title',
+          validation: { isRequired: true },
+        }),
         url: fields.url({ label: 'URL', validation: { isRequired: true } }),
         publishedAt: fields.text({
           label: 'Published at (YYYY or YYYY-MM-DD)',
