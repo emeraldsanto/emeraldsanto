@@ -3,6 +3,7 @@ import { Image as AstroImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths, ImageMetadata, Params } from 'astro';
 import Gallery from '@/layouts/gallery.astro';
+import { formatDate } from '@/utils/dates';
 import { categoryFromId, slugFromId } from '@/utils/images';
 
 type Props = {
@@ -96,7 +97,7 @@ const {
     )}
     {(date || location) && (
       <p class='mt-2 text-center text-sm text-zinc-500'>
-        {date && new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        {date && formatDate(date)}
         {date && location && ' — '}
         {location}
       </p>

@@ -8,9 +8,10 @@ import Footer from '@/components/footer.astro';
 
 interface Props {
   activeCategory?: string;
+  title?: string;
 }
 
-const { activeCategory } = Astro.props;
+const { activeCategory, title } = Astro.props;
 const isVercel =
   process.env.VERCEL_ENV === 'production' ||
   process.env.VERCEL_ENV === 'preview';
@@ -23,7 +24,7 @@ const isVercel =
     <meta name='generator' content={Astro.generator} />
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' href='/favicon.ico' sizes='48x48' type='image/x-icon' />
-    <title>Yanick Bélanger</title>
+    <title>{[title, 'Yanick Bélanger'].filter(Boolean).join(' — ')}</title>
     <Fonts />
     {isVercel && <Analytics />}
     <ClientRouter />

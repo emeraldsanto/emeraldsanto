@@ -18,6 +18,26 @@ export default config({
         order: fields.integer({ label: 'Nav order', defaultValue: 1 }),
       },
     }),
+    publications: collection({
+      label: 'Publications',
+      slugField: 'outlet',
+      path: 'src/content/publications/*',
+      format: { data: 'json' },
+      entryLayout: 'form',
+      schema: {
+        outlet: fields.slug({ name: { label: 'Outlet' } }),
+        title: fields.text({
+          label: 'Title',
+          validation: { isRequired: true },
+        }),
+        url: fields.url({ label: 'URL', validation: { isRequired: true } }),
+        publishedAt: fields.text({
+          label: 'Published at (YYYY or YYYY-MM-DD)',
+          validation: { isRequired: true },
+        }),
+        cover: fields.checkbox({ label: 'Cover photo', defaultValue: false }),
+      },
+    }),
     ...Object.fromEntries(
       categories.map((slug) => [
         `images_${slug}`,
