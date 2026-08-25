@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Gallery from '@/layouts/gallery.astro';
-import { formatPublishedAt, LANGUAGE_LABELS } from '@/utils/publications';
+import { formatPublishedAt } from '@/utils/publications';
 
 const publications = await getCollection('publications').then((entries) =>
   entries.sort(
@@ -29,8 +29,8 @@ const publications = await getCollection('publications').then((entries) =>
               </span>
               <p class='mt-1 text-sm text-zinc-700'>{entry.data.title}</p>
               <p class='mt-1 text-xs text-zinc-500'>
-                {formatPublishedAt(entry.data.publishedAt)} ·{' '}
-                {LANGUAGE_LABELS[entry.data.language]} · {entry.data.note}
+                {formatPublishedAt(entry.data.publishedAt)}
+                {entry.data.cover && ' · Cover photo'}
               </p>
             </div>
             <span

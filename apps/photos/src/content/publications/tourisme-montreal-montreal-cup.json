@@ -3,7 +3,5 @@
   "title": "Montréal Cup",
   "url": "https://www.mtl.org/fr/quoi-faire/festivals-et-evenements/montreal-cup-hochelaga-sdc",
   "publishedAt": "2026-04-15",
-  "language": "fr",
-  "kind": "listing",
-  "note": "Cover photo"
+  "cover": true
 }

@@ -1,9 +1,3 @@
-export const LANGUAGE_LABELS = {
-  en: 'EN',
-  fr: 'FR',
-  it: 'IT',
-} as const;
-
 export function formatPublishedAt(value: string) {
   if (/^\d{4}$/.test(value)) return value;
 

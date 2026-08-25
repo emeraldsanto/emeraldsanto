@@ -35,24 +35,7 @@ export default config({
           label: 'Published at (YYYY or YYYY-MM-DD)',
           validation: { isRequired: true },
         }),
-        language: fields.select({
-          label: 'Language',
-          options: [
-            { label: 'English', value: 'en' },
-            { label: 'Français', value: 'fr' },
-            { label: 'Italiano', value: 'it' },
-          ],
-          defaultValue: 'en',
-        }),
-        kind: fields.select({
-          label: 'Kind',
-          options: [
-            { label: 'Article', value: 'article' },
-            { label: 'Listing', value: 'listing' },
-          ],
-          defaultValue: 'article',
-        }),
-        note: fields.text({ label: 'Note (e.g. "Top photo")' }),
+        cover: fields.checkbox({ label: 'Cover photo', defaultValue: false }),
       },
     }),
     ...Object.fromEntries(

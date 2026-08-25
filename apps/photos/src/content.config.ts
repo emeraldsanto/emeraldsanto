@@ -29,9 +29,7 @@ const publications = defineCollection({
     title: z.string(),
     url: z.url(),
     publishedAt: z.string(),
-    language: z.enum(['en', 'fr', 'it']),
-    kind: z.enum(['article', 'listing']),
-    note: z.string(),
+    cover: z.boolean().default(false),
   }),
 });
 
