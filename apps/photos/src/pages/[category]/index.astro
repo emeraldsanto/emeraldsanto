@@ -6,9 +6,18 @@ import Gallery from '@/layouts/gallery.astro';
 import { categoryFromId, toGridImage } from '@/utils/images';
 
 export const getStaticPaths = (async () => {
-  const categories = await getCollection('categories');
+  const [categories, images] = await Promise.all([
+    getCollection('categories'),
+    getCollection('images'),
+  ]);
 
-  return categories.map((category) => ({ params: { category: category.id } }));
+  // Categories without images (e.g. Press) have dedicated static pages —
+  // generating a grid route for them would shadow those pages.
+  return categories
+    .filter((category) =>
+      images.some((entry) => categoryFromId(entry.id) === category.id),
+    )
+    .map((category) => ({ params: { category: category.id } }));
 }) satisfies GetStaticPaths;
 
 const { category } = Astro.params;

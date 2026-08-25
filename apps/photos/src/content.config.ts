@@ -22,4 +22,17 @@ const images = defineCollection({
     }),
 });
 
-export const collections = { categories, images };
+const publications = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/content/publications' }),
+  schema: z.object({
+    outlet: z.string(),
+    title: z.string(),
+    url: z.url(),
+    publishedAt: z.string(),
+    language: z.enum(['en', 'fr', 'it']),
+    kind: z.enum(['article', 'listing']),
+    note: z.string(),
+  }),
+});
+
+export const collections = { categories, images, publications };

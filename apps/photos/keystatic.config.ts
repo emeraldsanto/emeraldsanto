@@ -18,6 +18,40 @@ export default config({
         order: fields.integer({ label: 'Nav order', defaultValue: 1 }),
       },
     }),
+    publications: collection({
+      label: 'Publications',
+      slugField: 'outlet',
+      path: 'src/content/publications/*',
+      format: { data: 'json' },
+      entryLayout: 'form',
+      schema: {
+        outlet: fields.slug({ name: { label: 'Outlet' } }),
+        title: fields.text({ label: 'Title', validation: { isRequired: true } }),
+        url: fields.url({ label: 'URL', validation: { isRequired: true } }),
+        publishedAt: fields.text({
+          label: 'Published at (YYYY or YYYY-MM-DD)',
+          validation: { isRequired: true },
+        }),
+        language: fields.select({
+          label: 'Language',
+          options: [
+            { label: 'English', value: 'en' },
+            { label: 'Français', value: 'fr' },
+            { label: 'Italiano', value: 'it' },
+          ],
+          defaultValue: 'en',
+        }),
+        kind: fields.select({
+          label: 'Kind',
+          options: [
+            { label: 'Article', value: 'article' },
+            { label: 'Listing', value: 'listing' },
+          ],
+          defaultValue: 'article',
+        }),
+        note: fields.text({ label: 'Note (e.g. "Top photo")' }),
+      },
+    }),
     ...Object.fromEntries(
       categories.map((slug) => [
         `images_${slug}`,
