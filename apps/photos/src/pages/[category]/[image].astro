@@ -83,10 +83,10 @@ const {
 } = Astro.props;
 
 const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
-const title = caption || `${categoryName} photo`;
-const description =
-  [caption, date && formatDate(date), location].filter(Boolean).join(' — ') ||
-  'Photographer.';
+const title = caption || categoryName;
+const description = [date && formatDate(date), location]
+  .filter(Boolean)
+  .join(' — ');
 const ogImage = await getImage({ format: 'jpeg', src: imageSrc, width: 1200 });
 ---
 
