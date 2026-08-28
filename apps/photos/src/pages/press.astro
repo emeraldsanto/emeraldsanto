@@ -12,7 +12,7 @@ const publications = await getCollection('publications').then((entries) =>
 );
 ---
 
-<Layout activeCategory='press' title='Press'>
+<Layout title='Press'>
   <ul class='divide-y divide-zinc-200'>
     {
       publications.map((entry) => (
