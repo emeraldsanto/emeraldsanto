@@ -8,26 +8,27 @@ import Footer from '@/components/footer.astro';
 
 interface Props {
   description?: string;
-  ogImage?: {
-    alt: string;
-    height: number;
-    src: string;
-    width: number;
+  og?: {
+    image?: {
+      alt: string;
+      height: number;
+      src: string;
+      width: number;
+    };
+    type?: 'article' | 'website';
   };
-  ogType?: 'article' | 'website';
   title?: string;
 }
 
 const {
   description = 'Photographer.',
-  ogImage,
-  ogType = 'website',
+  og: { image, type = 'website' } = {},
   title,
 } = Astro.props;
 const siteName = 'Yanick Bélanger';
 const siteUrl = Astro.site ?? Astro.url;
 const pageUrl = new URL(Astro.url.pathname, siteUrl);
-const ogImageUrl = ogImage && new URL(ogImage.src, siteUrl);
+const imageUrl = image && new URL(image.src, siteUrl);
 const isVercel =
   process.env.VERCEL_ENV === 'production' ||
   process.env.VERCEL_ENV === 'preview';
@@ -42,30 +43,30 @@ const isVercel =
     <link rel='icon' href='/favicon.ico' sizes='48x48' type='image/x-icon' />
     <title>{[title, siteName].filter(Boolean).join(' — ')}</title>
     <link rel='canonical' href={pageUrl} />
-    <meta property='og:type' content={ogType} />
+    <meta property='og:type' content={type} />
     <meta property='og:site_name' content={siteName} />
     <meta property='og:title' content={title ?? siteName} />
     <meta property='og:description' content={description} />
     <meta property='og:url' content={pageUrl} />
-    {ogImage && (
+    {image && (
       <>
-        <meta property='og:image' content={ogImageUrl} />
-        <meta property='og:image:width' content={ogImage.width.toString()} />
-        <meta property='og:image:height' content={ogImage.height.toString()} />
+        <meta property='og:image' content={imageUrl} />
+        <meta property='og:image:width' content={image.width.toString()} />
+        <meta property='og:image:height' content={image.height.toString()} />
         <meta property='og:image:type' content='image/jpeg' />
-        <meta property='og:image:alt' content={ogImage.alt} />
+        <meta property='og:image:alt' content={image.alt} />
       </>
     )}
     <meta
       name='twitter:card'
-      content={ogImage ? 'summary_large_image' : 'summary'}
+      content={image ? 'summary_large_image' : 'summary'}
     />
     <meta name='twitter:site' content='@yanthedev' />
     <meta name='twitter:creator' content='@yanthedev' />
-    {ogImage && (
+    {image && (
       <>
-        <meta name='twitter:image' content={ogImageUrl} />
-        <meta name='twitter:image:alt' content={ogImage.alt} />
+        <meta name='twitter:image' content={imageUrl} />
+        <meta name='twitter:image:alt' content={image.alt} />
       </>
     )}
     <Fonts />

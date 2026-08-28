@@ -92,13 +92,15 @@ const ogImage = await getImage({ format: 'jpeg', src: imageSrc, width: 1200 });
 
 <Layout
   description={description}
-  ogImage={{
-    alt: caption ?? title,
-    height: ogImage.attributes.height,
-    src: ogImage.src,
-    width: ogImage.attributes.width,
+  og={{
+    image: {
+      alt: caption ?? title,
+      height: ogImage.attributes.height,
+      src: ogImage.src,
+      width: ogImage.attributes.width,
+    },
+    type: 'article',
   }}
-  ogType='article'
   title={title}
 >
   <div class='flex flex-col items-center'>
