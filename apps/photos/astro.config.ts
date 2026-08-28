@@ -12,13 +12,17 @@ const config: AstroUserConfig = {
   },
 };
 
-if (!process.env.VERCEL_ENV || process.env.VERCEL_ENV === 'development') {
-  config.integrations ??= [];
-  config.integrations.push(react(), keystatic());
-}
-
-if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-  config.site = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+switch (process.env.VERCEL_ENV) {
+  case 'production':
+    config.site = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+    break;
+  case 'preview':
+    config.site = `https://${process.env.VERCEL_URL}`;
+    break;
+  default:
+    config.integrations ??= [];
+    config.integrations.push(react(), keystatic());
+    break;
 }
 
 export default defineConfig(config);
