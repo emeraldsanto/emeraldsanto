@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Gallery from '@/layouts/gallery.astro';
+import Layout from '@/layouts/layout.astro';
 import { formatDate } from '@/utils/dates';
 
 const publications = await getCollection('publications').then((entries) =>
@@ -12,7 +12,7 @@ const publications = await getCollection('publications').then((entries) =>
 );
 ---
 
-<Gallery activeCategory='press' title='Press'>
+<Layout title='Press'>
   <ul class='divide-y divide-zinc-200'>
     {
       publications.map((entry) => (
@@ -44,4 +44,4 @@ const publications = await getCollection('publications').then((entries) =>
       ))
     }
   </ul>
-</Gallery>
+</Layout>

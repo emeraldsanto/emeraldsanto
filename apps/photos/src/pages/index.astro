@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PhotoGrid from '@/components/photo-grid.astro';
-import Gallery from '@/layouts/gallery.astro';
+import Layout from '@/layouts/layout.astro';
 import { toGridImage } from '@/utils/images';
 
 const images = await getCollection('images');
@@ -12,6 +12,6 @@ const featured = images
   .map(toGridImage);
 ---
 
-<Gallery>
+<Layout>
   <PhotoGrid images={featured} priority={9} />
-</Gallery>
+</Layout>
