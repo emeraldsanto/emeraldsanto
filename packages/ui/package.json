@@ -1,0 +1,14 @@
+{
+  "name": "@emeraldsanto/ui",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    "./components/*.astro": "./src/components/*.astro",
+    "./styles/theme.css": "./src/styles/theme.css"
+  },
+  "peerDependencies": {
+    "astro": "^7.0.6",
+    "tailwindcss": "^4.1.14"
+  }
+}
