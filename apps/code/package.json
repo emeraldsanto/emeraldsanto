@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@emeraldsanto/ui": "workspace:*",
-    "@tailwindcss/vite": "^4.1.14",
-    "@vercel/analytics": "^1.5.0",
-    "@vercel/speed-insights": "^1.2.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "astro": "^7.4.1",
-    "tailwindcss": "^4.1.14"
+    "tailwindcss": "^4.3.3"
   }
 }
